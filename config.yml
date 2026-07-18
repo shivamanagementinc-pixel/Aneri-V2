@@ -1,0 +1,230 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# For local development, uncomment this:
+# backend:
+#   name: test-repo
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+# Authentication for Netlify Identity
+site_url: https://thefounders.ca
+logo_url: https://thefounders.ca/logo.png
+
+# Collections define the content types you can edit
+collections:
+  # ============================================
+  # HOMEPAGE - All editable sections
+  # ============================================
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - file: "content/homepage/hero.md"
+        label: "Hero Section"
+        name: "hero"
+        fields:
+          - { label: "Trust Badge Text", name: "badge", widget: "string", default: "Trusted by 200+ families across Canada" }
+          - { label: "Headline Line 1", name: "headline1", widget: "string", default: "Your home. Your future." }
+          - { label: "Headline Line 2 (Italic Accent)", name: "headline2", widget: "string", default: "Made possible." }
+          - { label: "Description", name: "description", widget: "text", default: "The Funders helps first-time buyers, newcomers, and all Canadians navigate mortgages without jargon, judgment, or pressure. No matter your situation, we find a path forward." }
+          - label: "Primary CTA"
+            name: "primary_cta"
+            widget: "object"
+            fields:
+              - { label: "Button Text", name: "text", widget: "string", default: "Book your free strategy call" }
+              - { label: "Button URL", name: "url", widget: "string", default: "#contact" }
+          - label: "Secondary CTA"
+            name: "secondary_cta"
+            widget: "object"
+            fields:
+              - { label: "Button Text", name: "text", widget: "string", default: "Calculate your payment" }
+              - { label: "Button URL", name: "url", widget: "string", default: "#calculator" }
+          - { label: "Trust Text", name: "trust_text", widget: "string", default: "families helped across Canada" }
+          - { label: "Trust Number", name: "trust_number", widget: "string", default: "200+" }
+
+      - file: "content/homepage/marquee.md"
+        label: "Marquee / Trust Signals"
+        name: "marquee"
+        fields:
+          - label: "Trust Signals"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Icon (SVG path or name)", name: "icon", widget: "string" }
+              - { label: "Text", name: "text", widget: "string" }
+            default:
+              - { icon: "layers", text: "30+ Lender Network" }
+              - { icon: "clock", text: "48-Hour Pre-Approval" }
+              - { icon: "shield", text: "No Hidden Fees" }
+              - { icon: "users", text: "All Clients Welcome" }
+              - { icon: "monitor", text: "Digital-First Experience" }
+              - { icon: "message-circle", text: "Clear Communication" }
+
+      - file: "content/homepage/all-clients.md"
+        label: "All Clients Welcome Banner"
+        name: "all_clients"
+        fields:
+          - { label: "Banner Text", name: "text", widget: "text", default: "Whether you are a first-time buyer, newcomer, refinancer, investor, self-employed, or have unique circumstances — we work with everyone and find solutions that fit your life." }
+
+      - file: "content/homepage/who-we-help.md"
+        label: "Who We Help Section"
+        name: "who_we_help"
+        fields:
+          - { label: "Section Label", name: "label", widget: "string", default: "Who We Help" }
+          - { label: "Section Title", name: "title", widget: "string", default: "A mortgage that fits your story." }
+          - { label: "Section Description", name: "description", widget: "text", default: "Homeownership is not one-size-fits-all. Get advice designed around where you are now and where you want to go next." }
+          - label: "Cards"
+            name: "cards"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Link Text", name: "link_text", widget: "string" }
+              - { label: "Link URL", name: "link_url", widget: "string" }
+            default:
+              - { number: "01", title: "First-time homebuyers", description: "Understand your down payment, buying power, and every step from pre-approval to closing day. No question is too small.", link_text: "Start with confidence", link_url: "#" }
+              - { number: "02", title: "Newcomers to Canada", description: "Explore lenders that understand global income, foreign assets, and a limited Canadian credit history. We make the unfamiliar familiar.", link_text: "Explore your options", link_url: "#" }
+              - { number: "03", title: "Women building wealth", description: "Get practical education and an informed strategy for buying solo, refinancing, or investing in property. Your financial independence starts here.", link_text: "Build your strategy", link_url: "#" }
+
+      - file: "content/homepage/calculator.md"
+        label: "Mortgage Calculator Section"
+        name: "calculator"
+        fields:
+          - { label: "Section Label", name: "label", widget: "string", default: "Mortgage Calculator" }
+          - { label: "Section Title", name: "title", widget: "string", default: "Know your numbers. Plan with confidence." }
+          - { label: "Section Description", name: "description", widget: "text", default: "Estimate your monthly mortgage payment in seconds. Adjust the details to see how different scenarios affect your budget." }
+          - label: "Default Values"
+            name: "defaults"
+            widget: "object"
+            fields:
+              - { label: "Home Price", name: "home_price", widget: "number", default: 750000 }
+              - { label: "Down Payment", name: "down_payment", widget: "number", default: 75000 }
+              - { label: "Interest Rate (%)", name: "rate", widget: "number", default: 4.89, value_type: "float" }
+              - { label: "Amortization (years)", name: "amortization", widget: "number", default: 25 }
+          - { label: "Disclaimer Text", name: "disclaimer", widget: "text", default: "This is an estimate for planning purposes only." }
+          - { label: "CTA Link Text", name: "cta_text", widget: "string", default: "Book a free call" }
+          - { label: "CTA Link URL", name: "cta_url", widget: "string", default: "#contact" }
+
+      - file: "content/homepage/process.md"
+        label: "How It Works Section"
+        name: "process"
+        fields:
+          - { label: "Section Label", name: "label", widget: "string", default: "How It Works" }
+          - { label: "Section Title", name: "title", widget: "string", default: "From questions to keys." }
+          - { label: "Section Description", name: "description", widget: "text", default: "A straightforward process, expert guidance, and clear updates at every stage." }
+          - label: "Steps"
+            name: "steps"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+            default:
+              - { number: "01", title: "Quick chat", description: "Share your goals in a free 15-minute call or short application. We will listen first, then advise." }
+              - { number: "02", title: "Get pre-approved", description: "Compare options across 30+ lenders and understand your true buying power with clarity." }
+              - { number: "03", title: "Shop confidently", description: "House-hunt with a clear budget and a rate hold of up to 120 days. No surprises." }
+              - { number: "04", title: "Close & celebrate", description: "Get support through the paperwork, lender conditions, and closing. Then get your keys." }
+
+      - file: "content/homepage/testimonials.md"
+        label: "Testimonials Section"
+        name: "testimonials"
+        fields:
+          - { label: "Section Label", name: "label", widget: "string", default: "Client Stories" }
+          - { label: "Section Title", name: "title", widget: "string", default: "Real people. Real front doors." }
+          - { label: "Section Description", name: "description", widget: "text", default: "Thoughtful advice changes the experience — and sometimes what buyers believe is possible." }
+          - label: "Testimonials"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Author Initial", name: "initial", widget: "string" }
+              - { label: "Author Name", name: "name", widget: "string" }
+              - { label: "Author Detail", name: "detail", widget: "string" }
+              - { label: "Rating (1-5)", name: "rating", widget: "number", default: 5, min: 1, max: 5 }
+            default:
+              - { quote: "I had no Canadian credit history and thought buying a home was impossible. The Funders found a lender who accepted my foreign income.", initial: "A", name: "Aisha M.", detail: "Newcomer & first-time buyer", rating: 5 }
+              - { quote: "They treated me with respect, explained everything twice, and never made me feel rushed. I finally understood my mortgage.", initial: "S", name: "Sarah L.", detail: "First-time buyer, Vancouver", rating: 5 }
+              - { quote: "We got pre-approved in 48 hours and closed two weeks early. Absolute lifesavers during a stressful time.", initial: "M", name: "Marcus & Jen T.", detail: "First-time family, Calgary", rating: 5 }
+
+      - file: "content/homepage/faq.md"
+        label: "FAQ Section"
+        name: "faq"
+        fields:
+          - { label: "Section Label", name: "label", widget: "string", default: "FAQ" }
+          - { label: "Section Title", name: "title", widget: "string", default: "Questions? We have answers." }
+          - { label: "Section Description", name: "description", widget: "text", default: "Everything you need to know before starting your mortgage journey." }
+          - label: "FAQ Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Question", name: "question", widget: "string" }
+              - { label: "Answer", name: "answer", widget: "text" }
+            default:
+              - { question: "What is the minimum down payment in Canada?", answer: "For homes under $500,000, the minimum down payment is 5%. Between $500,000 and $999,999, it is 5% on the first $500,000 and 10% on the remainder. Homes $1 million and above require 20% down." }
+              - { question: "Can newcomers to Canada get a mortgage?", answer: "Yes. Many Canadian lenders offer newcomer mortgage programs that accept limited Canadian credit history, foreign income, and international assets. We help newcomers navigate these specialized options." }
+              - { question: "How long does pre-approval take?", answer: "With The Funders, most clients receive pre-approval within 48 hours. We compare rates across 30+ lenders to find the best fit for your situation." }
+              - { question: "Do you charge fees for your services?", answer: "For most standard mortgages, our services are free to you — we are compensated by the lender. In some complex situations, a fee may apply, which we will always disclose upfront." }
+              - { question: "What is the difference between fixed and variable rates?", answer: "A fixed rate stays the same for your entire term, giving you predictable payments. A variable rate fluctuates with the prime rate, which can mean lower costs when rates drop but higher costs when they rise. We will help you decide which fits your risk tolerance." }
+              - { question: "Can I get a mortgage if I am self-employed?", answer: "Absolutely. We work with lenders who understand self-employed income, including those who accept stated income or alternative documentation. Your business does not disqualify you from homeownership." }
+
+      - file: "content/homepage/cta.md"
+        label: "Final CTA Section"
+        name: "cta"
+        fields:
+          - { label: "Headline", name: "headline", widget: "string", default: "Ready to make your next move?" }
+          - { label: "Description", name: "description", widget: "text", default: "Start with a free strategy call. Ask questions, understand your options, and leave with a clearer path forward." }
+          - label: "CTA Button"
+            name: "button"
+            widget: "object"
+            fields:
+              - { label: "Button Text", name: "text", widget: "string", default: "Book your free strategy call" }
+              - { label: "Button URL", name: "url", widget: "string", default: "#" }
+          - { label: "Subtext", name: "subtext", widget: "string", default: "No obligation. No pressure. 100% confidential." }
+
+      - file: "content/homepage/footer.md"
+        label: "Footer"
+        name: "footer"
+        fields:
+          - { label: "Brand Description", name: "description", widget: "text", default: "A clearer path to homeownership for first-time buyers, newcomers, refinancers, investors, and all Canadians." }
+          - label: "Company Links"
+            name: "company_links"
+            widget: "list"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - label: "Resource Links"
+            name: "resource_links"
+            widget: "list"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - label: "Legal Links"
+            name: "legal_links"
+            widget: "list"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - { label: "Copyright Text", name: "copyright", widget: "string", default: "© 2026 The Funders Mortgage Group. All rights reserved." }
+
+  # ============================================
+  # BLOG POSTS
+  # ============================================
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Author", name: "author", widget: "string", default: "The Funders Team" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Canonical URL", name: "canonical", widget: "string", required: false }
