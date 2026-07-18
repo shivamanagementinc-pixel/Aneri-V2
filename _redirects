@@ -1,0 +1,2 @@
+# SPA fallback for admin
+/admin/* /admin/index.html 200

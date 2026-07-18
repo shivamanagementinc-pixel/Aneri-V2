@@ -1,12 +1,11 @@
 [build]
-  # No build command needed — this is a static HTML site
-  command = "echo 'Static site — no build required'"
+  # Explicitly tell Netlify this is a static site with no build step
   publish = "."
 
-# Redirect rules
+# Handle SPA routing for the CMS admin panel
 [[redirects]]
   from = "/admin/*"
-  to = "/admin/:splat"
+  to = "/admin/index.html"
   status = 200
 
 # Security headers
