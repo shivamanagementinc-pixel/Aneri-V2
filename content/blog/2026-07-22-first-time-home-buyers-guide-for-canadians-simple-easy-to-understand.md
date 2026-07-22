@@ -23,7 +23,7 @@ This guide walks you through it in plain language: what a mortgage actually is, 
 
 ## What a mortgage actually is
 
-A mortgage is simply a loan to buy a home, using the home itself as security. You put in some money up front (your **down payment**) and borrow the rest from a lender. You then pay that back, plus interest, over time.
+A mortgage is simply a loan to buy a home, using the home itself as security. You put in some money up front (your **down payment**) and borrow the rest from a lender. You then pay that back, plus interest, over time. 
 
 Two words worth knowing early:
 
@@ -36,23 +36,11 @@ That's the whole shape of it. Everything below is just detail on top of this sim
 
 Your down payment is the part you pay yourself. In Canada, the minimum depends on the purchase price ([Financial Consumer Agency of Canada](https://www.canada.ca/en/financial-consumer-agency/services/mortgages/down-payment.html)):
 
-* **5%**
+* **5%** on the first $500,000 of the price
+* **10%** on the portion between $500,000 and $1,500,000
+* Homes priced **over $1,500,000** require at least **20%** down payment
 
-   on the first $500,000 of the price
-* **10%**
-
-   on the portion between $500,000 and $1,500,000
-* Homes priced 
-
-  **over $1,500,000**
-
-   require at least 
-
-  **20%**
-
-   down
-
-So for a $600,000 home, the minimum is $25,000 (5% of the first $500,000) plus $10,000 (10% of the next $100,000) — **$35,000** in total.
+So for a $600,000 home, the minimum is $25,000 (5% of the first $500,000) plus $10,000 (10% of the next $100,000) = **$35,000** in total.
 
 Putting down **less than 20%** is completely normal for first-time buyers. It just means you'll need **mortgage default insurance** (from CMHC or another insurer), which protects the lender and lets you buy sooner with a smaller down payment. The premium is usually added to your mortgage rather than paid all at once. ([CMHC](https://www.cmhc-schl.gc.ca/consumers/home-buying/mortgage-loan-insurance-for-consumers/what-are-the-general-requirements-to-qualify-for-homeowner-mortgage-loan-insurance))
 
