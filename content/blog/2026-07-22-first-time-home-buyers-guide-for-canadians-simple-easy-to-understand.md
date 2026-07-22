@@ -27,20 +27,8 @@ A mortgage is simply a loan to buy a home, using the home itself as security. Yo
 
 Two words worth knowing early:
 
-* **Amortization**
-
-   — the total time you take to pay off the whole loan (often 25 or 30 years).
-* **Term**
-
-   — the shorter stretch (very often five years) that your rate and conditions are locked in for. When a term ends, you 
-
-  *renew*
-
-   for the next one. (More on that in our 
-
-  [mortgage renewal guide](http://localhost:3100/mortgage-renewal-canada-guide)
-
-  .)
+* **Amortization -** the total time you take to pay off the whole loan (often 25 or 30 years).
+* **Term -** the shorter stretch (very often five years) that your rate and conditions are locked in for. When a term ends, you *renew* for the next one. (More on that in our [mortgage renewal guide](http://localhost:3100/mortgage-renewal-canada-guide).)
 
 That's the whole shape of it. Everything below is just detail on top of this simple idea.
 
@@ -165,7 +153,6 @@ And current rates? Those move constantly, so we don't quote them here: `[Live r
 **What if my credit isn't perfect?** Very common, and not a dead end. There are paths for different situations — the point of a first conversation is to find yours, with no judgment.
 
 ## Ready to take the first step?
-
 
 Your first mortgage is a big decision, but it's a series of small, understandable steps — and you don't have to figure them out alone.
 **Book a free, no-pressure chat.** We'll look at where you stand, explain your options in plain language, and map out your first mortgage step by step. No obligation, no jargon, no pushing you toward anything.
