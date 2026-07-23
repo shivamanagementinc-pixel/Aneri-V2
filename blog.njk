@@ -1,0 +1,31 @@
+---
+layout: base.njk
+title: "Blog | The Funders Mortgage Group"
+description: "Mortgage tips, guides, and insights for Canadian homebuyers."
+---
+
+<section class="blog-section">
+  <div class="section-header reveal">
+    <div class="section-label">Blog</div>
+    <h2 class="section-title">Insights for your<br>mortgage <span class="italic">journey.</span></h2>
+    <p class="section-desc">Practical guides, market updates, and tips for Canadian homebuyers.</p>
+  </div>
+
+  <div class="blog-grid">
+    {% for post in collections.blog %}
+    <article class="blog-card reveal">
+      {% if post.data.thumbnail %}
+      <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="blog-image" loading="lazy">
+      {% else %}
+      <div class="blog-image" style="background: linear-gradient(135deg, var(--sage-faint), var(--cream-warm));"></div>
+      {% endif %}
+      <div class="blog-content">
+        <div class="blog-meta">{{ post.date | dateDisplay }}</div>
+        <h3>{{ post.data.title }}</h3>
+        <p>{{ post.data.excerpt or post.templateContent | striptags | truncate(120) }}</p>
+        <a href="{{ post.url }}" class="read-more">Read article<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
