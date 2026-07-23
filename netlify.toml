@@ -1,8 +1,7 @@
 [build]
-  # Explicitly tell Netlify this is a static site with no build step
-  publish = "."
+  command = "npm run build"
+  publish = "_site"
 
-# Handle SPA routing for the CMS admin panel
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
