@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Funders Mortgage Group | Canadian Mortgage Broker | thefunders.ca</title>
+  <meta name="description" content="The Funders Mortgage Group helps Canadians navigate mortgages with clarity. First-time buyers, newcomers, refinancers, investors — we work with all clients across Canada. 30+ lenders, 48-hour pre-approval.">
+  <meta name="keywords" content="mortgage broker Canada, Canadian mortgage rates, first time home buyer, newcomer mortgage Canada, mortgage pre-approval, refinance mortgage, mortgage calculator, best mortgage rates Canada, mortgage broker near me">
+  <meta name="author" content="The Funders Mortgage Group">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <link rel="canonical" href="https://thefunders.ca/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thefunders.ca/">
+  <meta property="og:title" content="The Funders Mortgage Group | A Clearer Path to Homeownership">
+  <meta property="og:description" content="Navigate Canadian mortgages without jargon, judgment, or pressure. First-time buyers, newcomers, refinancers — we work with everyone.">
+  <meta property="og:image" content="https://thefunders.ca/og-image.jpg">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:site_name" content="The Funders Mortgage Group">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Funders Mortgage Group | Canadian Mortgage Broker">
+  <meta name="twitter:description" content="Navigate Canadian mortgages without jargon, judgment, or pressure.">
+  <meta name="twitter:image" content="https://thefunders.ca/og-image.jpg">
+  <meta name="geo.region" content="CA">
+  <meta name="geo.placename" content="Canada">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"The Funders Mortgage Group","url":"https://thefunders.ca","logo":"https://thefunders.ca/logo.png","description":"Canadian mortgage brokerage helping all clients navigate homeownership with clarity.","areaServed":"CA","knowsAbout":["Canadian Mortgages","First-Time Home Buying","Newcomer Mortgages","Mortgage Refinancing","Investment Properties"],"sameAs":["https://www.linkedin.com/company/the-funders","https://www.instagram.com/thefunders"],"contactPoint":{"@type":"ContactPoint","contactType":"Mortgage Brokerage","areaServed":"CA","availableLanguage":["English"]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"MortgageBroker","name":"The Funders Mortgage Group","url":"https://thefunders.ca","telephone":"+1-XXX-XXX-XXXX","priceRange":"$$","areaServed":{"@type":"Country","name":"Canada"},"serviceType":["Mortgage Brokerage","Mortgage Pre-Approval","Mortgage Refinancing","First-Time Buyer Mortgages","Newcomer Mortgages"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Mortgage Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"First-Time Home Buyer Mortgages"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Newcomer to Canada Mortgages"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Mortgage Refinancing"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Investment Property Mortgages"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Mortgage Pre-Approval"}}]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the minimum down payment for a first-time home buyer in Canada?","acceptedAnswer":{"@type":"Answer","text":"In Canada, the minimum down payment is 5% for homes under $500,000. For homes between $500,000 and $999,999, it's 5% on the first $500,000 and 10% on the remainder. Homes $1M+ require 20% down."}},{"@type":"Question","name":"Can newcomers to Canada get a mortgage?","acceptedAnswer":{"@type":"Answer","text":"Yes. Many Canadian lenders offer newcomer mortgage programs that accept limited Canadian credit history, foreign income, and international assets. We help newcomers navigate these specialized options."}},{"@type":"Question","name":"How long does mortgage pre-approval take?","acceptedAnswer":{"@type":"Answer","text":"With The Funders, most clients receive pre-approval within 48 hours. We compare rates across 30+ lenders to find the best fit for your situation."}},{"@type":"Question","name":"Do you charge fees for mortgage services?","acceptedAnswer":{"@type":"Answer","text":"For most standard mortgages, our services are free to you — we are compensated by the lender. In some complex situations, a fee may apply, which we will always disclose upfront."}}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --forest: #19231d;
+      --forest-light: #24352c;
+      --forest-muted: #5a6b60;
+      --forest-ghost: #8a9a8e;
+      --sage: #7fb069;
+      --sage-glow: #9bc98a;
+      --sage-soft: #c8e6c9;
+      --sage-faint: #e8f5e9;
+      --cream: #fefaf3;
+      --cream-warm: #fff8f0;
+      --white: #FFFFFF;
+      --radius: 20px;
+      --radius-sm: 12px;
+      --radius-lg: 28px;
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 32px;
+      --space-lg: 64px;
+      --space-xl: 120px;
+      --space-2xl: 180px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--cream); color: var(--forest); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    ::selection { background: var(--sage-soft); color: var(--forest); }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 24px 40px; display: flex; align-items: center; justify-content: space-between; transition: all 0.5s var(--ease-out-expo); }
+    .nav.scrolled { background: rgba(254,250,243,0.9); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid rgba(25,35,29,0.06); padding: 16px 40px; }
+    .nav-logo { display: flex; align-items: baseline; gap: 2px; font-size: 24px; font-weight: 700; color: var(--forest); text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo .the { font-weight: 400; color: var(--forest-ghost); font-size: 20px; }
+    .nav-logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); margin-left: 2px; display: inline-block; }
+    .nav-links { display: flex; gap: 40px; align-items: center; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--forest-muted); text-decoration: none; letter-spacing: 0.2px; transition: color 0.3s ease; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--sage); border-radius: 2px; transition: width 0.4s var(--ease-out-expo); }
+    .nav-links a:hover { color: var(--forest); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { padding: 12px 28px; border-radius: 100px; background: var(--forest); color: var(--white); font-size: 14px; font-weight: 600; letter-spacing: 0.2px; text-decoration: none; border: none; cursor: pointer; transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden; }
+    .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--sage); border-radius: 100px; transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease-out-expo); }
+    .nav-cta:hover::before { transform: scaleX(1); }
+    .nav-cta span { position: relative; z-index: 1; }
+    .nav-cta:hover { box-shadow: 0 8px 32px rgba(127,176,105,0.25); }
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--forest); }
+    .hero { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--cream); padding: 160px 40px 120px; }
+    .hero-bg-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; max-width: 1000px; text-align: center; }
+    .hero-label { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 100px; background: rgba(127,176,105,0.08); border: 1px solid rgba(127,176,105,0.12); font-size: 13px; font-weight: 600; color: var(--sage); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 40px; opacity: 0; transform: translateY(20px); }
+    .hero-label .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); animation: pulse-dot 2s ease-in-out infinite; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.5); } }
+    .hero h1 { font-family: var(--font-serif); font-size: clamp(48px, 7vw, 96px); font-weight: 500; line-height: 1.05; color: var(--forest); letter-spacing: -1.5px; margin-bottom: 32px; }
+    .hero h1 .accent { color: var(--sage); font-style: italic; position: relative; display: inline-block; }
+    .hero h1 .accent::after { content: ''; position: absolute; bottom: 4px; left: 0; right: 0; height: 8px; background: var(--sage-soft); border-radius: 4px; z-index: -1; opacity: 0.6; }
+    .hero p { font-size: clamp(18px, 2vw, 22px); color: var(--forest-muted); line-height: 1.7; max-width: 620px; margin: 0 auto 48px; font-weight: 400; }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; opacity: 0; transform: translateY(20px); }
+    .btn-primary { padding: 18px 40px; border-radius: 100px; background: var(--forest); color: var(--white); font-size: 15px; font-weight: 600; letter-spacing: 0.2px; text-decoration: none; border: none; cursor: pointer; transition: all 0.4s var(--ease-out-expo); position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px; }
+    .btn-primary::before { content: ''; position: absolute; inset: 0; background: var(--sage); border-radius: 100px; transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease-out-expo); }
+    .btn-primary:hover::before { transform: scaleX(1); }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:hover { box-shadow: 0 12px 40px rgba(127,176,105,0.3); transform: translateY(-2px); }
+    .btn-secondary { padding: 18px 40px; border-radius: 100px; background: transparent; color: var(--forest); font-size: 15px; font-weight: 600; letter-spacing: 0.2px; text-decoration: none; border: 1.5px solid rgba(25,35,29,0.15); cursor: pointer; transition: all 0.4s var(--ease-out-expo); display: inline-flex; align-items: center; gap: 10px; }
+    .btn-secondary:hover { border-color: var(--sage); color: var(--sage); background: rgba(127,176,105,0.04); }
+    .hero-trust { margin-top: 80px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); }
+    .hero-trust .avatars { display: flex; }
+    .hero-trust .avatars img { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--cream); margin-left: -10px; object-fit: cover; }
+    .hero-trust .avatars img:first-child { margin-left: 0; }
+    .hero-trust p { font-size: 14px; color: var(--forest-muted); margin: 0; font-weight: 500; }
+    .hero-trust p strong { color: var(--forest); font-weight: 700; }
+    .marquee-section { padding: var(--space-xl) 0; overflow: hidden; background: var(--forest); position: relative; }
+    .marquee-section::before, .marquee-section::after { content: ''; position: absolute; top: 0; bottom: 0; width: 200px; z-index: 2; pointer-events: none; }
+    .marquee-section::before { left: 0; background: linear-gradient(90deg, var(--forest), transparent); }
+    .marquee-section::after { right: 0; background: linear-gradient(-90deg, var(--forest), transparent); }
+    .marquee-track { display: flex; gap: 80px; animation: marquee-scroll 30s linear infinite; width: max-content; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-item { display: flex; align-items: center; gap: 16px; white-space: nowrap; flex-shrink: 0; }
+    .marquee-item .icon-wrap { width: 48px; height: 48px; border-radius: 14px; background: rgba(127,176,105,0.15); display: flex; align-items: center; justify-content: center; color: var(--sage-glow); flex-shrink: 0; }
+    .marquee-item span { font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: -0.3px; }
+    .section { padding: var(--space-2xl) 40px; position: relative; }
+    .section-header { max-width: 720px; margin: 0 auto var(--space-xl); text-align: center; }
+    .section-label { display: inline-block; padding: 6px 16px; border-radius: 100px; background: var(--sage-faint); color: var(--sage); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(36px, 5vw, 64px); font-weight: 500; line-height: 1.1; color: var(--forest); letter-spacing: -1px; margin-bottom: 24px; }
+    .section-title .italic { font-style: italic; color: var(--sage); }
+    .section-desc { font-size: 18px; color: var(--forest-muted); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+    .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .help-card { background: var(--white); border-radius: var(--radius-lg); padding: 48px 40px; position: relative; overflow: hidden; border: 1px solid rgba(25,35,29,0.06); transition: all 0.6s var(--ease-out-expo); cursor: pointer; }
+    .help-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--sage); transform: scaleX(0); transform-origin: left; transition: transform 0.6s var(--ease-out-expo); }
+    .help-card:hover::before { transform: scaleX(1); }
+    .help-card:hover { transform: translateY(-8px); box-shadow: 0 32px 64px rgba(25,35,29,0.08); border-color: rgba(127,176,105,0.12); }
+    .help-card .number { font-size: 13px; font-weight: 700; color: var(--sage); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px; }
+    .help-card h3 { font-family: var(--font-serif); font-size: 28px; font-weight: 600; color: var(--forest); margin-bottom: 16px; letter-spacing: -0.5px; }
+    .help-card p { font-size: 15px; color: var(--forest-muted); line-height: 1.7; margin-bottom: 32px; }
+    .help-card .link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--forest); text-decoration: none; transition: all 0.3s ease; }
+    .help-card .link svg { transition: transform 0.3s var(--ease-out-expo); }
+    .help-card:hover .link { color: var(--sage); }
+    .help-card:hover .link svg { transform: translateX(4px); }
+    .help-card .bg-icon { position: absolute; bottom: -20px; right: -20px; width: 160px; height: 160px; opacity: 0.03; color: var(--forest); transition: all 0.6s var(--ease-out-expo); }
+    .help-card:hover .bg-icon { opacity: 0.06; transform: scale(1.1) rotate(-5deg); }
+    .all-clients-banner { background: var(--sage-faint); border-top: 1px solid rgba(127,176,105,0.1); border-bottom: 1px solid rgba(127,176,105,0.1); padding: 32px 40px; text-align: center; }
+    .all-clients-banner p { font-size: 16px; color: var(--forest-muted); font-weight: 500; max-width: 800px; margin: 0 auto; }
+    .all-clients-banner p strong { color: var(--forest); font-weight: 700; }
+    .process-section { background: var(--forest); color: var(--white); }
+    .process-section .section-title { color: var(--white); }
+    .process-section .section-desc { color: rgba(255,255,255,0.6); }
+    .process-section .section-label { background: rgba(127,176,105,0.2); color: var(--sage-glow); }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1200px; margin: 0 auto; position: relative; }
+    .process-grid::before { content: ''; position: absolute; top: 40px; left: 12%; right: 12%; height: 2px; background: linear-gradient(90deg, var(--sage), var(--sage-glow)); opacity: 0.3; border-radius: 2px; }
+    .process-step { text-align: center; position: relative; z-index: 1; }
+    .process-step .step-num { width: 80px; height: 80px; border-radius: 50%; background: var(--forest-light); border: 2px solid rgba(127,176,105,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; font-size: 28px; font-weight: 800; color: var(--sage-glow); font-family: var(--font-serif); transition: all 0.5s var(--ease-out-expo); }
+    .process-step:hover .step-num { background: var(--sage); color: var(--forest); border-color: var(--sage); transform: scale(1.1); box-shadow: 0 0 40px rgba(127,176,105,0.4); }
+    .process-step h4 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; letter-spacing: -0.3px; }
+    .process-step p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .calculator-section { background: var(--cream-warm); }
+    .calculator-container { max-width: 900px; margin: 0 auto; background: var(--white); border-radius: var(--radius-lg); padding: 56px 48px; border: 1px solid rgba(25,35,29,0.06); box-shadow: 0 4px 24px rgba(25,35,29,0.04); }
+    .calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .calc-field label { display: block; font-size: 13px; font-weight: 600; color: var(--forest-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; }
+    .calc-field input, .calc-field select { width: 100%; padding: 16px 20px; border: 1.5px solid rgba(25,35,29,0.1); border-radius: 14px; font-size: 16px; font-family: var(--font-sans); color: var(--forest); background: var(--cream); transition: all 0.3s ease; outline: none; }
+    .calc-field input:focus, .calc-field select:focus { border-color: var(--sage); box-shadow: 0 0 0 4px rgba(127,176,105,0.1); }
+    .calc-field input::placeholder { color: var(--forest-ghost); }
+    .calc-result { background: var(--forest); border-radius: var(--radius); padding: 40px; text-align: center; color: var(--white); }
+    .calc-result .result-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--sage-glow); margin-bottom: 12px; }
+    .calc-result .result-value { font-family: var(--font-serif); font-size: 56px; font-weight: 600; letter-spacing: -1px; margin-bottom: 8px; }
+    .calc-result .result-sub { font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 500; }
+    .calc-disclaimer { margin-top: 24px; font-size: 13px; color: var(--forest-ghost); text-align: center; line-height: 1.6; }
+    .calc-disclaimer a { color: var(--sage); text-decoration: none; font-weight: 600; }
+    .calc-disclaimer a:hover { text-decoration: underline; }
+    .testimonials-section { background: var(--cream); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .testimonial-card { background: var(--white); border-radius: var(--radius-lg); padding: 48px 40px; position: relative; border: 1px solid rgba(25,35,29,0.06); transition: all 0.5s var(--ease-out-expo); }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 24px 48px rgba(25,35,29,0.06); }
+    .testimonial-card .stars { display: flex; gap: 4px; margin-bottom: 24px; }
+    .testimonial-card .stars svg { width: 18px; height: 18px; color: var(--sage); fill: var(--sage); }
+    .testimonial-card blockquote { font-family: var(--font-serif); font-size: 20px; font-weight: 500; line-height: 1.6; color: var(--forest); margin-bottom: 32px; font-style: italic; letter-spacing: -0.2px; }
+    .testimonial-card .author { display: flex; align-items: center; gap: 14px; }
+    .testimonial-card .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--sage), var(--sage-glow)); display: flex; align-items: center; justify-content: center; color: var(--forest); font-weight: 700; font-size: 16px; flex-shrink: 0; }
+    .testimonial-card .author-name { font-size: 15px; font-weight: 700; color: var(--forest); margin-bottom: 2px; }
+    .testimonial-card .author-meta { font-size: 13px; color: var(--forest-ghost); font-weight: 500; }
+    .testimonial-card .quote-mark { position: absolute; top: 32px; right: 36px; font-size: 80px; color: var(--sage-faint); font-family: var(--font-serif); line-height: 1; pointer-events: none; }
+    .faq-section { background: var(--white); }
+    .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+    .faq-item { background: var(--cream); border-radius: var(--radius); border: 1px solid rgba(25,35,29,0.06); overflow: hidden; transition: all 0.4s var(--ease-out-expo); }
+    .faq-item:hover { border-color: rgba(127,176,105,0.2); }
+    .faq-question { width: 100%; padding: 24px 32px; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; text-align: left; font-size: 17px; font-weight: 600; color: var(--forest); font-family: var(--font-sans); }
+    .faq-question svg { width: 20px; height: 20px; color: var(--sage); transition: transform 0.4s var(--ease-out-expo); flex-shrink: 0; }
+    .faq-item.open .faq-question svg { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.5s var(--ease-out-expo), padding 0.5s var(--ease-out-expo); }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 32px 24px; }
+    .faq-answer p { font-size: 15px; color: var(--forest-muted); line-height: 1.7; }
+    .cta-section { padding: var(--space-2xl) 40px; position: relative; overflow: hidden; }
+    .cta-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--sage) 0%, #5a8a4a 50%, var(--forest) 100%); border-radius: var(--radius-lg); margin: 40px; }
+    .cta-bg .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; }
+    .cta-bg .orb-1 { width: 400px; height: 400px; background: var(--sage-glow); top: -100px; right: -50px; animation: orb-float 8s ease-in-out infinite; }
+    .cta-bg .orb-2 { width: 300px; height: 300px; background: #b8d4a8; bottom: -80px; left: 10%; animation: orb-float 10s ease-in-out infinite reverse; }
+    @keyframes orb-float { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(30px, -20px); } 66% { transform: translate(-20px, 30px); } }
+    .cta-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; text-align: center; padding: 100px 40px; }
+    .cta-content h2 { font-family: var(--font-serif); font-size: clamp(36px, 5vw, 64px); font-weight: 500; color: var(--white); line-height: 1.1; letter-spacing: -1px; margin-bottom: 24px; }
+    .cta-content h2 .italic { font-style: italic; }
+    .cta-content p { font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-content .btn-light { padding: 20px 48px; border-radius: 100px; background: var(--white); color: var(--forest); font-size: 16px; font-weight: 700; letter-spacing: 0.2px; text-decoration: none; border: none; cursor: pointer; transition: all 0.4s var(--ease-out-expo); display: inline-flex; align-items: center; gap: 10px; }
+    .cta-content .btn-light:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+    .cta-content .subtext { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500; }
+    .footer { background: var(--forest); color: var(--white); padding: 80px 40px 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 60px; max-width: 1200px; margin: 0 auto 80px; }
+    .footer-brand .logo { display: flex; align-items: baseline; gap: 2px; font-size: 24px; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: -0.5px; margin-bottom: 20px; }
+    .footer-brand .logo .the { font-weight: 400; color: var(--forest-ghost); font-size: 20px; }
+    .footer-brand .logo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); margin-left: 2px; }
+    .footer-brand p { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 300px; }
+    .footer-col h5 { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
+    .footer-col a { display: block; font-size: 15px; color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 14px; transition: all 0.3s ease; font-weight: 500; }
+    .footer-col a:hover { color: var(--sage-glow); transform: translateX(4px); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .footer-social { display: flex; gap: 16px; }
+    .footer-social a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: all 0.3s ease; }
+    .footer-social a:hover { background: var(--sage); color: var(--forest); transform: translateY(-3px); }
+    .reveal { opacity: 0; transform: translateY(40px); }
+    @media (max-width: 1024px) { .help-grid { grid-template-columns: 1fr; } .process-grid { grid-template-columns: repeat(2, 1fr); } .process-grid::before { display: none; } .testimonials-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr 1fr; } .calculator-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .nav { padding: 16px 24px; } .nav.scrolled { padding: 12px 24px; } .nav-links { display: none; } .menu-toggle { display: block; } .hero { padding: 140px 24px 80px; } .section { padding: 80px 24px; } .process-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; gap: 40px; } .footer-bottom { flex-direction: column; text-align: center; } .cta-bg { margin: 20px; } .cta-content { padding: 60px 24px; } .calculator-container { padding: 40px 24px; } .faq-question { padding: 20px 24px; font-size: 15px; } .faq-item.open .faq-answer { padding: 0 24px 20px; } }
+    .cursor-glow { position: fixed; width: 400px; height: 400px; border-radius: 50%; pointer-events: none; z-index: 9999; background: radial-gradient(circle, rgba(127,176,105,0.08) 0%, transparent 70%); transform: translate(-50%, -50%); transition: opacity 0.3s ease; opacity: 0; }
+    @media (pointer: fine) { .cursor-glow { opacity: 1; } }
+  </style>
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <a href="https://thefunders.ca/" class="nav-logo" aria-label="The Funders Mortgage Group Home">
+      <span class="the">the</span>funders<span class="dot"></span>
+    </a>
+    <div class="nav-links">
+      <a href="#who-we-help">Who We Help</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#stories">Stories</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta"><span>Book a Call</span></a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" role="banner">
+    <canvas class="hero-bg-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="hero-label" id="heroLabel"><span class="pulse"></span> Trusted by 200+ families across Canada</div>
+      <h1 id="heroTitle">Your home. Your future.<br><span class="accent">Made possible.</span></h1>
+      <p id="heroDesc">The Funders helps first-time buyers, newcomers, and all Canadians navigate mortgages without jargon, judgment, or pressure. No matter your situation, we find a path forward.</p>
+      <div class="hero-actions" id="heroActions">
+        <a href="#contact" class="btn-primary" aria-label="Book your free mortgage strategy call"><span>Book your free strategy call</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="#calculator" class="btn-secondary" aria-label="Try our mortgage payment calculator"><span>Calculate your payment</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg></a>
+      </div>
+      <div class="hero-trust" id="heroTrust">
+        <div class="avatars">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Happy client - Aisha" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Happy client - Marcus" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Happy client - Sarah" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Happy client - Jen" loading="lazy">
+        </div>
+        <p><strong>200+</strong> families helped across Canada</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <section class="marquee-section" aria-label="Trust signals">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><span>30+ Lender Network</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span>48-Hour Pre-Approval</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>No Hidden Fees</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span>All Clients Welcome</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><span>Digital-First Experience</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span>Clear Communication</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><span>30+ Lender Network</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span>48-Hour Pre-Approval</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>No Hidden Fees</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span>All Clients Welcome</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><span>Digital-First Experience</span></div>
+      <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span>Clear Communication</span></div>
+    </div>
+  </section>
+
+  <!-- ALL CLIENTS WELCOME BANNER -->
+  <div class="all-clients-banner" role="note">
+    <p><strong>All clients are welcome.</strong> Whether you are a first-time buyer, newcomer, refinancer, investor, self-employed, or have unique circumstances — we work with everyone and find solutions that fit your life.</p>
+  </div>
+
+  <!-- WHO WE HELP -->
+  <section class="section" id="who-we-help" aria-labelledby="who-we-help-title">
+    <div class="section-header reveal">
+      <div class="section-label">Who We Help</div>
+      <h2 class="section-title" id="who-we-help-title">A mortgage that fits<br>your <span class="italic">story.</span></h2>
+      <p class="section-desc">Homeownership is not one-size-fits-all. Get advice designed around where you are now and where you want to go next.</p>
+    </div>
+    <div class="help-grid">
+      <article class="help-card reveal">
+        <div class="number">01</div>
+        <h3>First-time homebuyers</h3>
+        <p>Understand your down payment, buying power, and every step from pre-approval to closing day. No question is too small.</p>
+        <a href="#" class="link" aria-label="Learn about first-time buyer mortgages">Start with confidence<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </article>
+      <article class="help-card reveal">
+        <div class="number">02</div>
+        <h3>Newcomers to Canada</h3>
+        <p>Explore lenders that understand global income, foreign assets, and a limited Canadian credit history. We make the unfamiliar familiar.</p>
+        <a href="#" class="link" aria-label="Learn about newcomer mortgages in Canada">Explore your options<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </article>
+      <article class="help-card reveal">
+        <div class="number">03</div>
+        <h3>Women building wealth</h3>
+        <p>Get practical education and an informed strategy for buying solo, refinancing, or investing in property. Your financial independence starts here.</p>
+        <a href="#" class="link" aria-label="Learn about mortgages for women building wealth">Build your strategy<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+      </article>
+    </div>
+  </section>
+
+  <!-- MORTGAGE CALCULATOR -->
+  <section class="section calculator-section" id="calculator" aria-labelledby="calculator-title">
+    <div class="section-header reveal">
+      <div class="section-label">Mortgage Calculator</div>
+      <h2 class="section-title" id="calculator-title">Know your numbers.<br>Plan with <span class="italic">confidence.</span></h2>
+      <p class="section-desc">Estimate your monthly mortgage payment in seconds. Adjust the details to see how different scenarios affect your budget.</p>
+    </div>
+    <div class="calculator-container reveal">
+      <div class="calculator-grid">
+        <div class="calc-field">
+          <label for="homePrice">Home Price</label>
+          <input type="number" id="homePrice" value="750000" min="50000" step="1000" aria-describedby="homePriceHelp">
+        </div>
+        <div class="calc-field">
+          <label for="downPayment">Down Payment</label>
+          <input type="number" id="downPayment" value="75000" min="0" step="1000" aria-describedby="downPaymentHelp">
+        </div>
+        <div class="calc-field">
+          <label for="interestRate">Interest Rate (%)</label>
+          <input type="number" id="interestRate" value="4.89" min="0.1" max="20" step="0.01" aria-describedby="rateHelp">
+        </div>
+        <div class="calc-field">
+          <label for="amortization">Amortization Period</label>
+          <select id="amortization" aria-describedby="amortHelp">
+            <option value="25">25 years</option>
+            <option value="30">30 years</option>
+            <option value="20">20 years</option>
+            <option value="15">15 years</option>
+            <option value="10">10 years</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="result-label">Estimated Monthly Payment</div>
+        <div class="result-value" id="monthlyPayment">$3,847</div>
+        <div class="result-sub">Principal + Interest only. Does not include property taxes, insurance, or condo fees.</div>
+      </div>
+      <p class="calc-disclaimer">This is an estimate for planning purposes only. <a href="#contact">Book a free call</a> to get your actual pre-approval and personalized rate from 30+ lenders.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section process-section" id="how-it-works" aria-labelledby="how-it-works-title">
+    <div class="section-header reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title" id="how-it-works-title">From questions<br>to <span class="italic">keys.</span></h2>
+      <p class="section-desc">A straightforward process, expert guidance, and clear updates at every stage.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal"><div class="step-num">01</div><h4>Quick chat</h4><p>Share your goals in a free 15-minute call or short application. We will listen first, then advise.</p></div>
+      <div class="process-step reveal"><div class="step-num">02</div><h4>Get pre-approved</h4><p>Compare options across 30+ lenders and understand your true buying power with clarity.</p></div>
+      <div class="process-step reveal"><div class="step-num">03</div><h4>Shop confidently</h4><p>House-hunt with a clear budget and a rate hold of up to 120 days. No surprises.</p></div>
+      <div class="process-step reveal"><div class="step-num">04</div><h4>Close & celebrate</h4><p>Get support through the paperwork, lender conditions, and closing. Then get your keys.</p></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section" id="stories" aria-labelledby="stories-title">
+    <div class="section-header reveal">
+      <div class="section-label">Client Stories</div>
+      <h2 class="section-title" id="stories-title">Real people.<br>Real front <span class="italic">doors.</span></h2>
+      <p class="section-desc">Thoughtful advice changes the experience — and sometimes what buyers believe is possible.</p>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial-card reveal">
+        <div class="quote-mark">"</div>
+        <div class="stars" aria-label="5 star rating">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <blockquote>"I had no Canadian credit history and thought buying a home was impossible. The Funders found a lender who accepted my foreign income."</blockquote>
+        <div class="author"><div class="author-avatar">A</div><div><div class="author-name">Aisha M.</div><div class="author-meta">Newcomer & first-time buyer</div></div></div>
+      </article>
+      <article class="testimonial-card reveal">
+        <div class="quote-mark">"</div>
+        <div class="stars" aria-label="5 star rating">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <blockquote>"They treated me with respect, explained everything twice, and never made me feel rushed. I finally understood my mortgage."</blockquote>
+        <div class="author"><div class="author-avatar">S</div><div><div class="author-name">Sarah L.</div><div class="author-meta">First-time buyer, Vancouver</div></div></div>
+      </article>
+      <article class="testimonial-card reveal">
+        <div class="quote-mark">"</div>
+        <div class="stars" aria-label="5 star rating">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <blockquote>"We got pre-approved in 48 hours and closed two weeks early. Absolute lifesavers during a stressful time."</blockquote>
+        <div class="author"><div class="author-avatar">M</div><div><div class="author-name">Marcus & Jen T.</div><div class="author-meta">First-time family, Calgary</div></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+    <div class="section-header reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title" id="faq-title">Questions?<br>We have <span class="italic">answers.</span></h2>
+      <p class="section-desc">Everything you need to know before starting your mortgage journey.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is the minimum down payment in Canada?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><p>For homes under $500,000, the minimum down payment is 5%. Between $500,000 and $999,999, it is 5% on the first $500,000 and 10% on the remainder. Homes $1 million and above require 20% down.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>Can newcomers to Canada get a mortgage?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><p>Yes. Many Canadian lenders offer newcomer mortgage programs that accept limited Canadian credit history, foreign income, and international assets. We help newcomers navigate these specialized options.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>How long does pre-approval take?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><p>With The Funders, most clients receive pre-approval within 48 hours. We compare rates across 30+ lenders to find the best fit for your situation.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you charge fees for your services?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><p>For most standard mortgages, our services are free to you — we are compensated by the lender. In some complex situations, a fee may apply, which we will always disclose upfront.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is the difference between fixed and variable rates?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><p>A fixed rate stays the same for your entire term, giving you predictable payments. A variable rate fluctuates with the prime rate, which can mean lower costs when rates drop but higher costs when they rise. We will help you decide which fits your risk tolerance.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" aria-expanded="false">
+          <span>Can I get a mortgage if I am self-employed?</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="faq-answer"><p>Absolutely. We work with lenders who understand self-employed income, including those who accept stated income or alternative documentation. Your business does not disqualify you from homeownership.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+    <div class="cta-content reveal">
+      <h2>Ready to make your<br>next <span class="italic">move?</span></h2>
+      <p>Start with a free strategy call. Ask questions, understand your options, and leave with a clearer path forward.</p>
+      <a href="#" class="btn-light">Book your free strategy call<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      <p class="subtext">No obligation. No pressure. 100% confidential.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="https://thefunders.ca/" class="logo" aria-label="The Funders Mortgage Group"><span class="the">the</span>funders<span class="dot"></span></a>
+        <p>A clearer path to homeownership for first-time buyers, newcomers, refinancers, investors, and all Canadians.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#">About Us</a>
+        <a href="#">Our Process</a>
+        <a href="#">Careers</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Resources</h5>
+        <a href="#">First-Time Buyer's Guide</a>
+        <a href="#">Newcomer Mortgages</a>
+        <a href="#">Women & Wealth</a>
+        <a href="#calculator">Mortgage Calculator</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 The Funders Mortgage Group. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // NAV SCROLL
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // CURSOR GLOW
+    const cursorGlow = document.getElementById('cursorGlow');
+    let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.08; glowY += (mouseY - glowY) * 0.08;
+      cursorGlow.style.left = glowX + 'px'; cursorGlow.style.top = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    // HERO CANVAS - Sage particle network
+    const canvas = document.getElementById('heroCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const PARTICLE_COUNT = 60;
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.offsetWidth;
+        this.y = Math.random() * canvas.offsetHeight;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.15 + 0.03;
+      }
+      update() {
+        this.x += this.speedX; this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.offsetWidth) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.offsetHeight) this.speedY *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(127, 176, 105, ${this.opacity})`; ctx.fill();
+      }
+    }
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      particles.forEach(p => { p.update(); p.draw(); });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(127, 176, 105, ${0.04 * (1 - dist / 150)})`; ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateCanvas);
+    }
+    animateCanvas();
+
+    // GSAP ANIMATIONS
+    gsap.registerPlugin(ScrollTrigger);
+    const heroTl = gsap.timeline({ delay: 0.3 });
+    heroTl.to('#heroLabel', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+          .to('#heroTitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.4')
+          .to('#heroDesc', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+          .to('#heroActions', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4')
+          .to('#heroTrust', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.4');
+    gsap.set('#heroTitle', { opacity: 0, y: 30 });
+    gsap.set('#heroDesc', { opacity: 0, y: 20 });
+    gsap.utils.toArray('.reveal').forEach((el, i) => {
+      gsap.to(el, {
+        scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+        opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: i % 3 * 0.1
+      });
+    });
+    gsap.utils.toArray('.process-step').forEach((el, i) => {
+      gsap.to(el, {
+        scrollTrigger: { trigger: el, start: 'top 85%' },
+        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: i * 0.15
+      });
+    });
+    gsap.to('#heroCanvas', {
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
+      y: 100, opacity: 0.3
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // MORTGAGE CALCULATOR
+    function calculateMortgage() {
+      const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
+      const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+      const rate = parseFloat(document.getElementById('interestRate').value) || 0;
+      const years = parseInt(document.getElementById('amortization').value) || 25;
+      const principal = homePrice - downPayment;
+      if (principal <= 0 || rate <= 0) { document.getElementById('monthlyPayment').textContent = '$0'; return; }
+      const monthlyRate = rate / 100 / 12;
+      const numPayments = years * 12;
+      const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+      document.getElementById('monthlyPayment').textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+    }
+    ['homePrice', 'downPayment', 'interestRate', 'amortization'].forEach(id => {
+      document.getElementById(id).addEventListener('input', calculateMortgage);
+    });
+    calculateMortgage();
+
+    // FAQ ACCORDION
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question').setAttribute('aria-expanded', 'false'); });
+        if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+      });
+    });
+  </script>
+</body>
+</html>
