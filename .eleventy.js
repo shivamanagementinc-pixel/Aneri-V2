@@ -20,13 +20,12 @@ module.exports = function (eleventyConfig) {
   );
 
   return {
-  dir: {
-    input: ".",
-    includes: "_includes",
-    layouts: "_includes",  // ← changed from "_includes/layouts"
-    output: "_site",
-  }
-  };
+    dir: {
+      input: ".",
+      includes: "_includes",
+      layouts: "_includes",
+      output: "_site",
+    },
     templateFormats: ["md", "html", "njk"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk"
