@@ -19,14 +19,14 @@ module.exports = function (eleventyConfig) {
       .sort((firstPost, secondPost) => secondPost.date - firstPost.date)
   );
 
-return {
+  return {
   dir: {
     input: ".",
     includes: "_includes",
     layouts: "_includes",  // ← changed from "_includes/layouts"
     output: "_site",
   }
-};
+  };
     templateFormats: ["md", "html", "njk"],
     htmlTemplateEngine: "njk",
     markdownTemplateEngine: "njk"
