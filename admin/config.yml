@@ -228,3 +228,31 @@ collections:
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
       - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
       - { label: "Canonical URL", name: "canonical", widget: "string", required: false }
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "rates"
+        label: "Mortgage Rates"
+        file: "_data/rates.json"
+        fields:
+          - { label: "Last Updated", name: "updated", widget: "string" }
+          - label: "Rates"
+            name: "rates"
+            widget: "list"
+            fields:
+              - { label: "Term", name: "term", widget: "string" }
+              - { label: "Rate %", name: "rate", widget: "number", value_type: "float" }
+              - { label: "Lender", name: "lender", widget: "string" }
+              - { label: "Logo Class", name: "logo", widget: "string", hint: "rbc, td, scotia, cibc, bmo, or funders" }
+              - { label: "Best Rate?", name: "best", widget: "boolean", default: false }
+          - { label: "Amortization Years", name: "amortizationYears", widget: "number", default: 25 }
+          - { label: "Stress Test Floor %", name: "stressTestFloor", widget: "number", value_type: "float", default: 5.25 }
+          - { label: "Appreciation Rate", name: "appreciationRate", widget: "number", value_type: "float", default: 0.03 }
+          - { label: "Selling Cost Rate", name: "sellingCostRate", widget: "number", value_type: "float", default: 0.05 }
+          - { label: "Heat Estimate", name: "heatEstimate", widget: "number", default: 150 }
+          - { label: "Insurance Estimate", name: "insuranceEstimate", widget: "number", default: 180 }
+          - { label: "Utilities Estimate", name: "utilitiesEstimate", widget: "number", default: 280 }
+          - { label: "Tenant Insurance", name: "tenantInsurance", widget: "number", default: 35 }
+          - { label: "Parking Estimate", name: "parkingEstimate", widget: "number", default: 150 }
+          - { label: "Basement Rent", name: "basementRent", widget: "number", default: 1650 }
