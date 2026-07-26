@@ -1,0 +1,136 @@
+---
+permalink: /report-builder/index.html
+---
+
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Builder | The Funders</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root { --forest: #19231d; --sage: #7fb069; --cream: #fefaf3; --border: #e2e8f0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f5f0e8; color: var(--forest); line-height: 1.6; }
+    .wrap { max-width: 720px; margin: 60px auto; padding: 0 24px; }
+    h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 32px; margin-bottom: 6px; }
+    .sub { color: #5a6b60; font-size: 15px; margin-bottom: 32px; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .full { grid-column: 1 / -1; }
+    label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    input, select { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; font-family: inherit; background: #fff; }
+    input:focus, select:focus { outline: none; border-color: var(--sage); box-shadow: 0 0 0 4px rgba(127,176,105,0.12); }
+    .actions { margin-top: 28px; display: flex; gap: 12px; }
+    button { padding: 14px 32px; border-radius: 100px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; }
+    .btn-primary { background: var(--forest); color: #fff; }
+    .btn-secondary { background: transparent; color: var(--forest); border: 1.5px solid var(--border); }
+    @media (max-width: 640px) { form { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Buyer Report Builder</h1>
+    <p class="sub">Takes 30 seconds. Generates a branded, print-ready report.</p>
+
+    <form action="/report/" method="GET" target="_blank">
+      <div class="full">
+        <label>Prepared For</label>
+        <input type="text" name="name" value="The Johnson Family" required>
+      </div>
+
+      <div class="full">
+        <label>Property Address</label>
+        <input type="text" name="address" value="42 Willow Creek Drive, Toronto, ON" required>
+      </div>
+
+      <div>
+        <label>MLS#</label>
+        <input type="text" name="mls" value="W12345678">
+      </div>
+
+      <div>
+        <label>List Price ($)</label>
+        <input type="number" name="price" value="1250000" required>
+      </div>
+
+      <div class="full">
+        <label>Photo URL</label>
+        <input type="url" name="photo" value="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=400&fit=crop&q=80">
+      </div>
+
+      <div>
+        <label>Beds</label>
+        <input type="number" name="beds" value="3">
+      </div>
+
+      <div>
+        <label>Baths</label>
+        <input type="number" name="baths" value="2">
+      </div>
+
+      <div>
+        <label>Sqft</label>
+        <input type="text" name="sqft" value="2,100">
+      </div>
+
+      <div>
+        <label>Type</label>
+        <select name="type">
+          <option selected>Detached</option>
+          <option>Semi-Detached</option>
+          <option>Townhouse</option>
+          <option>Condo</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Annual Tax ($)</label>
+        <input type="number" name="tax" value="9360">
+      </div>
+
+      <div>
+        <label>Monthly Condo/Maint ($)</label>
+        <input type="number" name="condo" value="350">
+      </div>
+
+      <div>
+        <label>Est. Rent ($)</label>
+        <input type="number" name="rent" value="3800">
+      </div>
+
+      <div>
+        <label>Basement Rent ($)</label>
+        <input type="number" name="bsmt" value="1650">
+      </div>
+
+      <div>
+        <label>Down Payment %</label>
+        <select name="dp">
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20" selected>20%</option>
+          <option value="25">25%</option>
+          <option value="30">30%</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Realtor Name</label>
+        <input type="text" name="agent" value="Sarah Chen">
+      </div>
+
+      <div class="full">
+        <label>Realtor Photo URL (optional)</label>
+        <input type="url" name="agentPhoto" placeholder="https://...">
+      </div>
+
+      <div class="actions full">
+        <button type="submit" class="btn-primary">Generate Report</button>
+        <button type="reset" class="btn-secondary">Clear</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
