@@ -105,47 +105,50 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'mlsId looks invalid (too long)' }) };
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 500, headers,
-      body: JSON.stringify({ error: 'Server is missing GEMINI_API_KEY. Add it in Netlify: Site settings \u2192 Environment variables, then redeploy.' })
+      body: JSON.stringify({ error: 'Server is missing OPENAI_API_KEY. Add it in Netlify: Site settings \u2192 Environment variables, then redeploy.' })
     };
   }
 
   try {
-    const resp = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: buildPrompt(mlsId) }] }],
-          tools: [{ google_search: {} }],
-          generationConfig: { temperature: 0.1 }
-        })
-      }
-    );
+    const resp = await fetch('https://api.openai.com/v1/responses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-5.6-luna',
+        input: buildPrompt(mlsId),
+        tools: [{ type: 'web_search' }]
+      })
+    });
 
     if (!resp.ok) {
       const errText = await resp.text();
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Gemini API error', detail: errText.slice(0, 500) }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'OpenAI API error', detail: errText.slice(0, 500) }) };
     }
 
     const data = await resp.json();
-    const candidate = data.candidates && data.candidates[0];
-    const parts = candidate && candidate.content && candidate.content.parts;
-    const text = (parts || []).map(p => p.text || '').join('');
+    // Responses API returns an "output" array of typed items. When a web_search
+    // tool call happens first, the message item (with the actual text) may not
+    // be output[0], so scan for the first "message" item rather than assuming.
+    const messageItem = (data.output || []).find(item => item.type === 'message');
+    const textParts = messageItem && messageItem.content ? messageItem.content : [];
+    const text = textParts.filter(p => p.type === 'output_text').map(p => p.text || '').join('');
 
     if (!text) {
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Gemini returned no text content', detail: JSON.stringify(data).slice(0, 500) }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'OpenAI returned no text content', detail: JSON.stringify(data).slice(0, 500) }) };
     }
 
     let parsed;
     try {
       parsed = extractJson(text);
     } catch (e) {
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Could not parse Gemini response as JSON', detail: text.slice(0, 500) }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Could not parse OpenAI response as JSON', detail: text.slice(0, 500) }) };
     }
 
     if (parsed.error) {
