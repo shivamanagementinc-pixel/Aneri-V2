@@ -165,7 +165,16 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 .rate-value.best{color:var(--sage);font-size:17px;}
 .monthly-cell{font-weight:600;color:var(--forest);}
 .monthly-cell.best{color:var(--sage);font-weight:700;}
-.bank-logo{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;font-family:var(--font-sans);font-size:10px;font-weight:800;letter-spacing:0.3px;color:var(--white);}
+.bank-logo{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;font-family:var(--font-sans);font-size:10px;font-weight:800;letter-spacing:0.3px;color:var(--white);overflow:hidden;}
+.bank-logo img{width:100%;height:100%;object-fit:contain;background:var(--white);padding:4px;}
+.rate-panel{position:relative;}
+.preferred-ribbon{position:absolute;top:14px;right:-34px;background:var(--sage);color:var(--forest);font-family:var(--font-sans);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:5px 40px;transform:rotate(45deg);box-shadow:0 2px 8px rgba(0,0,0,0.15);z-index:5;}
+.rec-panel{background:linear-gradient(135deg,#fff8e7 0%,#fefaf3 100%);border-radius:var(--radius);padding:24px 28px;border:1.5px solid var(--amber);margin-bottom:24px;position:relative;}
+.rec-panel-header{display:flex;align-items:center;gap:8px;font-family:var(--font-sans);font-size:15px;font-weight:700;color:#78350f;margin-bottom:12px;}
+.rec-panel-header .rec-star{color:var(--amber);}
+.rec-body{font-family:var(--font-sans);font-size:13.5px;color:#451a03;line-height:1.75;}
+.rec-body strong{color:#78350f;}
+.rec-highlight{display:inline-block;background:var(--white);border:1px solid var(--amber);border-radius:8px;padding:2px 8px;font-weight:700;color:var(--sage);}
 .bank-logo.rbc{background:#d81e05;}
 .bank-logo.td{background:#008a00;}
 .bank-logo.scotia{background:#d81e05;}
@@ -173,8 +182,6 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 .bank-logo.bmo{background:#0079c1;}
 .bank-logo.funders{background:var(--forest);border:1.5px solid var(--sage);}
 .preferred-badge{display:inline-flex;align-items:center;gap:4px;background:var(--sage);color:var(--forest);font-family:var(--font-sans);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;padding:3px 8px;border-radius:100px;margin-left:6px;vertical-align:middle;}
-.rate-insight{background:var(--amber-light);padding:14px 20px;border-top:1px solid #fde68a;font-family:var(--font-sans);font-size:12.5px;color:#78350f;display:flex;align-items:flex-start;gap:10px;line-height:1.6;}
-.rate-insight strong{color:#451a03;}
 .dp-panel{background:linear-gradient(135deg,var(--sage-faint) 0%,#f0fdf4 100%);border-radius:var(--radius);padding:24px 28px;border:1px solid var(--sage-soft);margin-bottom:24px;}
 .dp-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
 .dp-panel-header span:first-child{font-family:var(--font-sans);font-size:15px;font-weight:700;color:#14532d;display:flex;align-items:center;gap:8px;}
@@ -323,9 +330,25 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       .cc-panel,
       .cta-section,
       .report-header,
-      .photo-strip {
+      .photo-strip,
+      .rec-panel {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+      }
+
+      .rec-panel {
+        padding: 6px 10px !important;
+        margin-bottom: 6px !important;
+        border-radius: 8px !important;
+      }
+      .rec-panel-header { font-size: 8pt !important; margin-bottom: 3px !important; }
+      .rec-body { font-size: 6.8pt !important; line-height: 1.35 !important; }
+
+      .preferred-ribbon {
+        top: 8px !important;
+        right: -30px !important;
+        font-size: 6.5pt !important;
+        padding: 3px 32px !important;
       }
 
       /* --- Header --- */
@@ -404,10 +427,10 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       .page-section {
         padding: 10px 0 !important;
       }
-      .page-1 {
-        page-break-after: always !important;
-        break-after: page !important;
-      }
+      /* No forced break here \u2014 content flows naturally and fills each
+         page, since every panel already has page-break-inside: avoid.
+         This prevents wasted blank space when content is shorter than
+         a full page, while still never splitting a panel mid-way. */
 
       .section-header {
         margin-bottom: 8px !important;
@@ -427,8 +450,8 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 
       /* --- Metrics --- */
       .metrics-grid {
-        gap: 8px !important;
-        margin-bottom: 10px !important;
+        gap: 6px !important;
+        margin-bottom: 7px !important;
       }
       .metric-card {
         background: var(--cream) !important;
@@ -455,7 +478,7 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       .rate-panel {
         border: 1.5px solid var(--forest) !important;
         border-radius: 8px !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 6px !important;
         overflow: hidden !important;
       }
       .rate-panel-header {
@@ -505,28 +528,14 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
         padding: 1px 4px !important;
         margin-left: 2px !important;
       }
-      .rate-insight {
-        background: var(--amber-light) !important;
-        border-top: 1px solid #fde68a !important;
-        padding: 6px 10px !important;
-        font-size: 7.5pt !important;
-        gap: 6px !important;
-        line-height: 1.4 !important;
-      }
-      .rate-insight svg {
-        width: 12px !important;
-        height: 12px !important;
-        margin-top: 1px !important;
-      }
-      .rate-insight strong { color: #451a03 !important; }
 
       /* --- Down Payment --- */
       .dp-panel {
         background: var(--sage-faint) !important;
         border: 1.5px solid var(--sage) !important;
         border-radius: 8px !important;
-        padding: 8px 12px !important;
-        margin-bottom: 10px !important;
+        padding: 6px 10px !important;
+        margin-bottom: 6px !important;
       }
       .dp-panel-header { margin-bottom: 6px !important; }
       .dp-panel-header span:first-child {
@@ -635,8 +644,8 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
         background: var(--amber-light) !important;
         border: 1.5px solid var(--amber) !important;
         border-radius: 8px !important;
-        padding: 8px 12px !important;
-        margin-bottom: 10px !important;
+        padding: 6px 10px !important;
+        margin-bottom: 6px !important;
       }
       .rental-panel-header {
         font-size: 9pt !important;
@@ -676,8 +685,8 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
         background: var(--cream) !important;
         border: 1.5px solid var(--forest) !important;
         border-radius: 8px !important;
-        padding: 8px 12px !important;
-        margin-bottom: 10px !important;
+        padding: 6px 10px !important;
+        margin-bottom: 6px !important;
       }
       .cc-panel-header {
         font-size: 9pt !important;
@@ -709,61 +718,61 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       .cta-section {
         background: var(--forest) !important;
         border-radius: 8px !important;
-        padding: 10px !important;
-        margin-bottom: 8px !important;
+        padding: 6px 10px !important;
+        margin-bottom: 4px !important;
         color: #fff !important;
       }
       .cta-section::before { display: none !important; }
       .cta-title {
-        font-size: 12pt !important;
-        margin-bottom: 2px !important;
+        font-size: 10pt !important;
+        margin-bottom: 1px !important;
       }
       .cta-sub {
-        font-size: 8pt !important;
-        margin-bottom: 6px !important;
+        font-size: 6.8pt !important;
+        margin-bottom: 3px !important;
         max-width: none !important;
       }
       .agent-footer {
-        font-size: 7pt !important;
-        margin-top: 4px !important;
+        font-size: 6pt !important;
+        margin-top: 2px !important;
         opacity: 0.6 !important;
-        line-height: 1.4 !important;
+        line-height: 1.3 !important;
       }
       .print-cta-box {
         text-align: center;
-        padding: 6px;
+        padding: 4px;
         border: 1.5px solid var(--sage);
         border-radius: 6px;
         background: rgba(127,176,105,0.15) !important;
-        margin-top: 6px;
+        margin-top: 3px;
       }
       .print-cta-box h4 {
         font-family: var(--font-serif);
-        font-size: 10pt;
+        font-size: 8.5pt;
         color: #fff;
-        margin-bottom: 2px;
+        margin-bottom: 1px;
       }
       .print-cta-box p {
         font-family: var(--font-sans);
-        font-size: 7pt;
+        font-size: 6.5pt;
         color: rgba(255,255,255,0.8);
-        line-height: 1.3;
+        line-height: 1.2;
       }
       .print-cta-box .cta-strong {
         font-family: var(--font-sans);
-        font-size: 8pt;
+        font-size: 6.8pt;
         font-weight: 700;
         color: #fff;
-        margin-top: 3px;
+        margin-top: 1px;
       }
 
       /* --- Disclaimer --- */
       .disclaimer {
         background: none !important;
-        padding: 6px 0 !important;
+        padding: 3px 0 !important;
         border-top: 1px solid var(--border) !important;
         font-size: 5.5pt !important;
-        line-height: 1.35 !important;
+        line-height: 1.25 !important;
         color: #94a3b8 !important;
       }
     }
@@ -802,10 +811,14 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       <div class="metric-card"><div class="label">Est. Monthly Payment</div><div class="value">__MONTHLY_TOTAL__<span style="font-size:14px;font-weight:500">/mo</span></div><div class="sub">Incl. tax, heat & condo fees</div></div>
     </div>
     <div class="rate-panel">
+      <div class="preferred-ribbon">Preferred</div>
       <div class="rate-panel-header">Current Mortgage Rates &mdash; Updated Weekly<span style="margin-left:auto;font-size:11px;font-weight:500;color:var(--forest-muted);">Best rates highlighted</span></div>
       <table class="rate-table"><thead><tr><th>Term</th><th>Rate</th><th>Lender</th><th>Monthly</th><th>5-Yr Interest</th></tr></thead>
       <tbody><tr class="rows-placeholder"><td colspan="5">__RATES_ROWS__</td></tr></tbody></table>
-      <div class="rate-insight"><div><strong>__BEST_RATE_TERM__ is your sweet spot:</strong> At __BEST_RATE__%, you save <strong>$__BEST_SAVE_VS_5YR__/month</strong> vs. 5-Year Fixed. Assumes __DP__% down (__DP_FMT__), __AMORT__-year amortization.</div></div>
+    </div>
+    <div class="rec-panel">
+      <div class="rec-panel-header"><span class="rec-star">&#9733;</span> Our Recommendation</div>
+      <div class="rec-body">__RECOMMENDATION_TEXT__</div>
     </div>
     <div class="dp-panel">
       <div class="dp-panel-header"><span>Down Payment Impact</span><span class="dp-value" id="dpDisplay">__DP__% &mdash; __DP_FMT__</span></div>
@@ -886,9 +899,9 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       <div class="cta-title">Ready to Make This Home Yours?</div>
       <div class="cta-sub">Get a personalized pre-approval in 48 hours. No impact on your credit score. No obligation.</div>
       <div class="cta-buttons interactive-only">
-        <button class="btn btn-primary" onclick="openModal()">Get Pre-Approved Now</button>
-        <button class="btn btn-secondary" onclick="window.print()">Print / Save as PDF</button>
-        <button class="btn btn-secondary" onclick="emailReport()">Email Me This Report</button>
+        <button class="btn btn-primary" onclick="openModal('preapproval')">Get Pre-Approved Now</button>
+        <button class="btn btn-secondary" onclick="openModal('print')">Print / Save as PDF</button>
+        <button class="btn btn-secondary" onclick="openModal('email')">Email Me This Report</button>
       </div>
       <div class="print-only print-cta-box">
         <h4>This report is prepared by TheFunders.ca</h4>
@@ -904,24 +917,28 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
     <div id="modalForm">
-      <h3>Email This Report</h3>
-      <p>Send a copy to yourself, your partner, or your financial advisor.</p>
+      <h3 id="modalTitle">Get Pre-Approved</h3>
+      <p id="modalSubtitle">Tell us a bit about you and a mortgage specialist will follow up within 2 hours.</p>
       <div class="form-group"><label>Your Name</label><input type="text" id="senderName" placeholder="e.g. Michael Johnson"></div>
       <div class="form-group"><label>Email Address</label><input type="email" id="senderEmail" placeholder="you@email.com"></div>
       <div class="form-group"><label>Also send to (optional)</label><input type="email" id="ccEmail" placeholder="partner@email.com"></div>
       <div class="form-group">
+        <label>I am a&hellip; (optional)</label>
+        <select id="userRole"><option value="">Prefer not to say</option><option>Realtor</option><option>Homebuyer</option><option>Seller</option><option>Other</option></select>
+      </div>
+      <div class="form-group">
         <label>Best time to reach you?</label>
-        <select id="bestTime"><option>Morning (9am-12pm)</option><option>Afternoon (12pm-5pm)</option><option>Evening (5pm-8pm)</option><option>Anytime</option></select>
+        <select id="bestTime"><option>Morning (9am-12pm)</option><option>Afternoon (12pm-5pm)</option><option>Evening (5pm-8pm)</option><option>Anytime</option><option>I'm not ready yet, just looking</option></select>
       </div>
       <div class="modal-actions">
         <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-primary" onclick="submitEmail()">Send Report</button>
+        <button class="btn btn-primary" id="modalSubmitBtn" onclick="submitEmail()">Request Pre-Approval</button>
       </div>
     </div>
     <div class="success-msg" id="successMsg">
       <div class="success-icon">&#10003;</div>
-      <h3 style="color:var(--forest);margin-bottom:6px;font-family:var(--font-serif);font-size:20px;">Report Sent!</h3>
-      <p style="color:var(--forest-muted);font-size:13px;">Check your inbox. A mortgage specialist will follow up within 2 hours.</p>
+      <h3 style="color:var(--forest);margin-bottom:6px;font-family:var(--font-serif);font-size:20px;" id="successTitle">Request Sent!</h3>
+      <p style="color:var(--forest-muted);font-size:13px;" id="successBody">Check your inbox. A mortgage specialist will follow up within 2 hours.</p>
       <button class="btn btn-primary" style="margin-top:16px;border-radius:10px;" onclick="closeModal()">Close</button>
     </div>
   </div>
@@ -967,12 +984,69 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
   const modal=document.getElementById('emailModal');
   const modalForm=document.getElementById('modalForm');
   const successMsg=document.getElementById('successMsg');
-  function openModal(){modal.classList.add('active');modalForm.style.display='block';successMsg.classList.remove('active');document.body.style.overflow='hidden';}
+  const modalTitle=document.getElementById('modalTitle');
+  const modalSubtitle=document.getElementById('modalSubtitle');
+  const modalSubmitBtn=document.getElementById('modalSubmitBtn');
+  const successTitle=document.getElementById('successTitle');
+  const successBody=document.getElementById('successBody');
+  let pendingAction='preapproval';
+
+  const MODAL_COPY={
+    preapproval:{
+      title:'Get Pre-Approved',
+      subtitle:"Tell us a bit about you and a mortgage specialist will follow up within 2 hours.",
+      button:'Request Pre-Approval',
+      successTitle:'Request Sent!',
+      successBody:'Check your inbox. A mortgage specialist will follow up within 2 hours.'
+    },
+    print:{
+      title:'Just One Quick Thing',
+      subtitle:"Tell us a bit about you, then we'll open the print dialog so you can save this report as a PDF.",
+      button:'Continue to Print',
+      successTitle:null, // no success screen \u2014 goes straight to print
+      successBody:null
+    },
+    email:{
+      title:'Just One Quick Thing',
+      subtitle:"Tell us a bit about you, then we'll open your email app with this report ready to send.",
+      button:'Continue to Email',
+      successTitle:null, // no success screen \u2014 goes straight to email
+      successBody:null
+    }
+  };
+
+  function openModal(action){
+    pendingAction=action||'preapproval';
+    const copy=MODAL_COPY[pendingAction];
+    modalTitle.textContent=copy.title;
+    modalSubtitle.textContent=copy.subtitle;
+    modalSubmitBtn.textContent=copy.button;
+    modal.classList.add('active');
+    modalForm.style.display='block';
+    successMsg.classList.remove('active');
+    document.body.style.overflow='hidden';
+  }
   function closeModal(){modal.classList.remove('active');document.body.style.overflow='';}
   function submitEmail(){
     const name=document.getElementById('senderName').value.trim();
     const email=document.getElementById('senderEmail').value.trim();
     if(!name||!email){alert('Please fill in your name and email.');return;}
+
+    if(pendingAction==='print'){
+      closeModal();
+      window.print();
+      return;
+    }
+    if(pendingAction==='email'){
+      closeModal();
+      emailReport();
+      return;
+    }
+
+    // preapproval: show the success screen in-place
+    const copy=MODAL_COPY.preapproval;
+    successTitle.textContent=copy.successTitle;
+    successBody.textContent=copy.successBody;
     modalForm.style.display='none';
     successMsg.classList.add('active');
   }
@@ -980,16 +1054,27 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
   document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeModal();});
 
   function emailReport(){
-    const subject=encodeURIComponent('Your Buyer Financing Report - __ADDRESS__');
+    const subject=encodeURIComponent('Your Personalized Financing Report \u2014 __ADDRESS__');
     const body=encodeURIComponent(
-      'Hi,\n\nI wanted to share this personalized financing report for __ADDRESS__.\n\n'+
-      'Key Highlights:\n'+
-      '- List Price: __PRICE_FMT__\n'+
-      '- Best Rate: __BEST_RATE__% (__BEST_RATE_TERM__)\n'+
-      '- Monthly Payment: __MONTHLY_TOTAL__ (incl. tax & fees)\n'+
-      '- Income Required: __INCOME__/year\n'+
-      '- 5-Year Wealth Gain (buy vs rent): ~__NET_WEALTH__\n\n'+
-      '-\nPrepared by The Funders Mortgage Team\ninfo@thefunders.ca | 437-605-9024'
+      'Hi,\n\n'+
+      "Thanks for your interest in __ADDRESS__! I've put together a personalized financing report to help you understand exactly what it takes to make this home yours.\n\n"+
+      'QUICK SNAPSHOT\n'+
+      '--------------------------------\n'+
+      'List Price             __PRICE_FMT__\n'+
+      'Recommended Rate       __BEST_RATE__% (__BEST_RATE_TERM__)\n'+
+      'Est. Monthly Payment   __MONTHLY_TOTAL__ (incl. tax, condo fees & insurance)\n'+
+      'Income Required        __INCOME__/year\n'+
+      '5-Year Wealth Gain     ~__NET_WEALTH__ (buying vs. renting)\n'+
+      '--------------------------------\n\n'+
+      "The full report covers your financing roadmap, a buy-vs-rent breakdown, rental income potential, and a closing cost estimate.\n\n"+
+      "Before sending \u2014 please attach the report PDF (use the \"Print / Save as PDF\" button on the report page, save it, then attach it here).\n\n"+
+      "Happy to walk through any of this together whenever works for you \u2014 just reply to this email or give me a call.\n\n"+
+      'Talk soon,\n'+
+      '__AGENT_NAME__\n\n'+
+      '--\n'+
+      'The Funders Mortgage Team\n'+
+      'info@thefunders.ca | 437-605-9024\n'+
+      'FSRA Lic. M23001234'
     );
     window.location.href='mailto:?subject='+subject+'&body='+body;
   }
@@ -1012,7 +1097,8 @@ function fiveYearInterest(loanAmount,rate,amortYears){
   const principalPaid=loanAmount-remainingBalance(loanAmount,rate,amortYears,60);
   return totalPaid-principalPaid;
 }
-function generateRatesRows(rates,loanAmount,amortYears){return rates.map(r=>{const monthly=calculateMortgage(loanAmount,r.rate/100,amortYears);const isBest=r.isBest?' class="best-rate"':'';const bestClass=r.isBest?' best':'';const badge=r.isBest?'<span class="preferred-badge">thefunders.ca preferred</span>':'';const interest5=(typeof r.interest5yr==='number'&&!isNaN(r.interest5yr))?r.interest5yr:fiveYearInterest(loanAmount,r.rate/100,amortYears);return`<tr${isBest}><td>${r.term}${badge}</td><td class="rate-value${bestClass}">${r.rate.toFixed(2)}%</td><td><span class="bank-logo ${r.logo}">${r.lender}</span></td><td class="monthly-cell${bestClass}">${fmt(monthly)}</td><td>${fmt(interest5)}</td></tr>`;}).join('');}
+function isBestRate(r){return !!(r.best||r.isBest);}
+function generateRatesRows(rates,loanAmount,amortYears){return rates.map(r=>{const monthly=calculateMortgage(loanAmount,r.rate/100,amortYears);const rowIsBest=isBestRate(r);const isBest=rowIsBest?' class="best-rate"':'';const bestClass=rowIsBest?' best':'';const badge=rowIsBest?'<span class="preferred-badge">thefunders.ca preferred</span>':'';const interest5=(typeof r.interest5yr==='number'&&!isNaN(r.interest5yr))?r.interest5yr:fiveYearInterest(loanAmount,r.rate/100,amortYears);const logoContent=r.logoUrl?`<img src="${r.logoUrl}" alt="${r.lender}" onerror="this.parentElement.textContent='${r.lender}';this.parentElement.style.background=this.parentElement.style.background||'#475569';">`:r.lender;return`<tr${isBest}><td>${r.term}${badge}</td><td class="rate-value${bestClass}">${r.rate.toFixed(2)}%</td><td><span class="bank-logo ${r.logo}">${logoContent}</span></td><td class="monthly-cell${bestClass}">${fmt(monthly)}</td><td>${fmt(interest5)}</td></tr>`;}).join('');}
 
 async function lookupMLS(){
   const mlsId=document.getElementById('f_mlsLookup').value.trim();
@@ -1206,6 +1292,36 @@ function parsePastedData(){
 }
 
 
+function generateRecommendation(buyer,bestRate,rates,loanAmount,amortYears,dpPercent,cmhcAmount,monthlyMortgage,price){
+  const parts=[];
+  const variableRate=rates.find(r=>/variable/i.test(r.term));
+  const fixedIsBest=/fixed/i.test(bestRate.term);
+
+  parts.push(`Based on today's rates and a ${dpPercent}% down payment, the <span class="rec-highlight">${bestRate.term} at ${bestRate.rate.toFixed(2)}%</span> is the strongest option available right now.`);
+
+  if(variableRate && variableRate.term!==bestRate.term){
+    const variableMonthly=calculateMortgage(loanAmount,variableRate.rate/100,amortYears);
+    const diff=Math.round(variableMonthly-monthlyMortgage);
+    if(fixedIsBest && diff>0){
+      parts.push(`It's ${fmt(diff)}/month cheaper than the current ${variableRate.term}, with a locked-in payment for the full term.`);
+    }else if(fixedIsBest){
+      parts.push(`The ${variableRate.term} is priced close to this right now \u2014 worth discussing if some payment fluctuation is comfortable in exchange for potential savings.`);
+    }else{
+      parts.push(`This variable option is currently pricing lower than the leading fixed rates \u2014 worth considering for those comfortable with some payment movement.`);
+    }
+  }
+
+  if(dpPercent<20 && cmhcAmount>0){
+    parts.push(`At this down payment level, CMHC insurance of ${fmt(cmhcAmount)} is added to the mortgage \u2014 reaching 20% down would remove that cost entirely.`);
+  }else if(dpPercent>=20){
+    parts.push(`At ${dpPercent}% down, CMHC insurance is avoided altogether, keeping the loan amount \u2014 and monthly payment \u2014 as low as possible.`);
+  }
+
+  parts.push(`This is a starting point based on the numbers available; the right fit still depends on your plans and comfort with risk, which we're happy to walk through together.`);
+
+  return parts.join(' ');
+}
+
 function makeReport(){
   const status=document.getElementById('status');
   const price=Number(document.getElementById('f_price').value)||1250000;
@@ -1232,8 +1348,9 @@ function makeReport(){
   const amortYears=RATES.amortizationYears;
   const amortMonths=amortYears*12;
 
-  const bestRate=RATES.rates.find(r=>r.isBest)||RATES.rates[2];
+  const bestRate=RATES.rates.find(r=>isBestRate(r))||RATES.rates[2];
   const monthlyMortgage=calculateMortgage(loanAmount,bestRate.rate/100,amortYears);
+  const recommendationText=generateRecommendation(buyer,bestRate,RATES.rates,loanAmount,amortYears,dpPercent,cmhcAmount,monthlyMortgage,price);
 
   const monthlyTax=taxAnnual/12;
   const monthlyHeat=RATES.heatEstimate;
@@ -1280,6 +1397,7 @@ function makeReport(){
   .replace(/__MLS__/g,mls)
   .replace(/__PHOTO__/g,photo)
   .replace(/__PRICE_FMT__/g,fmt(price))
+  .replace(/__RECOMMENDATION_TEXT__/g,recommendationText)
   .replace(/__PRICE_RAW__/g,price)
   .replace(/__BEST_RATE_DECIMAL__/g,(bestRate.rate/100))
   .replace(/__AMORT_MONTHS__/g,amortMonths)
