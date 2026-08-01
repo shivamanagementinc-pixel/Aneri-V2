@@ -228,7 +228,9 @@ collections:
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
       - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
       - { label: "Canonical URL", name: "canonical", widget: "string", required: false }
-collections:
+  # ============================================
+  # SITE SETTINGS (rates & assumptions)
+  # ============================================
   - name: "settings"
     label: "Site Settings"
     files:
