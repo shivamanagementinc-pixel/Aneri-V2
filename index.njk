@@ -1,253 +1,397 @@
 ---
 layout: base.njk
-title: "The Funders Mortgage Group | Canadian Mortgage Broker | thefunders.ca"
-description: "The Funders Mortgage Group helps Canadians navigate mortgages with clarity. First-time buyers, newcomers, refinancers, investors — we work with all clients across Canada."
+title: "Canadian Mortgage Broker | Free Financing Reports"
+description: "thefunders.ca helps Canadians navigate mortgages with clarity — first-time buyers, newcomers, refinancers, and investors. Get a free, instant financing report for any property, no signup required."
 ---
 
-<!-- HERO -->
-<section class="hero" id="hero" role="banner">
-  <canvas class="hero-bg-canvas" id="heroCanvas" aria-hidden="true"></canvas>
-  <div class="hero-content">
-    <div class="hero-label" id="heroLabel"><span class="pulse"></span> Trusted by 200+ families across Canada</div>
-    <h1 id="heroTitle">Your home. Your future.<br><span class="accent">Made possible.</span></h1>
-    <p id="heroDesc">The Funders helps first-time buyers, newcomers, and all Canadians navigate mortgages without jargon, judgment, or pressure. No matter your situation, we find a path forward.</p>
-    <div class="hero-actions" id="heroActions">
-      <a href="#contact" class="btn-primary" aria-label="Book your free mortgage strategy call"><span>Book your free strategy call</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      <a href="#calculator" class="btn-secondary" aria-label="Try our mortgage payment calculator"><span>Calculate your payment</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="14.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg></a>
-    </div>
-    <div class="hero-trust" id="heroTrust">
-      <div class="avatars">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="Happy client - Aisha" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Happy client - Marcus" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Happy client - Sarah" loading="lazy">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Happy client - Jen" loading="lazy">
+<style>
+/* NOTE: some rules here (root vars, .wrap, nav, buttons, footer, section
+   header pattern) are also defined in base.njk. Repeating them here is
+   harmless (identical values simply re-apply) and keeps this page's CSS
+   easy to review as one block during the rebuild. Feel free to de-duplicate
+   later once everything is confirmed working. */
+
+.rate-pill{display:inline-flex;align-items:center;gap:8px;background:var(--sage-faint);border:1px solid var(--sage);padding:7px 18px 7px 8px;border-radius:100px;margin-bottom:36px;}
+.rate-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--sage);animation:pulse 2s infinite;}
+.rate-pill span{font-size:12.5px;font-weight:700;color:#14532d;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(127,176,105,0.4);}50%{box-shadow:0 0 0 6px rgba(127,176,105,0);}}
+
+.hero{padding:70px 0 50px;}
+.hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:center;}
+.hero h1{font-family:var(--font-serif);font-size:clamp(42px,6vw,72px);font-weight:600;color:var(--forest);line-height:1.08;letter-spacing:-1px;}
+.hero h1 .accent{font-style:italic;color:var(--sage);position:relative;display:inline-block;}
+.hero h1 .accent::after{content:'';position:absolute;left:2%;right:2%;bottom:6px;height:12px;background:var(--sage-faint);z-index:-1;}
+.hero p{font-family:var(--font-sans);font-size:17px;color:var(--ink-muted);max-width:480px;margin:22px 0 0;}
+.hero-actions{display:flex;gap:14px;justify-content:flex-start;margin-top:32px;flex-wrap:wrap;}
+.hero-trust{display:flex;align-items:center;justify-content:flex-start;gap:14px;margin-top:36px;}
+.hero-trust .avatars{display:flex;}
+.hero-trust .avatars img{width:36px;height:36px;border-radius:50%;border:2.5px solid var(--cream);object-fit:cover;margin-left:-10px;}
+.hero-trust .avatars img:first-child{margin-left:0;}
+.hero-trust p{font-size:13px;color:var(--ink-muted);margin:0;}
+.hero-trust strong{color:var(--forest);}
+
+.report-mock-wrap{perspective:1400px;}
+.report-mock{background:#fff;border-radius:16px;box-shadow:0 40px 90px rgba(25,35,29,0.18);transform:rotate(3deg) rotateY(-5deg);overflow:hidden;font-family:var(--font-sans);position:relative;}
+.rm-ribbon{position:absolute;top:12px;right:-26px;background:var(--sage);color:var(--forest);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;padding:3px 30px;transform:rotate(45deg);z-index:2;}
+.rm-header{background:linear-gradient(145deg,var(--forest),var(--forest-light));padding:18px 22px;color:#fff;}
+.rm-header .label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--sage-glow);opacity:0.85;margin-bottom:5px;font-weight:700;}
+.rm-header h4{font-family:var(--font-serif);font-size:17px;font-weight:600;}
+.rm-price{background:linear-gradient(135deg,#24352c,#19231d);padding:14px 22px;color:#fff;font-family:var(--font-serif);font-size:21px;font-weight:700;}
+.rm-price span{font-family:var(--font-sans);font-size:11px;opacity:0.6;font-weight:500;}
+.rm-body{padding:18px 22px 20px;}
+.rm-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
+.rm-metric{background:var(--cream);border-radius:9px;padding:11px 6px;text-align:center;}
+.rm-metric .l{font-size:7.5px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-muted);font-weight:700;margin-bottom:3px;}
+.rm-metric .v{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--forest);}
+.rm-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#f8fafc;border-radius:7px;margin-bottom:7px;font-size:11px;}
+.rm-row.best{background:#e8f5e9;}
+.rm-badge{background:var(--sage);color:var(--forest);font-size:7px;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:100px;letter-spacing:0.3px;margin-right:4px;}
+
+.stat-strip{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0;margin-top:70px;position:relative;overflow:hidden;}
+.stat-strip::before{content:'';position:absolute;top:-40%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(127,176,105,0.12) 0%,transparent 70%);pointer-events:none;}
+.stat-strip .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.stat{text-align:center;flex:1;min-width:140px;}
+.stat .num{font-family:var(--font-sans);font-size:34px;font-weight:900;color:var(--sage-glow);letter-spacing:-1px;position:relative;z-index:1;}
+.stat .lbl{font-size:11.5px;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-top:2px;position:relative;z-index:1;}
+
+.marquee-strip{background:var(--cream);border-bottom:1px solid var(--border);padding:16px 0;overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-flex;gap:40px;animation:marquee 28s linear infinite;}
+.marquee-track span{font-size:13.5px;font-weight:600;color:var(--forest);display:inline-flex;align-items:center;gap:10px;}
+.marquee-track span::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--sage);margin-left:40px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+.logo-strip{background:#fff;padding:36px 0 40px;overflow:hidden;border-bottom:1px solid var(--border);}
+.logo-strip-label{text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:22px;}
+.logo-strip-outer{white-space:nowrap;}
+.logo-track{display:inline-flex;gap:52px;align-items:center;animation:logoscroll 34s linear infinite;}
+.logo-track img{height:44px;width:44px;object-fit:contain;flex-shrink:0;}
+@keyframes logoscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+.tool-section h2,.afford-section-header h2{font-family:var(--font-serif);font-size:clamp(32px,3.6vw,46px);font-weight:600;color:var(--forest);line-height:1.12;letter-spacing:-0.5px;margin-bottom:20px;}
+.tool-section h2 em,.afford-section-header h2 em{font-style:italic;color:var(--sage);}
+.tool-grid{display:grid;grid-template-columns:0.95fr 1.05fr;gap:70px;align-items:center;}
+.tool-copy p{font-size:16px;color:var(--ink-muted);margin-bottom:28px;max-width:460px;}
+.tool-features{list-style:none;margin-bottom:32px;}
+.tool-features li{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;font-size:14.5px;color:var(--ink);}
+.tool-features li .check{width:20px;height:20px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.tool-audience{display:flex;gap:10px;}
+.audience-chip{background:#fff;border:1.5px solid var(--sage);color:var(--forest);font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:100px;}
+
+.demo-card{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);border-radius:20px;box-shadow:0 30px 70px rgba(25,35,29,0.25);overflow:hidden;position:relative;}
+.demo-card::before{content:'';position:absolute;top:-30%;right:-20%;width:320px;height:320px;background:radial-gradient(circle,rgba(127,176,105,0.14) 0%,transparent 70%);pointer-events:none;}
+.demo-topbar{padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);position:relative;z-index:1;}
+.demo-topbar .d{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.2);}
+.demo-topbar .url{margin-left:10px;font-size:11px;color:rgba(255,255,255,0.45);}
+.demo-inner{padding:28px 28px 30px;position:relative;z-index:1;}
+.demo-inner .rec{background:rgba(255,255,255,0.06);border:1px solid rgba(155,201,138,0.35);border-radius:12px;padding:18px 20px;margin-bottom:18px;backdrop-filter:blur(4px);}
+.demo-inner .rec .h{font-family:var(--font-serif);display:flex;align-items:center;gap:7px;font-size:16px;font-weight:600;color:var(--sage-glow);margin-bottom:9px;}
+.demo-inner .rec p{font-family:var(--font-sans);font-size:12.5px;color:rgba(255,255,255,0.75);line-height:1.65;}
+.demo-inner .rec .hl{background:rgba(255,255,255,0.95);border:1px solid var(--sage-glow);border-radius:6px;padding:1px 7px;color:var(--forest);font-weight:700;}
+.demo-btn{width:100%;background:var(--sage);color:#fff;border:none;padding:13px;border-radius:100px;font-size:13.5px;font-weight:700;text-align:center;display:block;text-decoration:none;}
+
+.afford-widget{max-width:640px;margin:0 auto;background:var(--cream);border:1px solid var(--border);border-radius:24px;padding:40px 44px 34px;box-shadow:0 30px 70px rgba(25,35,29,0.06);}
+.afford-label{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--ink-muted);margin-bottom:6px;}
+.afford-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:26px;}
+.afford-row span:first-child{font-family:var(--font-sans);font-size:17px;color:var(--ink-muted);}
+.afford-row .val{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--forest);}
+.afford-slider{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:var(--sage-faint);outline:none;margin-bottom:8px;}
+.afford-slider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--sage);border:4px solid #fff;box-shadow:0 2px 12px rgba(25,35,29,0.25);cursor:pointer;}
+.afford-slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--sage);border:4px solid #fff;box-shadow:0 2px 12px rgba(25,35,29,0.25);cursor:pointer;border:none;}
+.afford-ticks{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:30px;}
+.afford-divider{border-top:1px dashed var(--border);margin-bottom:26px;}
+.afford-result{text-align:center;}
+.afford-result .arrow{color:var(--sage);font-size:20px;margin-bottom:8px;}
+.afford-result .big{font-family:var(--font-serif);font-size:44px;font-weight:700;color:var(--forest);letter-spacing:-1px;}
+.afford-result .small{font-size:13px;color:var(--ink-muted);margin-top:4px;}
+.afford-section-header{text-align:center;max-width:600px;margin:0 auto 20px;}
+
+.help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.help-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:32px 28px;transition:transform 0.3s ease,box-shadow 0.3s ease;}
+.help-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(25,35,29,0.08);}
+.help-card .num{font-family:var(--font-serif);font-size:13px;font-weight:700;color:var(--sage);margin-bottom:16px;}
+.help-card h3{font-family:var(--font-serif);font-size:20px;font-weight:600;color:var(--forest);margin-bottom:10px;}
+.help-card p{font-size:14.5px;color:var(--ink-muted);margin-bottom:18px;line-height:1.65;}
+.help-card a{font-size:13.5px;font-weight:700;color:var(--forest);text-decoration:none;border-bottom:1.5px solid var(--sage);padding-bottom:2px;}
+
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.step-card{position:relative;padding:28px 22px;}
+.step-card .num{font-family:var(--font-serif);font-size:36px;font-weight:700;color:var(--sage-faint);-webkit-text-stroke:1.5px var(--sage);margin-bottom:14px;}
+.step-card h4{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--forest);margin-bottom:8px;}
+.step-card p{font-size:13.5px;color:var(--ink-muted);line-height:1.6;}
+
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.testimonial-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px 26px;}
+.stars{display:flex;gap:2px;margin-bottom:14px;}
+.stars svg{width:15px;height:15px;fill:var(--amber);}
+.testimonial-card blockquote{font-size:14.5px;color:var(--ink);line-height:1.7;margin-bottom:20px;font-style:italic;}
+.tauthor{display:flex;align-items:center;gap:12px;}
+.tauthor-avatar{width:38px;height:38px;border-radius:50%;background:var(--forest);color:var(--sage-glow);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:15px;flex-shrink:0;}
+.tauthor-name{font-size:13.5px;font-weight:700;color:var(--forest);}
+.tauthor-meta{font-size:12px;color:var(--ink-muted);}
+
+.faq-list{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;background:none;border:none;padding:22px 4px;display:flex;justify-content:space-between;align-items:center;text-align:left;font-family:var(--font-sans);font-size:15.5px;font-weight:600;color:var(--forest);cursor:pointer;}
+.faq-q svg{width:18px;height:18px;stroke:var(--sage);flex-shrink:0;transition:transform 0.25s ease;}
+.faq-item.open .faq-q svg{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a p{padding:0 4px 22px;font-size:14px;color:var(--ink-muted);line-height:1.7;}
+
+.final-cta{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);position:relative;overflow:hidden;padding:110px 0;text-align:center;}
+.final-cta .orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(127,176,105,0.18) 0%,transparent 70%);}
+.final-cta .orb-1{width:500px;height:500px;top:-20%;left:-10%;}
+.final-cta .orb-2{width:400px;height:400px;bottom:-25%;right:-5%;}
+.final-cta h2{font-family:var(--font-serif);font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.15;position:relative;z-index:1;}
+.final-cta h2 .italic{font-style:italic;color:var(--sage-glow);}
+.final-cta p{font-size:16px;color:rgba(255,255,255,0.7);max-width:480px;margin:18px auto 32px;position:relative;z-index:1;}
+.final-cta .subtext{font-size:13px;color:rgba(255,255,255,0.45);margin-top:18px;}
+.btn-light{background:var(--sage);color:var(--forest);padding:16px 34px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:1;}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;text-align:center;}
+  .report-mock{transform:none;max-width:360px;margin:40px auto 0;}
+  .rm-ribbon{right:-30px;}
+  .tool-grid{grid-template-columns:1fr;}
+  .afford-widget{padding:28px 24px;margin:0 16px;}
+  .help-grid,.steps-grid,.testimonial-grid{grid-template-columns:1fr;}
+}
+</style>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="rate-pill"><span class="dot"></span><span>{{ homepage.hero.badge }}</span></div>
+      <h1>{{ homepage.hero.headline1 }}<br><span class="accent">{{ homepage.hero.headline2 }}</span></h1>
+      <p>{{ homepage.hero.description }}</p>
+
+      <div class="hero-actions">
+        <a href="{{ homepage.hero.primary_cta.url }}" class="btn btn-primary">{{ homepage.hero.primary_cta.text }}</a>
+        <a href="{{ homepage.hero.secondary_cta.url }}" class="btn btn-secondary">{{ homepage.hero.secondary_cta.text }}</a>
       </div>
-      <p><strong>200+</strong> families helped across Canada</p>
+
+      <div class="hero-trust">
+        <div class="avatars">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="">
+        </div>
+        <p><strong>{{ homepage.hero.trust_number }}</strong> {{ homepage.hero.trust_text }}</p>
+      </div>
+    </div>
+
+    <div class="report-mock-wrap">
+      <div class="report-mock">
+        <div class="rm-ribbon">Preferred</div>
+        <div class="rm-header">
+          <div class="label">Prepared exclusively for</div>
+          <h4>The Johnson Family</h4>
+        </div>
+        <div class="rm-price">$1,250,000 <span>CAD</span></div>
+        <div class="rm-body">
+          <div class="rm-metrics">
+            <div class="rm-metric"><div class="l">List price</div><div class="v">$1.25M</div></div>
+            <div class="rm-metric"><div class="l">Income req.</div><div class="v">$274K</div></div>
+            <div class="rm-metric"><div class="l">Monthly</div><div class="v">$7,314</div></div>
+          </div>
+          <div class="rm-row"><span>1-Year Fixed · 5.84%</span><span>$6,346</span></div>
+          <div class="rm-row best"><span><span class="rm-badge">Preferred</span>3-Yr · 4.79%</span><span>$5,724</span></div>
+          <div class="rm-row"><span>5-Year Fixed · 4.64%</span><span>$5,638</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<section class="marquee-section" aria-label="Trust signals">
-  <div class="marquee-track" id="marqueeTrack">
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><span>30+ Lender Network</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span>48-Hour Pre-Approval</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>No Hidden Fees</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span>All Clients Welcome</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><span>Digital-First Experience</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span>Clear Communication</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><span>30+ Lender Network</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><span>48-Hour Pre-Approval</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>No Hidden Fees</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span>All Clients Welcome</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><span>Digital-First Experience</span></div>
-    <div class="marquee-item"><div class="icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span>Clear Communication</span></div>
+<div class="stat-strip">
+  <div class="wrap">
+    {% for stat in homepage.stats.items %}
+    <div class="stat"><div class="num">{{ stat.number }}</div><div class="lbl">{{ stat.label }}</div></div>
+    {% endfor %}
   </div>
-</section>
-
-<!-- ALL CLIENTS WELCOME BANNER -->
-<div class="all-clients-banner" role="note">
-  <p><strong>All clients are welcome.</strong> Whether you are a first-time buyer, newcomer, refinancer, investor, self-employed, or have unique circumstances — we work with everyone and find solutions that fit your life.</p>
 </div>
 
-<!-- WHO WE HELP -->
-<section class="section" id="who-we-help" aria-labelledby="who-we-help-title">
-  <div class="section-header reveal">
-    <div class="section-label">Who We Help</div>
-    <h2 class="section-title" id="who-we-help-title">A mortgage that fits<br>your <span class="italic">story.</span></h2>
-    <p class="section-desc">Homeownership is not one-size-fits-all. Get advice designed around where you are now and where you want to go next.</p>
+<div class="marquee-strip">
+  <div class="marquee-track">
+    {% for item in homepage.marquee.items %}<span>{{ item.text }}</span>{% endfor %}
+    {% for item in homepage.marquee.items %}<span>{{ item.text }}</span>{% endfor %}
   </div>
-  <div class="help-grid">
-    <article class="help-card reveal">
-      <div class="number">01</div>
-      <h3>First-time homebuyers</h3>
-      <p>Understand your down payment, buying power, and every step from pre-approval to closing day. No question is too small.</p>
-      <a href="#" class="link" aria-label="Learn about first-time buyer mortgages">Start with confidence<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </article>
-    <article class="help-card reveal">
-      <div class="number">02</div>
-      <h3>Newcomers to Canada</h3>
-      <p>Explore lenders that understand global income, foreign assets, and a limited Canadian credit history. We make the unfamiliar familiar.</p>
-      <a href="#" class="link" aria-label="Learn about newcomer mortgages in Canada">Explore your options<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    </article>
-    <article class="help-card reveal">
-      <div class="number">03</div>
-      <h3>Women building wealth</h3>
-      <p>Get practical education and an informed strategy for buying solo, refinancing, or investing in property. Your financial independence starts here.</p>
-      <a href="#" class="link" aria-label="Learn about mortgages for women building wealth">Build your strategy<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      <svg class="bg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-    </article>
-  </div>
-</section>
+</div>
 
-<!-- MORTGAGE CALCULATOR -->
-<section class="section calculator-section" id="calculator" aria-labelledby="calculator-title">
-  <div class="section-header reveal">
-    <div class="section-label">Mortgage Calculator</div>
-    <h2 class="section-title" id="calculator-title">Know your numbers.<br>Plan with <span class="italic">confidence.</span></h2>
-    <p class="section-desc">Estimate your monthly mortgage payment in seconds. Adjust the details to see how different scenarios affect your budget.</p>
+<div class="logo-strip">
+  <div class="wrap">
+    <div class="logo-strip-label">Access to 100+ lenders, including</div>
   </div>
-  <div class="calculator-container reveal">
-    <div class="calculator-grid">
-      <div class="calc-field">
-        <label for="homePrice">Home Price</label>
-        <input type="number" id="homePrice" value="750000" min="50000" step="1000" aria-describedby="homePriceHelp">
-      </div>
-      <div class="calc-field">
-        <label for="downPayment">Down Payment</label>
-        <input type="number" id="downPayment" value="75000" min="0" step="1000" aria-describedby="downPaymentHelp">
-      </div>
-      <div class="calc-field">
-        <label for="interestRate">Interest Rate (%)</label>
-        <input type="number" id="interestRate" value="4.89" min="0.1" max="20" step="0.01" aria-describedby="rateHelp">
-      </div>
-      <div class="calc-field">
-        <label for="amortization">Amortization Period</label>
-        <select id="amortization" aria-describedby="amortHelp">
-          <option value="25">25 years</option>
-          <option value="30">30 years</option>
-          <option value="20">20 years</option>
-          <option value="15">15 years</option>
-          <option value="10">10 years</option>
-        </select>
-      </div>
+  <div class="logo-strip-outer">
+    <div class="logo-track">
+      {% set lenders = ["bmo","rbc","eq","td","scotia","cibc","desjardins","vancity","national","simplii","meridian","tangerine","atb","hsbc","coastcapital","laurentian"] %}
+      {% for lender in lenders %}<img src="/assets/logos/{{ lender }}.png" alt="">{% endfor %}
+      {% for lender in lenders %}<img src="/assets/logos/{{ lender }}.png" alt="">{% endfor %}
     </div>
-    <div class="calc-result">
-      <div class="result-label">Estimated Monthly Payment</div>
-      <div class="result-value" id="monthlyPayment">$3,847</div>
-      <div class="result-sub">Principal + Interest only. Does not include property taxes, insurance, or condo fees.</div>
-    </div>
-    <p class="calc-disclaimer">This is an estimate for planning purposes only. <a href="#contact">Book a free call</a> to get your actual pre-approval and personalized rate from 30+ lenders.</p>
   </div>
-</section>
+</div>
 
-<!-- HOW IT WORKS -->
-<section class="section process-section" id="how-it-works" aria-labelledby="how-it-works-title">
-  <div class="section-header reveal">
-    <div class="section-label">How It Works</div>
-    <h2 class="section-title" id="how-it-works-title">From questions<br>to <span class="italic">keys.</span></h2>
-    <p class="section-desc">A straightforward process, expert guidance, and clear updates at every stage.</p>
-  </div>
-  <div class="process-grid">
-    <div class="process-step reveal"><div class="step-num">01</div><h4>Quick chat</h4><p>Share your goals in a free 15-minute call or short application. We will listen first, then advise.</p></div>
-    <div class="process-step reveal"><div class="step-num">02</div><h4>Get pre-approved</h4><p>Compare options across 30+ lenders and understand your true buying power with clarity.</p></div>
-    <div class="process-step reveal"><div class="step-num">03</div><h4>Shop confidently</h4><p>House-hunt with a clear budget and a rate hold of up to 120 days. No surprises.</p></div>
-    <div class="process-step reveal"><div class="step-num">04</div><h4>Close & celebrate</h4><p>Get support through the paperwork, lender conditions, and closing. Then get your keys.</p></div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section testimonials-section" id="stories" aria-labelledby="stories-title">
-  <div class="section-header reveal">
-    <div class="section-label">Client Stories</div>
-    <h2 class="section-title" id="stories-title">Real people.<br>Real front <span class="italic">doors.</span></h2>
-    <p class="section-desc">Thoughtful advice changes the experience — and sometimes what buyers believe is possible.</p>
-  </div>
-  <div class="testimonials-grid">
-    <article class="testimonial-card reveal">
-      <div class="quote-mark">"</div>
-      <div class="stars" aria-label="5 star rating">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+<section class="tool-section" id="report-tool">
+  <div class="wrap tool-grid">
+    <div class="tool-copy">
+      <div class="tool-eyebrow">{{ homepage.report_tool.eyebrow }}</div>
+      <h2>{{ homepage.report_tool.headline1 }}<br><em>{{ homepage.report_tool.headline2 }}</em></h2>
+      <p>{{ homepage.report_tool.description }}</p>
+      <ul class="tool-features">
+        {% for feature in homepage.report_tool.features %}<li><span class="check">&#10003;</span>{{ feature.text }}</li>{% endfor %}
+      </ul>
+      <div class="tool-audience">
+        {% for chip in homepage.report_tool.audience_chips %}<span class="audience-chip">{{ chip.text }}</span>{% endfor %}
       </div>
-      <blockquote>"I had no Canadian credit history and thought buying a home was impossible. The Funders found a lender who accepted my foreign income."</blockquote>
-      <div class="author"><div class="author-avatar">A</div><div><div class="author-name">Aisha M.</div><div class="author-meta">Newcomer & first-time buyer</div></div></div>
-    </article>
-    <article class="testimonial-card reveal">
-      <div class="quote-mark">"</div>
-      <div class="stars" aria-label="5 star rating">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <div class="demo-card">
+      <div class="demo-topbar"><div class="d"></div><div class="d"></div><div class="d"></div><div class="url">thefunders.ca/report-builder</div></div>
+      <div class="demo-inner">
+        <div class="rec">
+          <div class="h">&#9733; Our recommendation</div>
+          <p>Based on today's rates, the <span class="hl">3-Year Fixed at 4.79%</span> is the strongest option right now — $387/month less than 5-year variable, with a locked-in payment.</p>
+        </div>
+        <a href="{{ homepage.report_tool.cta_url }}" class="demo-btn">{{ homepage.report_tool.cta_text }}</a>
       </div>
-      <blockquote>"They treated me with respect, explained everything twice, and never made me feel rushed. I finally understood my mortgage."</blockquote>
-      <div class="author"><div class="author-avatar">S</div><div><div class="author-name">Sarah L.</div><div class="author-meta">First-time buyer, Vancouver</div></div></div>
-    </article>
-    <article class="testimonial-card reveal">
-      <div class="quote-mark">"</div>
-      <div class="stars" aria-label="5 star rating">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <blockquote>"We got pre-approved in 48 hours and closed two weeks early. Absolute lifesavers during a stressful time."</blockquote>
-      <div class="author"><div class="author-avatar">M</div><div><div class="author-name">Marcus & Jen T.</div><div class="author-meta">First-time family, Calgary</div></div></div>
-    </article>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="section faq-section" id="faq" aria-labelledby="faq-title">
-  <div class="section-header reveal">
-    <div class="section-label">FAQ</div>
-    <h2 class="section-title" id="faq-title">Questions?<br>We have <span class="italic">answers.</span></h2>
-    <p class="section-desc">Everything you need to know before starting your mortgage journey.</p>
-  </div>
-  <div class="faq-grid">
-    <div class="faq-item reveal">
-      <button class="faq-question" aria-expanded="false">
-        <span>What is the minimum down payment in Canada?</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer"><p>For homes under $500,000, the minimum down payment is 5%. Between $500,000 and $999,999, it is 5% on the first $500,000 and 10% on the remainder. Homes $1 million and above require 20% down.</p></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-question" aria-expanded="false">
-        <span>Can newcomers to Canada get a mortgage?</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer"><p>Yes. Many Canadian lenders offer newcomer mortgage programs that accept limited Canadian credit history, foreign income, and international assets. We help newcomers navigate these specialized options.</p></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-question" aria-expanded="false">
-        <span>How long does pre-approval take?</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer"><p>With The Funders, most clients receive pre-approval within 48 hours. We compare rates across 30+ lenders to find the best fit for your situation.</p></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-question" aria-expanded="false">
-        <span>Do you charge fees for your services?</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer"><p>For most standard mortgages, our services are free to you — we are compensated by the lender. In some complex situations, a fee may apply, which we will always disclose upfront.</p></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-question" aria-expanded="false">
-        <span>What is the difference between fixed and variable rates?</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer"><p>A fixed rate stays the same for your entire term, giving you predictable payments. A variable rate fluctuates with the prime rate, which can mean lower costs when rates drop but higher costs when they rise. We will help you decide which fits your risk tolerance.</p></div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-question" aria-expanded="false">
-        <span>Can I get a mortgage if I am self-employed?</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer"><p>Absolutely. We work with lenders who understand self-employed income, including those who accept stated income or alternative documentation. Your business does not disqualify you from homeownership.</p></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="cta-bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-  </div>
-  <div class="cta-content reveal">
-    <h2>Ready to make your<br>next <span class="italic">move?</span></h2>
-    <p>Start with a free strategy call. Ask questions, understand your options, and leave with a clearer path forward.</p>
-    <a href="#" class="btn-light">Book your free strategy call<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-    <p class="subtext">No obligation. No pressure. 100% confidential.</p>
+<section class="section" id="who-we-help">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.who_we_help.label }}</div>
+      <h2>{{ homepage.who_we_help.title }}</h2>
+      <p>{{ homepage.who_we_help.description }}</p>
+    </div>
+    <div class="help-grid">
+      {% for card in homepage.who_we_help.cards %}
+      <div class="help-card">
+        <div class="num">{{ card.number }}</div>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+        <a href="{{ card.link_url }}">{{ card.link_text }} &rarr;</a>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
+
+<section class="section" id="estimator" style="background:#fff;">
+  <div class="wrap">
+    <div class="afford-section-header">
+      <div class="tool-eyebrow">{{ homepage.estimator.eyebrow }}</div>
+      <h2>{{ homepage.estimator.headline1 }}<br><em>{{ homepage.estimator.headline2 }}</em></h2>
+      <p style="color:var(--ink-muted);font-size:15.5px;margin-top:14px;">{{ homepage.estimator.description }}</p>
+    </div>
+    <div class="afford-widget">
+      <div class="afford-label">If you can comfortably pay</div>
+      <div class="afford-row"><span>per month</span><span class="val" id="monthlyOut">${{ homepage.estimator.slider_default }}</span></div>
+      <input type="range" min="{{ homepage.estimator.slider_min }}" max="{{ homepage.estimator.slider_max }}" step="50" value="{{ homepage.estimator.slider_default }}" class="afford-slider" id="affordSlider">
+      <div class="afford-ticks"><span>${{ homepage.estimator.slider_min }}</span><span>${{ homepage.estimator.slider_max }}</span></div>
+      <div class="afford-divider"></div>
+      <div class="afford-result">
+        <div class="arrow">&#8595;</div>
+        <div class="big" id="powerOut">$0</div>
+        <div class="small" id="assumptionNote">estimated purchasing power at {{ homepage.estimator.assumed_rate }}%, {{ homepage.estimator.assumed_amortization }}-year amortization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how-it-works">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.process.label }}</div>
+      <h2>{{ homepage.process.title }}</h2>
+      <p>{{ homepage.process.description }}</p>
+    </div>
+    <div class="steps-grid">
+      {% for step in homepage.process.steps %}
+      <div class="step-card"><div class="num">{{ step.number }}</div><h4>{{ step.title }}</h4><p>{{ step.description }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stories" style="background:#fff;">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.testimonials.label }}</div>
+      <h2>{{ homepage.testimonials.title }}</h2>
+      <p>{{ homepage.testimonials.description }}</p>
+    </div>
+    <div class="testimonial-grid">
+      {% for t in homepage.testimonials.items %}
+      <div class="testimonial-card">
+        <div class="stars">
+          {% for i in range(t.rating) %}<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}
+        </div>
+        <blockquote>"{{ t.quote }}"</blockquote>
+        <div class="tauthor"><div class="tauthor-avatar">{{ t.initial }}</div><div><div class="tauthor-name">{{ t.name }}</div><div class="tauthor-meta">{{ t.detail }}</div></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.faq.label }}</div>
+      <h2>{{ homepage.faq.title }}</h2>
+      <p>{{ homepage.faq.description }}</p>
+    </div>
+    <div class="faq-list">
+      {% for item in homepage.faq.items %}
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>{{ item.question }}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>{{ item.answer }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="contact">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="wrap">
+    <h2>{{ homepage.cta.headline }}</h2>
+    <p>{{ homepage.cta.description }}</p>
+    <a href="{{ homepage.cta.button.url }}" class="btn-light">{{ homepage.cta.button.text }} &rarr;</a>
+    <div class="subtext">{{ homepage.cta.subtext }}</div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn){
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+
+const affordSlider = document.getElementById('affordSlider');
+const monthlyOut = document.getElementById('monthlyOut');
+const powerOut = document.getElementById('powerOut');
+const ASSUMED_RATE = {{ homepage.estimator.assumed_rate }};
+const ASSUMED_YEARS = {{ homepage.estimator.assumed_amortization }};
+const ASSUMED_DOWN_PCT = {{ homepage.estimator.assumed_down_percent }};
+
+function calcPower(monthly){
+  const rate = (ASSUMED_RATE/100)/12;
+  const n = ASSUMED_YEARS*12;
+  const loan = monthly*(Math.pow(1+rate,n)-1)/(rate*Math.pow(1+rate,n));
+  const price = loan/(1 - ASSUMED_DOWN_PCT/100);
+  return Math.round(price/1000)*1000;
+}
+function updateAfford(){
+  const m = parseInt(affordSlider.value);
+  monthlyOut.textContent = '$'+m.toLocaleString('en-CA');
+  powerOut.textContent = '$'+calcPower(m).toLocaleString('en-CA');
+}
+if(affordSlider){
+  affordSlider.addEventListener('input', updateAfford);
+  updateAfford();
+}
+</script>

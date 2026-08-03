@@ -39,9 +39,9 @@ collections:
             name: "secondary_cta"
             widget: "object"
             fields:
-              - { label: "Button Text", name: "text", widget: "string", default: "Calculate your payment" }
-              - { label: "Button URL", name: "url", widget: "string", default: "#calculator" }
-          - { label: "Trust Text", name: "trust_text", widget: "string", default: "families helped across Canada" }
+              - { label: "Button Text", name: "text", widget: "string", default: "Get the full report — free" }
+              - { label: "Button URL", name: "url", widget: "string", default: "/report-builder/" }
+          - { label: "Trust Text", name: "trust_text", widget: "string", default: "reports generated every day" }
           - { label: "Trust Number", name: "trust_number", widget: "string", default: "200+" }
 
       - file: "content/homepage/marquee.md"
@@ -55,7 +55,7 @@ collections:
               - { label: "Icon (SVG path or name)", name: "icon", widget: "string" }
               - { label: "Text", name: "text", widget: "string" }
             default:
-              - { icon: "layers", text: "30+ Lender Network" }
+              - { icon: "layers", text: "100+ Lender Network" }
               - { icon: "clock", text: "48-Hour Pre-Approval" }
               - { icon: "shield", text: "No Hidden Fees" }
               - { icon: "users", text: "All Clients Welcome" }
@@ -89,24 +89,66 @@ collections:
               - { number: "02", title: "Newcomers to Canada", description: "Explore lenders that understand global income, foreign assets, and a limited Canadian credit history. We make the unfamiliar familiar.", link_text: "Explore your options", link_url: "#" }
               - { number: "03", title: "Women building wealth", description: "Get practical education and an informed strategy for buying solo, refinancing, or investing in property. Your financial independence starts here.", link_text: "Build your strategy", link_url: "#" }
 
-      - file: "content/homepage/calculator.md"
-        label: "Mortgage Calculator Section"
-        name: "calculator"
+      - file: "content/homepage/report-tool.md"
+        label: "Free Report Tool Showcase"
+        name: "report_tool"
         fields:
-          - { label: "Section Label", name: "label", widget: "string", default: "Mortgage Calculator" }
-          - { label: "Section Title", name: "title", widget: "string", default: "Know your numbers. Plan with confidence." }
-          - { label: "Section Description", name: "description", widget: "text", default: "Estimate your monthly mortgage payment in seconds. Adjust the details to see how different scenarios affect your budget." }
-          - label: "Default Values"
-            name: "defaults"
-            widget: "object"
+          - { label: "Eyebrow Badge", name: "eyebrow", widget: "string", default: "Free Buyer Financing Report \u00b7 Open to everyone" }
+          - { label: "Headline Line 1", name: "headline1", widget: "string", default: "See exactly what it takes" }
+          - { label: "Headline Line 2 (Italic Accent)", name: "headline2", widget: "string", default: "to buy any home." }
+          - { label: "Description", name: "description", widget: "text", default: "In under a minute, get a free personalized report for any property \u2014 the real mortgage rate, monthly payment, and closing costs, explained simply. It's the same report our realtor partners send to their clients, and sellers use to show buyers exactly what's possible. No account, no cost, no catch \u2014 anyone can generate one." }
+          - label: "Feature Bullets"
+            name: "features"
+            widget: "list"
             fields:
-              - { label: "Home Price", name: "home_price", widget: "number", default: 750000 }
-              - { label: "Down Payment", name: "down_payment", widget: "number", default: 75000 }
-              - { label: "Interest Rate (%)", name: "rate", widget: "number", default: 4.89, value_type: "float" }
-              - { label: "Amortization (years)", name: "amortization", widget: "number", default: 25 }
-          - { label: "Disclaimer Text", name: "disclaimer", widget: "text", default: "This is an estimate for planning purposes only." }
-          - { label: "CTA Link Text", name: "cta_text", widget: "string", default: "Book a free call" }
-          - { label: "CTA Link URL", name: "cta_url", widget: "string", default: "#contact" }
+              - { label: "Text", name: "text", widget: "string" }
+            default:
+              - { text: "Live mortgage rates, buy-vs-rent breakdown, and closing costs for any listing \u2014 auto-calculated" }
+              - { text: "A clear, plain-language recommendation on which rate and term makes sense" }
+              - { text: "Print-ready PDF or emailed straight to you" }
+          - label: "Audience Chips"
+            name: "audience_chips"
+            widget: "list"
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+            default:
+              - { text: "Buying a home" }
+              - { text: "Selling a home" }
+              - { text: "A realtor" }
+          - { label: "CTA Button Text", name: "cta_text", widget: "string", default: "Try it free \u2014 no signup" }
+          - { label: "CTA Button URL", name: "cta_url", widget: "string", default: "/report-builder/" }
+
+      - file: "content/homepage/stats.md"
+        label: "Stat Strip"
+        name: "stats"
+        fields:
+          - label: "Stats"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "number", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+            default:
+              - { number: "100+", label: "Lender network" }
+              - { number: "48hr", label: "Pre-approval" }
+              - { number: "200+", label: "Reports generated every day" }
+              - { number: "$0", label: "Cost to you" }
+
+      - file: "content/homepage/estimator.md"
+        label: "Quick Estimate (Affordability Slider)"
+        name: "estimator"
+        fields:
+          - { label: "Eyebrow Badge", name: "eyebrow", widget: "string", default: "Quick estimate" }
+          - { label: "Headline Line 1", name: "headline1", widget: "string", default: "Curious what you" }
+          - { label: "Headline Line 2 (Italic Accent)", name: "headline2", widget: "string", default: "qualify for?" }
+          - { label: "Description", name: "description", widget: "text", default: "Drag the slider \u2014 this runs the same math as your full financing report." }
+          - { label: "Slider Min ($/month)", name: "slider_min", widget: "number", default: 1500 }
+          - { label: "Slider Max ($/month)", name: "slider_max", widget: "number", default: 8000 }
+          - { label: "Slider Default ($/month)", name: "slider_default", widget: "number", default: 3200 }
+          - { label: "Assumed Rate (%)", name: "assumed_rate", widget: "number", default: 4.79, value_type: "float" }
+          - { label: "Assumed Amortization (years)", name: "assumed_amortization", widget: "number", default: 25 }
+          - { label: "Assumed Down Payment (%)", name: "assumed_down_percent", widget: "number", default: 20 }
+          - { label: "Result Note", name: "result_note", widget: "string", default: "estimated purchasing power at {rate}%, {years}-year amortization" }
 
       - file: "content/homepage/process.md"
         label: "How It Works Section"
@@ -124,7 +166,7 @@ collections:
               - { label: "Description", name: "description", widget: "text" }
             default:
               - { number: "01", title: "Quick chat", description: "Share your goals in a free 15-minute call or short application. We will listen first, then advise." }
-              - { number: "02", title: "Get pre-approved", description: "Compare options across 30+ lenders and understand your true buying power with clarity." }
+              - { number: "02", title: "Get pre-approved", description: "Compare options across 100+ lenders and understand your true buying power with clarity." }
               - { number: "03", title: "Shop confidently", description: "House-hunt with a clear budget and a rate hold of up to 120 days. No surprises." }
               - { number: "04", title: "Close & celebrate", description: "Get support through the paperwork, lender conditions, and closing. Then get your keys." }
 
@@ -165,7 +207,7 @@ collections:
             default:
               - { question: "What is the minimum down payment in Canada?", answer: "For homes under $500,000, the minimum down payment is 5%. Between $500,000 and $999,999, it is 5% on the first $500,000 and 10% on the remainder. Homes $1 million and above require 20% down." }
               - { question: "Can newcomers to Canada get a mortgage?", answer: "Yes. Many Canadian lenders offer newcomer mortgage programs that accept limited Canadian credit history, foreign income, and international assets. We help newcomers navigate these specialized options." }
-              - { question: "How long does pre-approval take?", answer: "With The Funders, most clients receive pre-approval within 48 hours. We compare rates across 30+ lenders to find the best fit for your situation." }
+              - { question: "How long does pre-approval take?", answer: "With The Funders, most clients receive pre-approval within 48 hours. We compare rates across 100+ lenders to find the best fit for your situation." }
               - { question: "Do you charge fees for your services?", answer: "For most standard mortgages, our services are free to you — we are compensated by the lender. In some complex situations, a fee may apply, which we will always disclose upfront." }
               - { question: "What is the difference between fixed and variable rates?", answer: "A fixed rate stays the same for your entire term, giving you predictable payments. A variable rate fluctuates with the prime rate, which can mean lower costs when rates drop but higher costs when they rise. We will help you decide which fits your risk tolerance." }
               - { question: "Can I get a mortgage if I am self-employed?", answer: "Absolutely. We work with lenders who understand self-employed income, including those who accept stated income or alternative documentation. Your business does not disqualify you from homeownership." }
@@ -207,7 +249,8 @@ collections:
             fields:
               - { label: "Text", name: "text", widget: "string" }
               - { label: "URL", name: "url", widget: "string" }
-          - { label: "Copyright Text", name: "copyright", widget: "string", default: "© 2026 The Funders Mortgage Group. All rights reserved." }
+          - { label: "Licensing Disclosure", name: "licensing", widget: "string", default: "thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463." }
+          - { label: "Copyright Text", name: "copyright", widget: "string", default: "© 2026 thefunders.ca. All rights reserved." }
 
   # ============================================
   # BLOG POSTS
