@@ -31,6 +31,22 @@ permalink: /report-builder/index.html
 .parse-result .found{color:#14532d;}
 .parse-result .warn{color:#92400e;background:#fff8e7;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;margin-top:6px;display:block;}
 .parse-result .missed{color:#7f1d1d;}
+.quick-box{background:#fff;border:2px solid #19231d;border-radius:16px;padding:28px 30px;margin-bottom:24px;box-shadow:0 8px 30px rgba(25,35,29,.08);}
+.quick-box h3{font-size:18px;font-weight:700;color:#19231d;margin-bottom:4px;}
+.quick-box p{font-size:13px;color:#5a6b60;margin-bottom:20px;line-height:1.6;}
+.quick-row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;}
+.quick-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#19231d;margin-bottom:6px;}
+.quick-field input{width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:inherit;background:#fefaf3;color:#1e293b;}
+.quick-field input:focus{outline:none;border-color:#7fb069;box-shadow:0 0 0 4px rgba(127,176,105,.12);}
+.btn-quick-gen{background:#19231d;color:#fff;border:none;padding:13px 28px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;height:46px;}
+.btn-quick-gen:hover{background:#24352c;}
+.btn-quick-gen:disabled{background:#94a3b8;cursor:not-allowed;}
+.quick-status{margin-top:16px;font-size:12.5px;line-height:1.7;}
+.manual-toggle-row{text-align:center;margin:8px 0 28px;}
+.btn-manual-toggle{background:none;border:none;color:#5a6b60;font-size:13px;font-weight:600;text-decoration:underline;cursor:pointer;padding:8px;}
+.manual-section{display:none;border-top:2px dashed #e2e8f0;padding-top:28px;}
+.manual-section.open{display:block;}
+@media(max-width:760px){.quick-row{grid-template-columns:1fr;}}
 .lookup-box{background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:14px;padding:20px 22px;margin-bottom:20px;}
 .lookup-box h3{font-size:14px;font-weight:700;color:#19231d;margin-bottom:4px;}
 .lookup-box p{font-size:12.5px;color:#5a6b60;margin-bottom:12px;line-height:1.6;}
@@ -53,6 +69,23 @@ permalink: /report-builder/index.html
   <h1>Buyer Report Builder</h1>
   <p>Fill in the property details. A branded, print-ready report opens instantly in a new tab.</p>
 
+  <div class="quick-box">
+    <h3>Quick Generate</h3>
+    <p>Enter the buyer, the realtor, and an MLS number &mdash; the report opens automatically. This uses AI + web search to pull listing details.</p>
+    <div class="quick-row">
+      <div class="quick-field"><label>Prepared For (Buyer)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
+      <div class="quick-field"><label>Prepared By (Realtor)</label><input type="text" id="q_agent" placeholder="e.g. Sarah Chen"></div>
+      <div class="quick-field"><label>MLS Number</label><input type="text" id="q_mls" placeholder="e.g. X13227018"></div>
+      <button class="btn-quick-gen" id="quickGenBtn" onclick="quickGenerate()">Generate Report</button>
+    </div>
+    <div class="quick-status" id="quickStatus"></div>
+  </div>
+
+  <div class="manual-toggle-row">
+    <button class="btn-manual-toggle" onclick="toggleManual()" id="manualToggleBtn">Prefer to enter details manually? &darr;</button>
+  </div>
+
+  <div class="manual-section" id="manualSection">
   <div class="lookup-box">
     <h3>Look Up by MLS Number</h3>
     <p>Enter an MLS number and this will search public listings automatically and fill in the form below. This uses AI + web search &mdash; always verify the results against the real listing before sending a report to a client.</p>
@@ -100,6 +133,7 @@ List Price ($)&#9;$599,888
     <button class="btn-sec" onclick="document.querySelectorAll('input').forEach(i=>i.value='');document.getElementById('f_dp').value='20';">Clear</button>
   </div>
   <div class="status" id="status"></div>
+  </div>
 </div>
 
 <script>
@@ -1099,6 +1133,84 @@ function fiveYearInterest(loanAmount,rate,amortYears){
 }
 function isBestRate(r){return !!(r.best||r.isBest);}
 function generateRatesRows(rates,loanAmount,amortYears){return rates.map(r=>{const monthly=calculateMortgage(loanAmount,r.rate/100,amortYears);const rowIsBest=isBestRate(r);const isBest=rowIsBest?' class="best-rate"':'';const bestClass=rowIsBest?' best':'';const badge=rowIsBest?'<span class="preferred-badge">thefunders.ca preferred</span>':'';const interest5=(typeof r.interest5yr==='number'&&!isNaN(r.interest5yr))?r.interest5yr:fiveYearInterest(loanAmount,r.rate/100,amortYears);const logoContent=r.logoUrl?`<img src="${r.logoUrl}" alt="${r.lender}" onerror="this.parentElement.textContent='${r.lender}';this.parentElement.style.background=this.parentElement.style.background||'#475569';">`:r.lender;return`<tr${isBest}><td>${r.term}${badge}</td><td class="rate-value${bestClass}">${r.rate.toFixed(2)}%</td><td><span class="bank-logo ${r.logo}">${logoContent}</span></td><td class="monthly-cell${bestClass}">${fmt(monthly)}</td><td>${fmt(interest5)}</td></tr>`;}).join('');}
+
+function toggleManual(){
+  const section=document.getElementById('manualSection');
+  const btn=document.getElementById('manualToggleBtn');
+  const nowOpen=!section.classList.contains('open');
+  section.classList.toggle('open');
+  btn.textContent=nowOpen?'Hide manual entry \u2191':'Prefer to enter details manually? \u2193';
+  if(nowOpen) section.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+async function quickGenerate(){
+  const buyer=document.getElementById('q_buyer').value.trim();
+  const agent=document.getElementById('q_agent').value.trim();
+  const mlsId=document.getElementById('q_mls').value.trim();
+  const statusEl=document.getElementById('quickStatus');
+  const btn=document.getElementById('quickGenBtn');
+
+  if(!buyer||!agent||!mlsId){
+    statusEl.innerHTML='<span class="missed">Please fill in all three fields \u2014 buyer name, realtor name, and MLS number.</span>';
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent='Looking up\u2026';
+  statusEl.innerHTML='<div>Searching public listings for '+mlsId+'\u2026 this can take a few seconds.</div>';
+
+  try{
+    const resp=await fetch('/.netlify/functions/lookup-mls',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mlsId})
+    });
+    const data=await resp.json();
+
+    if(!resp.ok){
+      statusEl.innerHTML='<span class="missed">'+(data.error||'Lookup failed')+(data.sourceNotes?' \u2014 '+data.sourceNotes:'')+
+        ' Try the manual entry option below instead.</span>';
+      document.getElementById('manualSection').classList.add('open');
+      document.getElementById('manualToggleBtn').textContent='Hide manual entry \u2191';
+      return;
+    }
+
+    document.getElementById('f_buyer').value=buyer;
+    document.getElementById('f_agent').value=agent;
+    document.getElementById('f_address').value=data.address||'';
+    document.getElementById('f_mls').value=data.mlsNumber||mlsId;
+    document.getElementById('f_price').value=data.listPrice||'';
+    document.getElementById('f_photo').value=data.photoUrl||'';
+    document.getElementById('f_beds').value=data.beds||'';
+    document.getElementById('f_baths').value=data.baths||'';
+    document.getElementById('f_sqft').value=data.sqft?String(data.sqft):'';
+    if(data.propertyType) document.getElementById('f_type').value=data.propertyType;
+    document.getElementById('f_tax').value=data.annualPropertyTax||'';
+    document.getElementById('f_condo').value=data.monthlyCondoFee||0;
+    document.getElementById('f_rent').value=data.estMonthlyRent||'';
+    document.getElementById('f_basement').value=data.basementRent||0;
+
+    const confClass='confidence-'+(data.confidence||'low');
+    let html='<div><span class="confidence-badge '+confClass+'">'+(data.confidence||'low')+' confidence</span></div>';
+    if(data.sourceNotes) html+='<div style="margin-top:6px;">'+data.sourceNotes+'</div>';
+    if(!data.photoIsDirect && data.photoUrl){
+      html+='<span class="ai-warning">\u26a0 The photo link found is a listing page, not a direct image \u2014 you may want to swap it in Manual Entry below.</span>';
+    }
+    html+='<span class="ai-warning">\u26a0 This data was gathered by AI web search, not a licensed MLS feed. Double-check every field \u2014 especially price, tax, and rent \u2014 against the real listing before sending this report to a client.</span>';
+    html+='<div style="margin-top:10px;">Opening report\u2026 <a href="#" onclick="document.getElementById(\'manualSection\').classList.add(\'open\');document.getElementById(\'manualToggleBtn\').textContent=\'Hide manual entry \u2191\';return false;">Review or edit these details first</a></div>';
+    statusEl.innerHTML=html;
+
+    makeReport();
+
+  }catch(err){
+    statusEl.innerHTML='<span class="missed">Something went wrong reaching the lookup service. Try again, or use manual entry below.</span>';
+    document.getElementById('manualSection').classList.add('open');
+    document.getElementById('manualToggleBtn').textContent='Hide manual entry \u2191';
+  }finally{
+    btn.disabled=false;
+    btn.textContent='Generate Report';
+  }
+}
 
 async function lookupMLS(){
   const mlsId=document.getElementById('f_mlsLookup').value.trim();
