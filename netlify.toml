@@ -7,6 +7,11 @@
   to = "/admin/index.html"
   status = 200
 
+[[redirects]]
+  from = "/r/:id"
+  to = "/.netlify/functions/view-report?id=:id"
+  status = 200
+  
 # Security headers
 [[headers]]
   for = "/*"
