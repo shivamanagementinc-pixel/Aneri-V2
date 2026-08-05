@@ -1,0 +1,28 @@
+// This is a REFERENCE showing what to add to your existing _data/rates.json.
+// Don't replace your whole file with this — just add the "logoUrl" line to
+// each existing rate entry, matching the lender to the logo filename below.
+// These filenames match the /assets/logos/ files already set up from the
+// homepage work, so no new logo files are needed.
+
+{
+  "rates": [
+    { "term": "1-Year Fixed", "rate": 5.84, "lender": "RBC", "logo": "rbc", "logoUrl": "/assets/logos/rbc.png", "isBest": false },
+    { "term": "2-Year Fixed", "rate": 5.29, "lender": "TD",  "logo": "td",  "logoUrl": "/assets/logos/td.png",  "isBest": false },
+    { "term": "3-Year Fixed", "rate": 4.79, "lender": "BNS", "logo": "scotia", "logoUrl": "/assets/logos/scotia.png", "isBest": true },
+    { "term": "4-Year Fixed", "rate": 4.74, "lender": "CIBC","logo": "cibc","logoUrl": "/assets/logos/cibc.png", "isBest": false },
+    { "term": "5-Year Fixed", "rate": 4.64, "lender": "BMO", "logo": "bmo", "logoUrl": "/assets/logos/bmo.png", "isBest": false },
+    { "term": "5-Year Variable", "rate": 5.45, "lender": "TF", "logo": "funders", "isBest": false }
+    // ^ no logoUrl for your own "TF" (The Funders) entry — keep that one as
+    //   the colored-initials badge, since it's your own brand mark, not a
+    //   lender logo. The code already falls back to initials automatically
+    //   whenever logoUrl is missing, so this row needs no change.
+  ]
+}
+
+// Available logo filenames (from the 16 you uploaded earlier):
+// bmo, rbc, eq, td, scotia, cibc, desjardins, vancity,
+// national, simplii, meridian, tangerine, atb, hsbc, coastcapital, laurentian
+//
+// If a lender in your real rates.json isn't in that list of 16, just leave
+// its logoUrl out — it'll automatically show the colored-initials badge
+// instead, no error, nothing breaks.

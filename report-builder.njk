@@ -4,6 +4,7 @@ title: Report Builder | The Funders
 permalink: /report-builder/index.html
 ---
 
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <style>
 .builder-wrap{max-width:800px;margin:40px auto;padding:0 24px;font-family:var(--font-sans,'Inter',system-ui,sans-serif);}
 .builder-wrap h1{font-family:var(--font-serif,'Playfair Display',Georgia,serif);font-size:32px;color:#19231d;margin-bottom:6px;}
@@ -47,6 +48,10 @@ permalink: /report-builder/index.html
 .manual-section{display:none;border-top:2px dashed #e2e8f0;padding-top:28px;}
 .manual-section.open{display:block;}
 @media(max-width:760px){.quick-row{grid-template-columns:1fr;}}
+.agree-row{display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:12px 14px;background:#f8fafc;border-radius:10px;}
+.agree-row input[type="checkbox"]{margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:#19231d;cursor:pointer;}
+.agree-row label{font-size:12px;color:#5a6b60;line-height:1.6;cursor:pointer;}
+.agree-row label a{color:#19231d;font-weight:600;text-decoration:underline;}
 .lookup-box{background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:14px;padding:20px 22px;margin-bottom:20px;}
 .lookup-box h3{font-size:14px;font-weight:700;color:#19231d;margin-bottom:4px;}
 .lookup-box p{font-size:12.5px;color:#5a6b60;margin-bottom:12px;line-height:1.6;}
@@ -78,6 +83,11 @@ permalink: /report-builder/index.html
       <div class="quick-field"><label>MLS Number</label><input type="text" id="q_mls" placeholder="e.g. X13227018"></div>
       <button class="btn-quick-gen" id="quickGenBtn" onclick="quickGenerate()">Generate Report</button>
     </div>
+    <div class="agree-row">
+      <input type="checkbox" id="q_agree">
+      <label for="q_agree">I have read and agree to the <a href="/terms" target="_blank">Terms</a> and <a href="/privacy" target="_blank">Privacy Policy</a>. I understand this report will be based on publicly available data, may be shared with the buyer and/or posted publicly (e.g. on social media) as part of thefunders.ca's marketing, and that thefunders.ca may contact me about this inquiry.</label>
+    </div>
+    <div style="margin-top:14px;" class="cf-turnstile" id="quickTurnstile" data-sitekey="0x0000000000000000000000AA"></div>
     <div class="quick-status" id="quickStatus"></div>
   </div>
 
@@ -93,11 +103,12 @@ permalink: /report-builder/index.html
       <input type="text" id="f_mlsLookup" placeholder="e.g. X13227018">
       <button class="btn-lookup" id="lookupBtn" onclick="lookupMLS()">Look Up & Auto-Fill</button>
     </div>
+    <div class="cf-turnstile" id="manualTurnstile" data-sitekey="0x0000000000000000000000AA" style="margin-top:12px;"></div>
     <div class="lookup-result" id="lookupResult"></div>
   </div>
 
   <div class="paste-box">
-    <h3>Paste MLS Data (from ChatGPT, an assistant, or your notes)</h3>
+    <h3>Paste MLS Data</h3>
     <p>Paste a property data table or list &mdash; field names and values, in any format (tab-separated table, "Field: Value" lines, or a markdown table). Auto-Fill will match common field names and populate the form below. Always review the filled-in values before generating the report.</p>
     <textarea id="f_pasteData" placeholder="Field&#9;Value
 Property Address&#9;4084 Fracchioni Drive, Lincoln, ON L0R 1B4
@@ -461,10 +472,15 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       .page-section {
         padding: 10px 0 !important;
       }
-      /* No forced break here \u2014 content flows naturally and fills each
-         page, since every panel already has page-break-inside: avoid.
-         This prevents wasted blank space when content is shorter than
-         a full page, while still never splitting a panel mid-way. */
+      .page-1 {
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+      /* Trade-off, being upfront about it: this forces exactly 2 pages
+         every time, which can occasionally leave a bit of blank space at
+         the bottom of page 1 for shorter properties/recommendations \u2014
+         but that reads as a clean brochure far more reliably than letting
+         a 3rd page happen when content runs long. */
 
       .section-header {
         margin-bottom: 8px !important;
@@ -1101,7 +1117,7 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       '5-Year Wealth Gain     ~__NET_WEALTH__ (buying vs. renting)\n'+
       '--------------------------------\n\n'+
       "The full report covers your financing roadmap, a buy-vs-rent breakdown, rental income potential, and a closing cost estimate.\n\n"+
-      "Before sending \u2014 please attach the report PDF (use the \"Print / Save as PDF\" button on the report page, save it, then attach it here).\n\n"+
+      "View or save the full report here:\n__REPORT_URL__\n\n"+
       "Happy to walk through any of this together whenever works for you \u2014 just reply to this email or give me a call.\n\n"+
       'Talk soon,\n'+
       '__AGENT_NAME__\n\n'+
@@ -1154,6 +1170,17 @@ async function quickGenerate(){
     statusEl.innerHTML='<span class="missed">Please fill in all three fields \u2014 buyer name, realtor name, and MLS number.</span>';
     return;
   }
+  if(!document.getElementById('q_agree').checked){
+    statusEl.innerHTML='<span class="missed">Please check the agreement box above before generating a report.</span>';
+    return;
+  }
+
+  const turnstileToken=(typeof turnstile!=='undefined'&&document.getElementById('quickTurnstile'))
+    ? turnstile.getResponse('quickTurnstile') : '';
+  if(!turnstileToken){
+    statusEl.innerHTML='<span class="missed">Please complete the verification check above before generating a report.</span>';
+    return;
+  }
 
   btn.disabled=true;
   btn.textContent='Looking up\u2026';
@@ -1163,7 +1190,7 @@ async function quickGenerate(){
     const resp=await fetch('/.netlify/functions/lookup-mls',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({mlsId})
+      body:JSON.stringify({mlsId,turnstileToken})
     });
     const data=await resp.json();
 
@@ -1200,7 +1227,9 @@ async function quickGenerate(){
     html+='<div style="margin-top:10px;">Opening report\u2026 <a href="#" onclick="document.getElementById(\'manualSection\').classList.add(\'open\');document.getElementById(\'manualToggleBtn\').textContent=\'Hide manual entry \u2191\';return false;">Review or edit these details first</a></div>';
     statusEl.innerHTML=html;
 
-    makeReport();
+    window.__reportSource='quick-generate';
+    await makeReport();
+    if(typeof turnstile!=='undefined') turnstile.reset('quickTurnstile');
 
   }catch(err){
     statusEl.innerHTML='<span class="missed">Something went wrong reaching the lookup service. Try again, or use manual entry below.</span>';
@@ -1218,6 +1247,10 @@ async function lookupMLS(){
   const btn=document.getElementById('lookupBtn');
   if(!mlsId){resultEl.innerHTML='<span class="missed">Enter an MLS number first.</span>';return;}
 
+  const turnstileToken=(typeof turnstile!=='undefined'&&document.getElementById('manualTurnstile'))
+    ? turnstile.getResponse('manualTurnstile') : '';
+  if(!turnstileToken){resultEl.innerHTML='<span class="missed">Please complete the verification check above first.</span>';return;}
+
   btn.disabled=true;
   btn.textContent='Looking up\u2026';
   resultEl.innerHTML='<div>Searching public listings for '+mlsId+'\u2026 this can take a few seconds.</div>';
@@ -1226,9 +1259,10 @@ async function lookupMLS(){
     const resp=await fetch('/.netlify/functions/lookup-mls',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({mlsId})
+      body:JSON.stringify({mlsId,turnstileToken})
     });
     const data=await resp.json();
+    if(typeof turnstile!=='undefined') turnstile.reset('manualTurnstile');
 
     if(!resp.ok){
       resultEl.innerHTML='<span class="missed">'+(data.error||'Lookup failed')+(data.sourceNotes?' \u2014 '+data.sourceNotes:'')+'</span>';
@@ -1434,8 +1468,10 @@ function generateRecommendation(buyer,bestRate,rates,loanAmount,amortYears,dpPer
   return parts.join(' ');
 }
 
-function makeReport(){
+async function makeReport(){
   const status=document.getElementById('status');
+  const reportId=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2)));
+  const reportUrl=window.location.origin+'/r/'+reportId;
   const price=Number(document.getElementById('f_price').value)||1250000;
   const dpPercent=Number(document.getElementById('f_dp').value)||20;
   const address=document.getElementById('f_address').value||'42 Willow Creek Drive, Toronto, ON';
@@ -1560,7 +1596,24 @@ function makeReport(){
   .replace(/__BASEMENT__/g,fmt(basementRent))
   .replace(/__NET_CARRY__/g,fmt(netCarryingCost))
   .replace(/__RENT_DIFF__/g,fmt(rentDiff))
-  .replace(/__TENANT_PRINCIPAL__/g,fmt(tenantPrincipal5yr));
+  .replace(/__TENANT_PRINCIPAL__/g,fmt(tenantPrincipal5yr))
+  .replace(/__REPORT_URL__/g,reportUrl);
+
+  // Save the report so it has a permanent, shareable link and shows up in
+  // the leads dashboard. This shouldn't block opening the report even if
+  // saving fails for some reason (e.g. a transient network blip).
+  try{
+    await fetch('/.netlify/functions/save-report',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        id:reportId, reportHtml:html, buyer, agent, mlsId:mls,
+        address, price, source:(window.__reportSource||'manual')
+      })
+    });
+  }catch(e){
+    console.warn('Could not save report for tracking/link purposes:',e);
+  }
 
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);

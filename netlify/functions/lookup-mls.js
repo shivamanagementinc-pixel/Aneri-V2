@@ -1,11 +1,44 @@
 // netlify/functions/lookup-mls.js
 //
-// Serverless function: takes an MLS number, asks Gemini (with Google Search
-// grounding) to find the public listing and return structured JSON.
+// Serverless function: takes an MLS number, asks GPT (with web search) to
+// find the public listing and return structured JSON. Verifies a Cloudflare
+// Turnstile token first, and checks a same-day cache before spending an API
+// call on a repeat lookup.
 //
-// Requires an environment variable set in Netlify (Site settings > Environment
+// Requires environment variables set in Netlify (Site settings > Environment
 // variables), NOT in this file or the repo:
-//   GEMINI_API_KEY = <your Gemini API key>
+//   OPENAI_API_KEY      = <your OpenAI API key>
+//   TURNSTILE_SECRET_KEY = <your Cloudflare Turnstile secret key>
+
+const { getStore } = require("@netlify/blobs");
+
+async function verifyTurnstile(token, remoteIp) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    // Fail closed: if the secret isn't configured yet, don't silently allow
+    // everything through unprotected — surface a clear error instead.
+    return { success: false, error: "TURNSTILE_SECRET_KEY not configured on server" };
+  }
+  if (!token) {
+    return { success: false, error: "Missing CAPTCHA token" };
+  }
+  try {
+    const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret, response: token, remoteip: remoteIp || "" })
+    });
+    const data = await resp.json();
+    return { success: !!data.success, error: data.success ? null : "CAPTCHA verification failed" };
+  } catch (e) {
+    return { success: false, error: "Could not reach CAPTCHA verification service" };
+  }
+}
+
+function todayKey() {
+  return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
 
 const REQUIRED_FIELDS = [
   'address', 'mlsNumber', 'listPrice', 'photoUrl', 'photoIsDirect',
@@ -90,10 +123,11 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  let mlsId;
+  let mlsId, turnstileToken;
   try {
     const body = JSON.parse(event.body || '{}');
     mlsId = (body.mlsId || '').trim();
+    turnstileToken = body.turnstileToken || '';
   } catch (e) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
@@ -103,6 +137,25 @@ exports.handler = async (event) => {
   }
   if (mlsId.length > 40) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'mlsId looks invalid (too long)' }) };
+  }
+
+  const remoteIp = event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || '';
+  const turnstileResult = await verifyTurnstile(turnstileToken, remoteIp);
+  if (!turnstileResult.success) {
+    return { statusCode: 403, headers, body: JSON.stringify({ error: 'CAPTCHA verification failed', detail: turnstileResult.error }) };
+  }
+
+  // Same-day cache: if this MLS number was already looked up today, reuse
+  // that result instead of spending another API call.
+  const cacheKey = `${mlsId}__${todayKey()}`;
+  try {
+    const cacheStore = getStore('mls-cache');
+    const cached = await cacheStore.get(cacheKey, { type: 'json' });
+    if (cached) {
+      return { statusCode: 200, headers, body: JSON.stringify({ ...cached, fromCache: true }) };
+    }
+  } catch (e) {
+    // Cache read failing shouldn't block a fresh lookup — just proceed.
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
@@ -156,7 +209,16 @@ exports.handler = async (event) => {
     }
 
     const clean = sanitize(parsed);
-    return { statusCode: 200, headers, body: JSON.stringify(clean) };
+
+    try {
+      const cacheStore = getStore('mls-cache');
+      await cacheStore.setJSON(cacheKey, clean);
+    } catch (e) {
+      // Cache write failing shouldn't fail the request — the lookup itself
+      // already succeeded, just skip caching this time.
+    }
+
+    return { statusCode: 200, headers, body: JSON.stringify({ ...clean, fromCache: false }) };
 
   } catch (err) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Failed to process listing lookup', detail: String(err).slice(0, 500) }) };

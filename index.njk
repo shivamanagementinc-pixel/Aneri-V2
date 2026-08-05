@@ -62,9 +62,9 @@ description: "thefunders.ca helps Canadians navigate mortgages with clarity — 
 
 .logo-strip{background:#fff;padding:36px 0 40px;overflow:hidden;border-bottom:1px solid var(--border);}
 .logo-strip-label{text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:22px;}
-.logo-strip-outer{white-space:nowrap;}
-.logo-track{display:inline-flex;gap:52px;align-items:center;animation:logoscroll 34s linear infinite;}
-.logo-track img{height:44px;width:44px;object-fit:contain;flex-shrink:0;}
+.logo-strip-outer{white-space:nowrap;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 80px,#000 calc(100% - 80px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 80px,#000 calc(100% - 80px),transparent 100%);}
+.logo-track{display:inline-flex;gap:68px;align-items:center;animation:logoscroll 38s linear infinite;padding:0 34px;}
+.logo-track img{height:48px;width:48px;object-fit:contain;flex-shrink:0;}
 @keyframes logoscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
 .tool-section h2,.afford-section-header h2{font-family:var(--font-serif);font-size:clamp(32px,3.6vw,46px);font-weight:600;color:var(--forest);line-height:1.12;letter-spacing:-0.5px;margin-bottom:20px;}
