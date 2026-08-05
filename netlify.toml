@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = "_site"
 
+[functions]
+  directory = "netlify/functions"
+
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
@@ -11,13 +14,11 @@
   from = "/r/:id"
   to = "/.netlify/functions/view-report?id=:id"
   status = 200
-  
-# Security headers
+
 [[headers]]
   for = "/*"
+
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-[functions]
-     directory = "netlify/functions"

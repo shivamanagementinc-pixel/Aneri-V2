@@ -8,6 +8,8 @@
     "start": "eleventy --serve"
   },
   "dependencies": {
+    "@netlify/blobs": "^10.7.12",
+   "gray-matter": "^4.0.3",
     "@11ty/eleventy": "^2.0.1"
   }
 }
