@@ -31,15 +31,46 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("homepage", () => {
     const dir = path.join(__dirname, "content/homepage");
     const data = {};
-    if (!fs.existsSync(dir)) return data;
-    fs.readdirSync(dir)
-      .filter((file) => file.endsWith(".md"))
-      .forEach((file) => {
-        const key = path.basename(file, ".md").replace(/-/g, "_");
-        const raw = fs.readFileSync(path.join(dir, file), "utf8");
-        const { data: frontMatter } = matter(raw);
-        data[key] = frontMatter;
-      });
+
+    if (!fs.existsSync(dir)) {
+      throw new Error(
+        `[homepage data] FATAL: the folder "content/homepage" does not exist at ` +
+        `${dir}. The homepage will render with no text if this isn't fixed. ` +
+        `Check that content/homepage/*.md files were actually committed to the repo.`
+      );
+    }
+
+    const mdFiles = fs.readdirSync(dir).filter((file) => file.endsWith(".md"));
+
+    if (mdFiles.length === 0) {
+      throw new Error(
+        `[homepage data] FATAL: content/homepage exists but contains no .md files ` +
+        `(found: ${fs.readdirSync(dir).join(", ") || "nothing"}). ` +
+        `The homepage will render with no text if this isn't fixed.`
+      );
+    }
+
+    mdFiles.forEach((file) => {
+      const key = path.basename(file, ".md").replace(/-/g, "_");
+      const raw = fs.readFileSync(path.join(dir, file), "utf8");
+      const { data: frontMatter } = matter(raw);
+      data[key] = frontMatter;
+    });
+
+    // Loud success log too, so the build log always shows exactly what
+    // loaded — makes future issues immediately visible instead of silent.
+    console.log(`[homepage data] Loaded ${mdFiles.length} files: ${Object.keys(data).join(", ")}`);
+
+    const expectedKeys = ["hero","marquee","all_clients","who_we_help","report_tool","stats","estimator","process","testimonials","faq","cta","footer"];
+    const missingKeys = expectedKeys.filter((k) => !data[k]);
+    if (missingKeys.length > 0) {
+      throw new Error(
+        `[homepage data] FATAL: missing expected homepage section(s): ${missingKeys.join(", ")}. ` +
+        `Found files for: ${Object.keys(data).join(", ")}. ` +
+        `Check content/homepage/ for missing or misnamed .md files (expects hyphens, e.g. "who-we-help.md").`
+      );
+    }
+
     return data;
   });
 
