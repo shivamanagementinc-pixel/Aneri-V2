@@ -1,0 +1,397 @@
+---
+layout: base.njk
+title: "Canadian Mortgage Broker | Free Financing Reports"
+description: "thefunders.ca helps Canadians navigate mortgages with clarity — first-time buyers, newcomers, refinancers, and investors. Get a free, instant financing report for any property, no signup required."
+---
+
+<style>
+/* NOTE: some rules here (root vars, .wrap, nav, buttons, footer, section
+   header pattern) are also defined in base.njk. Repeating them here is
+   harmless (identical values simply re-apply) and keeps this page's CSS
+   easy to review as one block during the rebuild. Feel free to de-duplicate
+   later once everything is confirmed working. */
+
+.rate-pill{display:inline-flex;align-items:center;gap:8px;background:var(--sage-faint);border:1px solid var(--sage);padding:7px 18px 7px 8px;border-radius:100px;margin-bottom:36px;}
+.rate-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--sage);animation:pulse 2s infinite;}
+.rate-pill span{font-size:12.5px;font-weight:700;color:#14532d;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(127,176,105,0.4);}50%{box-shadow:0 0 0 6px rgba(127,176,105,0);}}
+
+.hero{padding:70px 0 50px;}
+.hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:center;}
+.hero h1{font-family:var(--font-serif);font-size:clamp(42px,6vw,72px);font-weight:600;color:var(--forest);line-height:1.08;letter-spacing:-1px;}
+.hero h1 .accent{font-style:italic;color:var(--sage);position:relative;display:inline-block;}
+.hero h1 .accent::after{content:'';position:absolute;left:2%;right:2%;bottom:6px;height:12px;background:var(--sage-faint);z-index:-1;}
+.hero p{font-family:var(--font-sans);font-size:17px;color:var(--ink-muted);max-width:480px;margin:22px 0 0;}
+.hero-actions{display:flex;gap:14px;justify-content:flex-start;margin-top:32px;flex-wrap:wrap;}
+.hero-trust{display:flex;align-items:center;justify-content:flex-start;gap:14px;margin-top:36px;}
+.hero-trust .avatars{display:flex;}
+.hero-trust .avatars img{width:36px;height:36px;border-radius:50%;border:2.5px solid var(--cream);object-fit:cover;margin-left:-10px;}
+.hero-trust .avatars img:first-child{margin-left:0;}
+.hero-trust p{font-size:13px;color:var(--ink-muted);margin:0;}
+.hero-trust strong{color:var(--forest);}
+
+.report-mock-wrap{perspective:1400px;}
+.report-mock{background:#fff;border-radius:16px;box-shadow:0 40px 90px rgba(25,35,29,0.18);transform:rotate(3deg) rotateY(-5deg);overflow:hidden;font-family:var(--font-sans);position:relative;}
+.rm-ribbon{position:absolute;top:12px;right:-26px;background:var(--sage);color:var(--forest);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:0.6px;padding:3px 30px;transform:rotate(45deg);z-index:2;}
+.rm-header{background:linear-gradient(145deg,var(--forest),var(--forest-light));padding:18px 22px;color:#fff;}
+.rm-header .label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--sage-glow);opacity:0.85;margin-bottom:5px;font-weight:700;}
+.rm-header h4{font-family:var(--font-serif);font-size:17px;font-weight:600;}
+.rm-price{background:linear-gradient(135deg,#24352c,#19231d);padding:14px 22px;color:#fff;font-family:var(--font-serif);font-size:21px;font-weight:700;}
+.rm-price span{font-family:var(--font-sans);font-size:11px;opacity:0.6;font-weight:500;}
+.rm-body{padding:18px 22px 20px;}
+.rm-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;}
+.rm-metric{background:var(--cream);border-radius:9px;padding:11px 6px;text-align:center;}
+.rm-metric .l{font-size:7.5px;text-transform:uppercase;letter-spacing:0.5px;color:var(--ink-muted);font-weight:700;margin-bottom:3px;}
+.rm-metric .v{font-family:var(--font-serif);font-size:14px;font-weight:700;color:var(--forest);}
+.rm-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#f8fafc;border-radius:7px;margin-bottom:7px;font-size:11px;}
+.rm-row.best{background:#e8f5e9;}
+.rm-badge{background:var(--sage);color:var(--forest);font-size:7px;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:100px;letter-spacing:0.3px;margin-right:4px;}
+
+.stat-strip{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0;margin-top:70px;position:relative;overflow:hidden;}
+.stat-strip::before{content:'';position:absolute;top:-40%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(127,176,105,0.12) 0%,transparent 70%);pointer-events:none;}
+.stat-strip .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+.stat{text-align:center;flex:1;min-width:140px;}
+.stat .num{font-family:var(--font-sans);font-size:34px;font-weight:900;color:var(--sage-glow);letter-spacing:-1px;position:relative;z-index:1;}
+.stat .lbl{font-size:11.5px;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-top:2px;position:relative;z-index:1;}
+
+.marquee-strip{background:var(--cream);border-bottom:1px solid var(--border);padding:16px 0;overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-flex;gap:40px;animation:marquee 28s linear infinite;}
+.marquee-track span{font-size:13.5px;font-weight:600;color:var(--forest);display:inline-flex;align-items:center;gap:10px;}
+.marquee-track span::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--sage);margin-left:40px;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+.logo-strip{background:#fff;padding:36px 0 40px;overflow:hidden;border-bottom:1px solid var(--border);}
+.logo-strip-label{text-align:center;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ink-muted);margin-bottom:22px;}
+.logo-strip-outer{white-space:nowrap;-webkit-mask-image:linear-gradient(to right,transparent 0,#000 80px,#000 calc(100% - 80px),transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 80px,#000 calc(100% - 80px),transparent 100%);}
+.logo-track{display:inline-flex;gap:68px;align-items:center;animation:logoscroll 38s linear infinite;padding:0 34px;}
+.logo-track img{height:48px;width:48px;object-fit:contain;flex-shrink:0;}
+@keyframes logoscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+.tool-section h2,.afford-section-header h2{font-family:var(--font-serif);font-size:clamp(32px,3.6vw,46px);font-weight:600;color:var(--forest);line-height:1.12;letter-spacing:-0.5px;margin-bottom:20px;}
+.tool-section h2 em,.afford-section-header h2 em{font-style:italic;color:var(--sage);}
+.tool-grid{display:grid;grid-template-columns:0.95fr 1.05fr;gap:70px;align-items:center;}
+.tool-copy p{font-size:16px;color:var(--ink-muted);margin-bottom:28px;max-width:460px;}
+.tool-features{list-style:none;margin-bottom:32px;}
+.tool-features li{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;font-size:14.5px;color:var(--ink);}
+.tool-features li .check{width:20px;height:20px;border-radius:50%;background:var(--sage);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.tool-audience{display:flex;gap:10px;}
+.audience-chip{background:#fff;border:1.5px solid var(--sage);color:var(--forest);font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:100px;}
+
+.demo-card{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);border-radius:20px;box-shadow:0 30px 70px rgba(25,35,29,0.25);overflow:hidden;position:relative;}
+.demo-card::before{content:'';position:absolute;top:-30%;right:-20%;width:320px;height:320px;background:radial-gradient(circle,rgba(127,176,105,0.14) 0%,transparent 70%);pointer-events:none;}
+.demo-topbar{padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,0.08);position:relative;z-index:1;}
+.demo-topbar .d{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.2);}
+.demo-topbar .url{margin-left:10px;font-size:11px;color:rgba(255,255,255,0.45);}
+.demo-inner{padding:28px 28px 30px;position:relative;z-index:1;}
+.demo-inner .rec{background:rgba(255,255,255,0.06);border:1px solid rgba(155,201,138,0.35);border-radius:12px;padding:18px 20px;margin-bottom:18px;backdrop-filter:blur(4px);}
+.demo-inner .rec .h{font-family:var(--font-serif);display:flex;align-items:center;gap:7px;font-size:16px;font-weight:600;color:var(--sage-glow);margin-bottom:9px;}
+.demo-inner .rec p{font-family:var(--font-sans);font-size:12.5px;color:rgba(255,255,255,0.75);line-height:1.65;}
+.demo-inner .rec .hl{background:rgba(255,255,255,0.95);border:1px solid var(--sage-glow);border-radius:6px;padding:1px 7px;color:var(--forest);font-weight:700;}
+.demo-btn{width:100%;background:var(--sage);color:#fff;border:none;padding:13px;border-radius:100px;font-size:13.5px;font-weight:700;text-align:center;display:block;text-decoration:none;}
+
+.afford-widget{max-width:640px;margin:0 auto;background:var(--cream);border:1px solid var(--border);border-radius:24px;padding:40px 44px 34px;box-shadow:0 30px 70px rgba(25,35,29,0.06);}
+.afford-label{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--ink-muted);margin-bottom:6px;}
+.afford-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:26px;}
+.afford-row span:first-child{font-family:var(--font-sans);font-size:17px;color:var(--ink-muted);}
+.afford-row .val{font-family:var(--font-serif);font-size:26px;font-weight:700;color:var(--forest);}
+.afford-slider{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:var(--sage-faint);outline:none;margin-bottom:8px;}
+.afford-slider::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--sage);border:4px solid #fff;box-shadow:0 2px 12px rgba(25,35,29,0.25);cursor:pointer;}
+.afford-slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--sage);border:4px solid #fff;box-shadow:0 2px 12px rgba(25,35,29,0.25);cursor:pointer;border:none;}
+.afford-ticks{display:flex;justify-content:space-between;font-size:11px;color:#9ca3af;margin-bottom:30px;}
+.afford-divider{border-top:1px dashed var(--border);margin-bottom:26px;}
+.afford-result{text-align:center;}
+.afford-result .arrow{color:var(--sage);font-size:20px;margin-bottom:8px;}
+.afford-result .big{font-family:var(--font-serif);font-size:44px;font-weight:700;color:var(--forest);letter-spacing:-1px;}
+.afford-result .small{font-size:13px;color:var(--ink-muted);margin-top:4px;}
+.afford-section-header{text-align:center;max-width:600px;margin:0 auto 20px;}
+
+.help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.help-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:32px 28px;transition:transform 0.3s ease,box-shadow 0.3s ease;}
+.help-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(25,35,29,0.08);}
+.help-card .num{font-family:var(--font-serif);font-size:13px;font-weight:700;color:var(--sage);margin-bottom:16px;}
+.help-card h3{font-family:var(--font-serif);font-size:20px;font-weight:600;color:var(--forest);margin-bottom:10px;}
+.help-card p{font-size:14.5px;color:var(--ink-muted);margin-bottom:18px;line-height:1.65;}
+.help-card a{font-size:13.5px;font-weight:700;color:var(--forest);text-decoration:none;border-bottom:1.5px solid var(--sage);padding-bottom:2px;}
+
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.step-card{position:relative;padding:28px 22px;}
+.step-card .num{font-family:var(--font-serif);font-size:36px;font-weight:700;color:var(--sage-faint);-webkit-text-stroke:1.5px var(--sage);margin-bottom:14px;}
+.step-card h4{font-family:var(--font-serif);font-size:17px;font-weight:600;color:var(--forest);margin-bottom:8px;}
+.step-card p{font-size:13.5px;color:var(--ink-muted);line-height:1.6;}
+
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.testimonial-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:28px 26px;}
+.stars{display:flex;gap:2px;margin-bottom:14px;}
+.stars svg{width:15px;height:15px;fill:var(--amber);}
+.testimonial-card blockquote{font-size:14.5px;color:var(--ink);line-height:1.7;margin-bottom:20px;font-style:italic;}
+.tauthor{display:flex;align-items:center;gap:12px;}
+.tauthor-avatar{width:38px;height:38px;border-radius:50%;background:var(--forest);color:var(--sage-glow);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-weight:700;font-size:15px;flex-shrink:0;}
+.tauthor-name{font-size:13.5px;font-weight:700;color:var(--forest);}
+.tauthor-meta{font-size:12px;color:var(--ink-muted);}
+
+.faq-list{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;background:none;border:none;padding:22px 4px;display:flex;justify-content:space-between;align-items:center;text-align:left;font-family:var(--font-sans);font-size:15.5px;font-weight:600;color:var(--forest);cursor:pointer;}
+.faq-q svg{width:18px;height:18px;stroke:var(--sage);flex-shrink:0;transition:transform 0.25s ease;}
+.faq-item.open .faq-q svg{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a p{padding:0 4px 22px;font-size:14px;color:var(--ink-muted);line-height:1.7;}
+
+.final-cta{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);position:relative;overflow:hidden;padding:110px 0;text-align:center;}
+.final-cta .orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(127,176,105,0.18) 0%,transparent 70%);}
+.final-cta .orb-1{width:500px;height:500px;top:-20%;left:-10%;}
+.final-cta .orb-2{width:400px;height:400px;bottom:-25%;right:-5%;}
+.final-cta h2{font-family:var(--font-serif);font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;line-height:1.15;position:relative;z-index:1;}
+.final-cta h2 .italic{font-style:italic;color:var(--sage-glow);}
+.final-cta p{font-size:16px;color:rgba(255,255,255,0.7);max-width:480px;margin:18px auto 32px;position:relative;z-index:1;}
+.final-cta .subtext{font-size:13px;color:rgba(255,255,255,0.45);margin-top:18px;}
+.btn-light{background:var(--sage);color:var(--forest);padding:16px 34px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:1;}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;text-align:center;}
+  .report-mock{transform:none;max-width:360px;margin:40px auto 0;}
+  .rm-ribbon{right:-30px;}
+  .tool-grid{grid-template-columns:1fr;}
+  .afford-widget{padding:28px 24px;margin:0 16px;}
+  .help-grid,.steps-grid,.testimonial-grid{grid-template-columns:1fr;}
+}
+</style>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="rate-pill"><span class="dot"></span><span>{{ homepage.hero.badge }}</span></div>
+      <h1>{{ homepage.hero.headline1 }}<br><span class="accent">{{ homepage.hero.headline2 }}</span></h1>
+      <p>{{ homepage.hero.description }}</p>
+
+      <div class="hero-actions">
+        <a href="{{ homepage.hero.primary_cta.url }}" class="btn btn-primary">{{ homepage.hero.primary_cta.text }}</a>
+        <a href="{{ homepage.hero.secondary_cta.url }}" class="btn btn-secondary">{{ homepage.hero.secondary_cta.text }}</a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="avatars">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="">
+        </div>
+        <p><strong>{{ homepage.hero.trust_number }}</strong> {{ homepage.hero.trust_text }}</p>
+      </div>
+    </div>
+
+    <div class="report-mock-wrap">
+      <div class="report-mock">
+        <div class="rm-ribbon">Preferred</div>
+        <div class="rm-header">
+          <div class="label">Prepared exclusively for</div>
+          <h4>The Johnson Family</h4>
+        </div>
+        <div class="rm-price">$1,250,000 <span>CAD</span></div>
+        <div class="rm-body">
+          <div class="rm-metrics">
+            <div class="rm-metric"><div class="l">List price</div><div class="v">$1.25M</div></div>
+            <div class="rm-metric"><div class="l">Income req.</div><div class="v">$274K</div></div>
+            <div class="rm-metric"><div class="l">Monthly</div><div class="v">$7,314</div></div>
+          </div>
+          <div class="rm-row"><span>1-Year Fixed · 5.84%</span><span>$6,346</span></div>
+          <div class="rm-row best"><span><span class="rm-badge">Preferred</span>3-Yr · 4.79%</span><span>$5,724</span></div>
+          <div class="rm-row"><span>5-Year Fixed · 4.64%</span><span>$5,638</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="wrap">
+    {% for stat in homepage.stats.items %}
+    <div class="stat"><div class="num">{{ stat.number }}</div><div class="lbl">{{ stat.label }}</div></div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    {% for item in homepage.marquee.items %}<span>{{ item.text }}</span>{% endfor %}
+    {% for item in homepage.marquee.items %}<span>{{ item.text }}</span>{% endfor %}
+  </div>
+</div>
+
+<div class="logo-strip">
+  <div class="wrap">
+    <div class="logo-strip-label">Access to 100+ lenders, including</div>
+  </div>
+  <div class="logo-strip-outer">
+    <div class="logo-track">
+      {% set lenders = ["bmo","rbc","eq","td","scotia","cibc","desjardins","vancity","national","simplii","meridian","tangerine","atb","hsbc","coastcapital","laurentian"] %}
+      {% for lender in lenders %}<img src="/assets/logos/{{ lender }}.png" alt="">{% endfor %}
+      {% for lender in lenders %}<img src="/assets/logos/{{ lender }}.png" alt="">{% endfor %}
+    </div>
+  </div>
+</div>
+
+<section class="tool-section" id="report-tool">
+  <div class="wrap tool-grid">
+    <div class="tool-copy">
+      <div class="tool-eyebrow">{{ homepage.report_tool.eyebrow }}</div>
+      <h2>{{ homepage.report_tool.headline1 }}<br><em>{{ homepage.report_tool.headline2 }}</em></h2>
+      <p>{{ homepage.report_tool.description }}</p>
+      <ul class="tool-features">
+        {% for feature in homepage.report_tool.features %}<li><span class="check">&#10003;</span>{{ feature.text }}</li>{% endfor %}
+      </ul>
+      <div class="tool-audience">
+        {% for chip in homepage.report_tool.audience_chips %}<span class="audience-chip">{{ chip.text }}</span>{% endfor %}
+      </div>
+    </div>
+    <div class="demo-card">
+      <div class="demo-topbar"><div class="d"></div><div class="d"></div><div class="d"></div><div class="url">thefunders.ca/report-builder</div></div>
+      <div class="demo-inner">
+        <div class="rec">
+          <div class="h">&#9733; Our recommendation</div>
+          <p>Based on today's rates, the <span class="hl">3-Year Fixed at 4.79%</span> is the strongest option right now — $387/month less than 5-year variable, with a locked-in payment.</p>
+        </div>
+        <a href="{{ homepage.report_tool.cta_url }}" class="demo-btn">{{ homepage.report_tool.cta_text }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="who-we-help">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.who_we_help.label }}</div>
+      <h2>{{ homepage.who_we_help.title }}</h2>
+      <p>{{ homepage.who_we_help.description }}</p>
+    </div>
+    <div class="help-grid">
+      {% for card in homepage.who_we_help.cards %}
+      <div class="help-card">
+        <div class="num">{{ card.number }}</div>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+        <a href="{{ card.link_url }}">{{ card.link_text }} &rarr;</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="estimator" style="background:#fff;">
+  <div class="wrap">
+    <div class="afford-section-header">
+      <div class="tool-eyebrow">{{ homepage.estimator.eyebrow }}</div>
+      <h2>{{ homepage.estimator.headline1 }}<br><em>{{ homepage.estimator.headline2 }}</em></h2>
+      <p style="color:var(--ink-muted);font-size:15.5px;margin-top:14px;">{{ homepage.estimator.description }}</p>
+    </div>
+    <div class="afford-widget">
+      <div class="afford-label">If you can comfortably pay</div>
+      <div class="afford-row"><span>per month</span><span class="val" id="monthlyOut">${{ homepage.estimator.slider_default }}</span></div>
+      <input type="range" min="{{ homepage.estimator.slider_min }}" max="{{ homepage.estimator.slider_max }}" step="50" value="{{ homepage.estimator.slider_default }}" class="afford-slider" id="affordSlider">
+      <div class="afford-ticks"><span>${{ homepage.estimator.slider_min }}</span><span>${{ homepage.estimator.slider_max }}</span></div>
+      <div class="afford-divider"></div>
+      <div class="afford-result">
+        <div class="arrow">&#8595;</div>
+        <div class="big" id="powerOut">$0</div>
+        <div class="small" id="assumptionNote">estimated purchasing power at {{ homepage.estimator.assumed_rate }}%, {{ homepage.estimator.assumed_amortization }}-year amortization</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how-it-works">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.process.label }}</div>
+      <h2>{{ homepage.process.title }}</h2>
+      <p>{{ homepage.process.description }}</p>
+    </div>
+    <div class="steps-grid">
+      {% for step in homepage.process.steps %}
+      <div class="step-card"><div class="num">{{ step.number }}</div><h4>{{ step.title }}</h4><p>{{ step.description }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stories" style="background:#fff;">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.testimonials.label }}</div>
+      <h2>{{ homepage.testimonials.title }}</h2>
+      <p>{{ homepage.testimonials.description }}</p>
+    </div>
+    <div class="testimonial-grid">
+      {% for t in homepage.testimonials.items %}
+      <div class="testimonial-card">
+        <div class="stars">
+          {% for i in range(t.rating) %}<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>{% endfor %}
+        </div>
+        <blockquote>"{{ t.quote }}"</blockquote>
+        <div class="tauthor"><div class="tauthor-avatar">{{ t.initial }}</div><div><div class="tauthor-name">{{ t.name }}</div><div class="tauthor-meta">{{ t.detail }}</div></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-header">
+      <div class="section-label">{{ homepage.faq.label }}</div>
+      <h2>{{ homepage.faq.title }}</h2>
+      <p>{{ homepage.faq.description }}</p>
+    </div>
+    <div class="faq-list">
+      {% for item in homepage.faq.items %}
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>{{ item.question }}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>{{ item.answer }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="contact">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div>
+  <div class="wrap">
+    <h2>{{ homepage.cta.headline }}</h2>
+    <p>{{ homepage.cta.description }}</p>
+    <a href="{{ homepage.cta.button.url }}" class="btn-light">{{ homepage.cta.button.text }} &rarr;</a>
+    <div class="subtext">{{ homepage.cta.subtext }}</div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(btn){
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+
+const affordSlider = document.getElementById('affordSlider');
+const monthlyOut = document.getElementById('monthlyOut');
+const powerOut = document.getElementById('powerOut');
+const ASSUMED_RATE = {{ homepage.estimator.assumed_rate }};
+const ASSUMED_YEARS = {{ homepage.estimator.assumed_amortization }};
+const ASSUMED_DOWN_PCT = {{ homepage.estimator.assumed_down_percent }};
+
+function calcPower(monthly){
+  const rate = (ASSUMED_RATE/100)/12;
+  const n = ASSUMED_YEARS*12;
+  const loan = monthly*(Math.pow(1+rate,n)-1)/(rate*Math.pow(1+rate,n));
+  const price = loan/(1 - ASSUMED_DOWN_PCT/100);
+  return Math.round(price/1000)*1000;
+}
+function updateAfford(){
+  const m = parseInt(affordSlider.value);
+  monthlyOut.textContent = '$'+m.toLocaleString('en-CA');
+  powerOut.textContent = '$'+calcPower(m).toLocaleString('en-CA');
+}
+if(affordSlider){
+  affordSlider.addEventListener('input', updateAfford);
+  updateAfford();
+}
+</script>
