@@ -11,8 +11,8 @@
   status = 200
 
 [[redirects]]
-  from = "/r/:id"
-  to = "/.netlify/functions/view-report?id=:id"
+  from = "/r/*"
+  to = "/.netlify/functions/view-report?id=:splat"
   status = 200
 
 [[headers]]
