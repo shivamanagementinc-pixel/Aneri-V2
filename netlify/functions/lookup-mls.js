@@ -134,50 +134,51 @@ exports.handler = async (event) => {
     // Cache read failing shouldn't block a fresh lookup — just proceed.
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     return {
       statusCode: 500, headers,
-      body: JSON.stringify({ error: 'Server is missing OPENAI_API_KEY. Add it in Netlify: Site settings \u2192 Environment variables, then redeploy.' })
+      body: JSON.stringify({ error: 'Server is missing GEMINI_API_KEY. Add it in Netlify: Site settings \u2192 Environment variables, then redeploy.' })
     };
   }
 
   try {
-    const resp = await fetch('https://api.openai.com/v1/responses', {
+    const resp = await fetch('https://generativelanguage.googleapis.com/v1beta/interactions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'x-goog-api-key': apiKey
       },
       body: JSON.stringify({
-        model: 'gpt-5.6-terra',
+        model: 'gemini-3.6-flash',
         input: buildPrompt(mlsId),
-        tools: [{ type: 'web_search' }]
+        tools: [{ type: 'google_search' }]
       })
     });
 
     if (!resp.ok) {
       const errText = await resp.text();
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'OpenAI API error', detail: errText.slice(0, 500) }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Gemini API error', detail: errText.slice(0, 500) }) };
     }
 
     const data = await resp.json();
-    // Responses API returns an "output" array of typed items. When a web_search
-    // tool call happens first, the message item (with the actual text) may not
-    // be output[0], so scan for the first "message" item rather than assuming.
-    const messageItem = (data.output || []).find(item => item.type === 'message');
-    const textParts = messageItem && messageItem.content ? messageItem.content : [];
-    const text = textParts.filter(p => p.type === 'output_text').map(p => p.text || '').join('');
+    // Interactions API returns a "steps" array of typed items (thought,
+    // google_search_call, google_search_result, model_output, ...). The
+    // actual answer lives in the step with type "model_output", so scan
+    // for it rather than assuming a fixed position.
+    const outputStep = (data.steps || []).find(step => step.type === 'model_output');
+    const textBlocks = outputStep && outputStep.content ? outputStep.content : [];
+    const text = textBlocks.filter(b => b.type === 'text').map(b => b.text || '').join('');
 
     if (!text) {
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'OpenAI returned no text content', detail: JSON.stringify(data).slice(0, 500) }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Gemini returned no text content', detail: JSON.stringify(data).slice(0, 500) }) };
     }
 
     let parsed;
     try {
       parsed = extractJson(text);
     } catch (e) {
-      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Could not parse OpenAI response as JSON', detail: text.slice(0, 500) }) };
+      return { statusCode: 502, headers, body: JSON.stringify({ error: 'Could not parse Gemini response as JSON', detail: text.slice(0, 500) }) };
     }
 
     if (parsed.error) {
