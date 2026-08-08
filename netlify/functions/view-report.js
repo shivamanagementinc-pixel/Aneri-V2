@@ -4,7 +4,7 @@
 // /r/:id -> /.netlify/functions/view-report?id=:id (add to netlify.toml,
 // see instructions).
 
-const { getStore } = require("@netlify/blobs");
+const { getConfiguredStore } = require('./_blobs-config');
 
 exports.handler = async (event) => {
   const id = event.queryStringParameters && event.queryStringParameters.id;
@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const reportsStore = getStore("reports");
+    const reportsStore = getConfiguredStore("reports");
     const html = await reportsStore.get(id, { type: "text" });
 
     if (!html) {

@@ -8,7 +8,7 @@
 // variables), NOT in this file or the repo:
 //   OPENAI_API_KEY = <your OpenAI API key>
 
-const { getStore } = require("@netlify/blobs");
+const { getConfiguredStore } = require("./_blobs-config");
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
@@ -117,7 +117,7 @@ exports.handler = async (event) => {
   // that result instead of spending another API call.
   const cacheKey = `${mlsId}__${todayKey()}`;
   try {
-    const cacheStore = getStore('mls-cache');
+    const cacheStore = getConfiguredStore('mls-cache');
     const cached = await cacheStore.get(cacheKey, { type: 'json' });
     if (cached) {
       return { statusCode: 200, headers, body: JSON.stringify({ ...cached, fromCache: true }) };
@@ -179,7 +179,7 @@ exports.handler = async (event) => {
     const clean = sanitize(parsed);
 
     try {
-      const cacheStore = getStore('mls-cache');
+      const cacheStore = getConfiguredStore('mls-cache');
       await cacheStore.setJSON(cacheKey, clean);
     } catch (e) {
       // Cache write failing shouldn't fail the request — the lookup itself

@@ -7,7 +7,7 @@
 //    address, price, timestamp) — kept separate from the HTML so listing
 //    all leads doesn't require reading every full report body
 
-const { getStore } = require("@netlify/blobs");
+const { getConfiguredStore } = require("./_blobs-config");
 const crypto = require("crypto");
 
 exports.handler = async (event) => {
@@ -42,10 +42,10 @@ exports.handler = async (event) => {
     const id = isValidUuid ? clientId : crypto.randomUUID();
     const now = new Date().toISOString();
 
-    const reportsStore = getStore("reports");
+    const reportsStore = getConfiguredStore("reports");
     await reportsStore.set(id, reportHtml, { metadata: { contentType: "text/html" } });
 
-    const leadsStore = getStore("leads");
+    const leadsStore = getConfiguredStore("leads");
     const leadRecord = {
       id,
       buyer,

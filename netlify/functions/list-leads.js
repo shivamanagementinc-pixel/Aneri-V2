@@ -7,7 +7,7 @@
 // No extra login system needed; the same account that can access /admin
 // can access /leads.
 
-const { getStore } = require("@netlify/blobs");
+const { getConfiguredStore } = require("./_blobs-config");
 
 exports.handler = async (event, context) => {
   const headers = { "Content-Type": "application/json" };
@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const leadsStore = getStore("leads");
+    const leadsStore = getConfiguredStore("leads");
     const { blobs } = await leadsStore.list();
 
     const leads = await Promise.all(
