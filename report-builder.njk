@@ -76,9 +76,13 @@ permalink: /report-builder/index.html
   <div class="quick-box">
     <h3>Quick Generate</h3>
     <p>Enter the buyer, the realtor, and an MLS number &mdash; the report opens automatically. This uses AI + web search to pull listing details.</p>
-    <div class="quick-row">
+    <div class="quick-row" style="grid-template-columns:1fr 1fr;">
       <div class="quick-field"><label>Prepared For (Buyer)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
       <div class="quick-field"><label>Prepared By (Realtor)</label><input type="text" id="q_agent" placeholder="e.g. Sarah Chen"></div>
+    </div>
+    <div class="quick-row" style="margin-top:12px;">
+      <div class="quick-field"><label>Realtor Email</label><input type="email" id="q_agent_email" placeholder="sarah@realty.com"></div>
+      <div class="quick-field"><label>Realtor Phone (optional)</label><input type="tel" id="q_agent_phone" placeholder="(437) 555-0123"></div>
       <div class="quick-field"><label>MLS Number</label><input type="text" id="q_mls" placeholder="e.g. X13227018"></div>
       <button class="btn-quick-gen" id="quickGenBtn" onclick="quickGenerate()">Generate Report</button>
     </div>
@@ -1159,12 +1163,18 @@ function toggleManual(){
 async function quickGenerate(){
   const buyer=document.getElementById('q_buyer').value.trim();
   const agent=document.getElementById('q_agent').value.trim();
+  const agentEmail=document.getElementById('q_agent_email').value.trim();
+  const agentPhone=document.getElementById('q_agent_phone').value.trim();
   const mlsId=document.getElementById('q_mls').value.trim();
   const statusEl=document.getElementById('quickStatus');
   const btn=document.getElementById('quickGenBtn');
 
   if(!buyer||!agent||!mlsId){
-    statusEl.innerHTML='<span class="missed">Please fill in all three fields \u2014 buyer name, realtor name, and MLS number.</span>';
+    statusEl.innerHTML='<span class="missed">Please fill in buyer name, realtor name, and MLS number.</span>';
+    return;
+  }
+  if(!agentEmail||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(agentEmail)){
+    statusEl.innerHTML='<span class="missed">Please enter a valid realtor email so we can follow up.</span>';
     return;
   }
   if(!document.getElementById('q_agree').checked){
@@ -1222,6 +1232,8 @@ async function quickGenerate(){
     statusEl.innerHTML=html;
 
     window.__reportSource='quick-generate';
+    window.__agentEmail=agentEmail;
+    window.__agentPhone=agentPhone;
     await makeReport(reportWindow);
 
   }catch(err){
@@ -1462,7 +1474,7 @@ async function makeReport(existingWindow){
   const reportWindow=existingWindow||window.open('','_blank');
   if(reportWindow) reportWindow.document.write('<p style="font-family:sans-serif;padding:60px;text-align:center;color:#5a6b60;">Generating your report&hellip;</p>');
   const reportId=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2)));
-  const reportUrl=window.location.origin+'/r/'+reportId;
+  const reportUrl=window.location.origin+'/.netlify/functions/view-report?id='+reportId;
   const price=Number(document.getElementById('f_price').value)||1250000;
   const dpPercent=Number(document.getElementById('f_dp').value)||20;
   const address=document.getElementById('f_address').value||'42 Willow Creek Drive, Toronto, ON';
@@ -1599,7 +1611,8 @@ async function makeReport(existingWindow){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         id:reportId, reportHtml:html, buyer, agent, mlsId:mls,
-        address, price, source:(window.__reportSource||'manual')
+        address, price, source:(window.__reportSource||'manual'),
+        agentEmail:(window.__agentEmail||''), agentPhone:(window.__agentPhone||'')
       })
     });
   }catch(e){

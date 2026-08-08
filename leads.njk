@@ -32,7 +32,7 @@ permalink: /leads/index.html
     <p style="color:#5a6b60;margin-bottom:20px;font-size:13.5px;">Every report generated through Quick Generate or the manual form is logged here.</p>
     <table class="leads-table" id="leadsTable">
       <thead>
-        <tr><th>Date</th><th>Buyer</th><th>Agent</th><th>MLS#</th><th>Address</th><th>Price</th><th>Source</th><th>Report</th></tr>
+        <tr><th>Date</th><th>Buyer</th><th>Agent</th><th>Email</th><th>Phone</th><th>MLS#</th><th>Address</th><th>Price</th><th>Source</th><th>Report</th></tr>
       </thead>
       <tbody id="leadsBody"></tbody>
     </table>
@@ -85,11 +85,13 @@ async function loadLeads(user){
         <td>${fmtDate(lead.createdAt)}</td>
         <td>${lead.buyer || '\u2014'}</td>
         <td>${lead.agent || '\u2014'}</td>
+        <td>${lead.agentEmail ? `<a href="mailto:${lead.agentEmail}">${lead.agentEmail}</a>` : '\u2014'}</td>
+        <td>${lead.agentPhone ? `<a href="tel:${lead.agentPhone}">${lead.agentPhone}</a>` : '\u2014'}</td>
         <td>${lead.mlsId || '\u2014'}</td>
         <td>${lead.address || '\u2014'}</td>
         <td>${fmtPrice(lead.price)}</td>
         <td><span class="source-badge ${lead.source==='manual'?'manual':''}">${lead.source||'quick-generate'}</span></td>
-        <td><a href="/r/${lead.id}" target="_blank">View &rarr;</a></td>
+        <td><a href="/.netlify/functions/view-report?id=${lead.id}" target="_blank">View &rarr;</a></td>
       </tr>
     `).join('');
   }catch(err){
