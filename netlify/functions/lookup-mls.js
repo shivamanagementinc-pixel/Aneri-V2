@@ -150,7 +150,7 @@ exports.handler = async (event) => {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-5.6-luna',
+        model: 'gpt-5.6-terra',
         input: buildPrompt(mlsId),
         tools: [{ type: 'web_search' }]
       })
