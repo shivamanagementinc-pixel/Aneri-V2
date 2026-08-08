@@ -26,7 +26,15 @@ const VALID_TYPES = ['Detached', 'Semi-Detached', 'Townhouse', 'Condo'];
 function buildPrompt(mlsId) {
   return `You are helping a licensed mortgage broker in Ontario, Canada gather PUBLIC real estate listing details for MLS number "${mlsId}".
 
-Search the web (realtor.ca, Zillow.ca, Sotheby's, Royal LePage, Century 21, RE/MAX, brokerage sites, TRREB-affiliated listing pages, etc.) to find this specific listing.
+SEARCH STRATEGY (follow this order, do not give up after one attempt):
+1. First, search the EXACT simple query: MLS ${mlsId}
+2. If that doesn't find it, try: "${mlsId}" real estate
+3. If still nothing, try the number with common aggregator sites specifically, since these index MLS numbers directly and are often the fastest way to find a listing: site:zolo.ca ${mlsId}, site:housesigma.com ${mlsId}, site:zoocasa.com ${mlsId}, site:realtor.ca ${mlsId}
+4. Also check individual brokerage sites if the above don't work: Royal LePage, RE/MAX, Century 21, Sotheby's, Chestnut Park, and any brokerage name that turns up in earlier results.
+5. Note: MLS numbers starting with certain letters (e.g. "N", "W", "E", "C") indicate specific TRREB (Toronto Regional Real Estate Board) districts — this is a real, valid MLS format, not an error, even for rental listings.
+6. Only return "not found" after genuinely trying multiple search variations above — a single search returning nothing is NOT sufficient to conclude the listing doesn't exist.
+
+Search the web to find this specific listing using the strategy above.
 
 Return ONLY a single JSON object. No markdown code fences. No commentary before or after. Use exactly these fields:
 
