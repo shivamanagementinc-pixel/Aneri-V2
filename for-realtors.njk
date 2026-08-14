@@ -1,0 +1,82 @@
+---
+layout: base.njk
+title: "For Realtors | The Funders Network"
+description: "The Funders Network gives approved Realtors a property-first workspace for Open House QR registration, buyer reports, engagement signals, high-level Funders updates, campaign tools, and rewards visibility."
+permalink: /for-realtors/index.html
+---
+
+<style>
+.network-hero{padding:70px 0 58px;background:radial-gradient(circle at 84% 8%,rgba(127,176,105,.2),transparent 26rem),linear-gradient(145deg,#fefaf3,#f4f8f1)}
+.network-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}.network-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid #b9d4b2;border-radius:100px;background:#edf6e9;color:#3c7137;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.network-hero h1{max-width:650px;margin:24px 0 18px;font-family:var(--font-serif);font-size:clamp(42px,5.4vw,70px);font-weight:600;line-height:1.03;letter-spacing:-1.4px;color:var(--forest)}.network-hero h1 em{font-style:italic;color:var(--sage)}.network-hero p{max-width:590px;color:var(--ink-muted);font-size:17px;line-height:1.65}.network-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.network-note{margin-top:18px;color:#65746a;font-size:12px;line-height:1.55}.network-preview{padding:21px;border:1px solid #d9e4d5;border-radius:20px;background:#fff;box-shadow:0 18px 52px rgba(25,35,29,.11)}.preview-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:15px;border-bottom:1px solid #edf0eb}.preview-top b{display:block;color:var(--forest);font-size:14px}.preview-top span{display:block;margin-top:3px;color:var(--ink-muted);font-size:11px}.preview-chip{padding:6px 9px;border-radius:99px;background:#edf6e9;color:#3d7039;font-size:10px;font-weight:800}.preview-property{margin:16px 0;padding:15px;border-radius:14px;background:#f5f8f3}.preview-property span{display:block;color:var(--ink-muted);font-size:10px}.preview-property b{display:block;margin-top:4px;color:var(--forest);font-size:16px}.preview-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.preview-kpis div{padding:11px;border:1px solid #e6ece4;border-radius:10px}.preview-kpis b{display:block;color:var(--forest);font-size:18px}.preview-kpis span{display:block;margin-top:3px;color:var(--ink-muted);font-size:9px}.preview-update{margin-top:12px;padding:12px;border-left:3px solid var(--sage);border-radius:8px;background:#f4faf2}.preview-update span{display:block;color:#4b7b43;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.preview-update b{display:block;margin-top:5px;color:var(--forest);font-size:12px}.preview-update small{display:block;margin-top:4px;color:var(--ink-muted);font-size:10px;line-height:1.4}
+.network-section{padding:94px 0}.network-section.soft{background:#fff}.network-header{max-width:720px;margin:0 auto 46px;text-align:center}.network-header .label{display:inline-block;color:var(--sage);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.network-header h2{margin:12px 0 14px;color:var(--forest);font-family:var(--font-serif);font-size:clamp(33px,4vw,48px);font-weight:600;line-height:1.1}.network-header h2 em{font-style:italic;color:var(--sage)}.network-header p{color:var(--ink-muted);font-size:16px;line-height:1.6}.network-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.network-card{padding:25px;border:1px solid var(--border);border-radius:17px;background:#fff}.network-card .icon{display:grid;place-items:center;width:42px;height:42px;margin-bottom:17px;border-radius:12px;background:#edf6e9;color:#3e7438;font-size:20px;font-weight:900}.network-card h3{margin:0 0 9px;color:var(--forest);font-size:18px}.network-card p{margin:0;color:var(--ink-muted);font-size:14px;line-height:1.55}.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.workflow-step{position:relative;padding:20px;border:1px solid #dce8d8;border-radius:15px;background:#f9fbf8}.workflow-step b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--forest);color:#fff;font-size:11px}.workflow-step h3{margin:15px 0 6px;color:var(--forest);font-size:16px}.workflow-step p{margin:0;color:var(--ink-muted);font-size:12px;line-height:1.5}.privacy-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px}.privacy-panel{padding:27px;border-radius:18px;background:#f4faf2;border:1px solid #d6e6d1}.privacy-panel.dark{background:var(--forest);border-color:var(--forest)}.privacy-panel h3{margin:0 0 14px;color:var(--forest);font-family:var(--font-serif);font-size:25px}.privacy-panel.dark h3{color:#fff}.privacy-panel p{margin:0;color:var(--ink-muted);font-size:14px;line-height:1.6}.privacy-panel.dark p{color:#c9d9c8}.privacy-list{display:grid;gap:9px;margin-top:17px}.privacy-list div{display:flex;gap:9px;align-items:flex-start;color:var(--forest);font-size:13px;line-height:1.4}.privacy-list b{display:grid;place-items:center;flex:0 0 20px;height:20px;border-radius:50%;background:var(--sage);color:var(--forest);font-size:11px}.privacy-panel.dark .privacy-list div{color:#e5efe5}.privacy-panel.dark .privacy-list b{background:#34513b;color:#fff}.reward-panel{display:grid;grid-template-columns:1fr .9fr;gap:38px;align-items:center;padding:38px;border:1px solid #e6d5a8;border-radius:22px;background:linear-gradient(135deg,#fffdf6,#fbf4df)}.reward-panel h2{margin:10px 0;color:var(--forest);font-family:var(--font-serif);font-size:clamp(33px,4vw,47px);line-height:1.08}.reward-panel p{color:#6a654f;font-size:15px;line-height:1.6}.reward-tiers{display:grid;grid-template-columns:1fr 1fr;gap:9px}.reward-tier{padding:13px;border:1px solid #eadbae;border-radius:11px;background:rgba(255,255,255,.72)}.reward-tier b{display:block;color:#75530b;font-size:15px}.reward-tier span{display:block;margin-top:3px;color:#776f59;font-size:10px;line-height:1.35}.network-cta{padding:86px 0;text-align:center;background:var(--forest)}.network-cta h2{margin:0;color:#fff;font-family:var(--font-serif);font-size:clamp(36px,4.7vw,57px);line-height:1.08}.network-cta h2 em{color:var(--sage-glow);font-style:italic}.network-cta p{max-width:610px;margin:18px auto 28px;color:#c9d9c8;font-size:16px;line-height:1.6}.network-cta small{display:block;max-width:680px;margin:18px auto 0;color:#aebfaf;font-size:11px;line-height:1.5}@media(max-width:850px){.network-hero-grid,.privacy-wrap,.reward-panel{grid-template-columns:1fr}.network-grid{grid-template-columns:1fr 1fr}.workflow{grid-template-columns:1fr 1fr}}@media(max-width:560px){.network-hero{padding:46px 0}.network-grid,.workflow,.reward-tiers{grid-template-columns:1fr}.network-section{padding:66px 0}}
+</style>
+
+<section class="network-hero">
+  <div class="wrap network-hero-grid">
+    <div>
+      <span class="network-eyebrow">The Funders Network · For Realtors</span>
+      <h1>Turn every Open House into a better <em>buyer conversation.</em></h1>
+      <p>The Funders Network is a no-cost, property-first engagement workspace for approved Realtor partners. Create campaigns from listing data, display a QR experience, deliver useful property reports, and stay aligned with The Funders Team.</p>
+      <div class="network-actions">
+        <a class="btn btn-primary" href="{{ fundersNetwork.appUrl }}/login.html?portal=realtor">Partner login &rarr;</a>
+        <a class="btn btn-secondary" href="#network-how-it-works">See how it works</a>
+      </div>
+      <p class="network-note">Programme access, rewards, and fulfilment are subject to approval, availability, and applicable brokerage/compliance requirements.</p>
+    </div>
+    <aside class="network-preview" aria-label="Funders Network workspace example">
+      <div class="preview-top"><div><b>My Open House</b><span>Property-first buyer engagement</span></div><span class="preview-chip">Live campaign</span></div>
+      <div class="preview-property"><span>Featured property</span><b>123 Maple Grove Avenue</b></div>
+      <div class="preview-kpis"><div><b>24</b><span>QR scans</span></div><div><b>9</b><span>Registrations</span></div><div><b>6</b><span>Reports opened</span></div></div>
+      <div class="preview-update"><span>Latest Funders update</span><b>Financing review started</b><small>High-level file updates keep the Realtor aligned while buyer financial detail stays private.</small></div>
+    </aside>
+  </div>
+</section>
+
+<section class="network-section">
+  <div class="wrap">
+    <div class="network-header"><span class="label">One property-first system</span><h2>Useful for the buyer. <em>Practical for the Realtor.</em></h2><p>The platform turns a listing into an immediate financial education moment, a permissioned buyer signal, and a more organized path for follow-up.</p></div>
+    <div class="network-grid">
+      <article class="network-card"><div class="icon">⌁</div><h3>Open House QR registration</h3><p>Display a property-specific QR code that gives visitors a useful reason to scan, register, and receive a financing report.</p></article>
+      <article class="network-card"><div class="icon">▣</div><h3>Property report delivery</h3><p>Share estimated cash to close, ownership cost, income context, listing details, and a clear educational next step.</p></article>
+      <article class="network-card"><div class="icon">♙</div><h3>Property-first CRM</h3><p>Track campaigns, buyer engagement, reports, Open House activity, and property conversations from one workspace.</p></article>
+      <article class="network-card"><div class="icon">↗</div><h3>High-level Funders updates</h3><p>See safe status updates from the Funders Team without seeing income, credit, documents, lender notes, or underwriting detail.</p></article>
+      <article class="network-card"><div class="icon">⇄</div><h3>Compare homes</h3><p>Use property financing context to compare different homes with a buyer who is narrowing their shortlist.</p></article>
+      <article class="network-card"><div class="icon">★</div><h3>Rewards visibility</h3><p>See potential campaign points, approved reward points, and eligible reward requests inside your Realtor workspace.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="network-section soft" id="network-how-it-works">
+  <div class="wrap">
+    <div class="network-header"><span class="label">The shared workflow</span><h2>From a listing to a <em>clearer next step.</em></h2><p>The Realtor stays central to the property conversation. The Funders Team handles the financing workflow when the buyer is ready.</p></div>
+    <div class="workflow">
+      <article class="workflow-step"><b>1</b><h3>Create campaign</h3><p>Add MLS, listing link, property details, and Open House timing.</p></article>
+      <article class="workflow-step"><b>2</b><h3>Display QR</h3><p>Invite visitors to scan for a useful property financing experience.</p></article>
+      <article class="workflow-step"><b>3</b><h3>Follow real signals</h3><p>Use registrations, reports, buyer milestones, and high-level Funders updates.</p></article>
+      <article class="workflow-step"><b>4</b><h3>Keep moving</h3><p>Continue the property conversation while The Funders Team supports financing next steps.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="network-section">
+  <div class="wrap privacy-wrap">
+    <article class="privacy-panel"><h3>What Realtors can see</h3><p>Useful engagement and high-level file progress that helps the Realtor serve the buyer better.</p><div class="privacy-list"><div><b>✓</b><span>QR registrations and report engagement</span></div><div><b>✓</b><span>Buyer milestones and high-level Funders updates</span></div><div><b>✓</b><span>Campaign performance and property reports</span></div><div><b>✓</b><span>Approved rewards and redemption status</span></div></div></article>
+    <article class="privacy-panel dark"><h3>What stays private</h3><p>The Funders Network is designed so Realtors can stay helpful without receiving confidential mortgage-file information.</p><div class="privacy-list"><div><b>×</b><span>Income, debt, credit, bank statements, and tax documents</span></div><div><b>×</b><span>Down-payment evidence and lender/underwriting notes</span></div><div><b>×</b><span>Actual funded amount or internal reward value</span></div><div><b>×</b><span>Unsupported approval or qualification claims</span></div></div></article>
+  </div>
+</section>
+
+<section class="network-section soft">
+  <div class="wrap reward-panel">
+    <div><span class="network-eyebrow">Realtor rewards programme</span><h2>Build more buyer value. <em>Unlock your next milestone.</em></h2><p>Open House campaigns can show estimated potential points. After verified funding, points are submitted for Administrator review and become visible only after approval.</p><p class="network-note">Points are not cash. Rewards, travel, tickets, availability, eligibility, and fulfilment remain subject to programme terms and Administrator approval.</p></div>
+    <div class="reward-tiers"><div class="reward-tier"><b>200 points</b><span>Welcome-home package or select experience</span></div><div class="reward-tier"><b>400 points</b><span>Premium home & lifestyle bundle</span></div><div class="reward-tier"><b>800+ points</b><span>Signature premium selections</span></div><div class="reward-tier"><b>1,200+ points</b><span>Travel and milestone packages, subject to terms</span></div></div>
+  </div>
+</section>
+
+<section class="network-cta">
+  <div class="wrap">
+    <h2>Ready to make your next Open House <em>more useful?</em></h2>
+    <p>Approved Realtor partners can use The Funders Network for property campaigns, QR experiences, buyer engagement, high-level Funders updates, and rewards visibility.</p>
+    <a class="btn-light" href="{{ fundersNetwork.appUrl }}/login.html?portal=realtor">Open Partner Login &rarr;</a>
+    <small>thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</small>
+  </div>
+</section>

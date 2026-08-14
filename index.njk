@@ -1,7 +1,7 @@
 ---
 layout: base.njk
-title: "Canadian Mortgage Broker | Free Financing Reports"
-description: "thefunders.ca helps Canadians navigate mortgages with clarity — first-time buyers, newcomers, refinancers, and investors. Get a free, instant financing report for any property, no signup required."
+title: "Canadian Mortgage Broker | Property Financing Education"
+description: "thefunders.ca helps Canadians explore mortgage options with clear, property-specific education and a practical next step for licensed review."
 ---
 
 <style>
@@ -148,11 +148,13 @@ description: "thefunders.ca helps Canadians navigate mortgages with clarity — 
 .final-cta .subtext{font-size:13px;color:rgba(255,255,255,0.45);margin-top:18px;}
 .btn-light{background:var(--sage);color:var(--forest);padding:16px 34px;border-radius:100px;font-weight:700;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;position:relative;z-index:1;}
 
+.funders-network-bridge{padding:84px 0;background:linear-gradient(135deg,#f1f7ef,#fffdf6);border-top:1px solid #dbe8d8;border-bottom:1px solid #e7e1d1;}.network-bridge-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:46px;align-items:center}.network-bridge-label{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:100px;background:#e4f1df;color:#3e7139;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.network-bridge-copy h2{margin:18px 0 13px;font-family:var(--font-serif);font-size:clamp(32px,4vw,48px);font-weight:600;line-height:1.1;color:var(--forest)}.network-bridge-copy h2 em{font-style:italic;color:var(--sage)}.network-bridge-copy p{max-width:610px;color:var(--ink-muted);font-size:16px;line-height:1.65}.network-bridge-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.network-bridge-note{margin-top:16px;color:#6e766e;font-size:11.5px;line-height:1.5}.network-bridge-cards{display:grid;gap:10px}.network-bridge-card{padding:15px 16px;border:1px solid #d8e6d5;border-radius:12px;background:#fff}.network-bridge-card b{display:block;color:var(--forest);font-size:14px}.network-bridge-card span{display:block;margin-top:4px;color:var(--ink-muted);font-size:12px;line-height:1.45}
+
 @media(max-width:900px){
   .hero-grid{grid-template-columns:1fr;text-align:center;}
   .report-mock{transform:none;max-width:360px;margin:40px auto 0;}
   .rm-ribbon{right:-30px;}
-  .tool-grid{grid-template-columns:1fr;}
+  .tool-grid,.network-bridge-grid{grid-template-columns:1fr;}
   .afford-widget{padding:28px 24px;margin:0 16px;}
   .help-grid,.steps-grid,.testimonial-grid{grid-template-columns:1fr;}
 }
@@ -194,9 +196,9 @@ description: "thefunders.ca helps Canadians navigate mortgages with clarity — 
             <div class="rm-metric"><div class="l">Income req.</div><div class="v">$274K</div></div>
             <div class="rm-metric"><div class="l">Monthly</div><div class="v">$7,314</div></div>
           </div>
-          <div class="rm-row"><span>1-Year Fixed · 5.84%</span><span>$6,346</span></div>
-          <div class="rm-row best"><span><span class="rm-badge">Preferred</span>3-Yr · 4.79%</span><span>$5,724</span></div>
-          <div class="rm-row"><span>5-Year Fixed · 4.64%</span><span>$5,638</span></div>
+          <div class="rm-row"><span>Cash-to-close context</span><span>Explore</span></div>
+          <div class="rm-row best"><span><span class="rm-badge">Illustrative</span>Monthly ownership scenario</span><span>Review</span></div>
+          <div class="rm-row"><span>Available option trade-offs</span><span>Compare</span></div>
         </div>
       </div>
     </div>
@@ -220,7 +222,7 @@ description: "thefunders.ca helps Canadians navigate mortgages with clarity — 
 
 <div class="logo-strip">
   <div class="wrap">
-    <div class="logo-strip-label">Access to 100+ lenders, including</div>
+    <div class="logo-strip-label">Explore lender options with The Funders Team</div>
   </div>
   <div class="logo-strip-outer">
     <div class="logo-track">
@@ -248,11 +250,31 @@ description: "thefunders.ca helps Canadians navigate mortgages with clarity — 
       <div class="demo-topbar"><div class="d"></div><div class="d"></div><div class="d"></div><div class="url">thefunders.ca/report-builder</div></div>
       <div class="demo-inner">
         <div class="rec">
-          <div class="h">&#9733; Our recommendation</div>
-          <p>Based on today's rates, the <span class="hl">3-Year Fixed at 4.79%</span> is the strongest option right now — $387/month less than 5-year variable, with a locked-in payment.</p>
+          <div class="h">&#9733; Property-specific starting point</div>
+          <p>Explore estimated ownership costs, cash-to-close context, and the questions that matter before a licensed review. Available options and final eligibility depend on the buyer and property.</p>
         </div>
         <a href="{{ homepage.report_tool.cta_url }}" class="demo-btn">{{ homepage.report_tool.cta_text }}</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="funders-network-bridge" id="for-realtors">
+  <div class="wrap network-bridge-grid">
+    <div class="network-bridge-copy">
+      <span class="network-bridge-label">For Realtors · The Funders Network</span>
+      <h2>Give every property conversation a <em>better next step.</em></h2>
+      <p>The Funders Network gives approved Realtor partners a property-first workspace for Open House QR registration, buyer reports, engagement signals, high-level Funders updates, campaign tools, and rewards visibility.</p>
+      <div class="network-bridge-actions">
+        <a class="btn btn-primary" href="/for-realtors/">Explore the Funders Network &rarr;</a>
+        <a class="btn btn-secondary" href="/partner-login">Partner login</a>
+      </div>
+      <p class="network-bridge-note">Realtors see useful buyer engagement and high-level file updates. Buyer income, credit, debt, documents, lender notes, and underwriting details remain private.</p>
+    </div>
+    <div class="network-bridge-cards">
+      <article class="network-bridge-card"><b>Open House QR experience</b><span>Turn a scan into a property-specific report request and a permissioned buyer signal.</span></article>
+      <article class="network-bridge-card"><b>High-level Funders updates</b><span>Stay aligned with the mortgage team without receiving confidential mortgage-file data.</span></article>
+      <article class="network-bridge-card"><b>Approved rewards visibility</b><span>See estimated campaign potential, approved points, and reward requests inside the Realtor workspace.</span></article>
     </div>
   </div>
 </section>

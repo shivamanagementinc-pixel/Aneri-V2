@@ -11,13 +11,15 @@ company_links:
   - text: "Contact"
     url: "#contact"
 resource_links:
+  - text: "For Realtors · Funders Network"
+    url: "/for-realtors/"
   - text: "First-Time Buyer's Guide"
     url: "#"
   - text: "Newcomer Mortgages"
     url: "#"
   - text: "Women & Wealth"
     url: "#"
-  - text: "Free Financing Report"
+  - text: "Property Financing Report"
     url: "#report-tool"
 legal_links:
   - text: "Privacy Policy"

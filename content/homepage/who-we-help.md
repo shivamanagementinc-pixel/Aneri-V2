@@ -6,7 +6,7 @@ description: "Homeownership is not one-size-fits-all. Get advice designed around
 cards:
   - number: "01"
     title: "First-time homebuyers"
-    description: "Understand your down payment, buying power, and every step from pre-approval to closing day. No question is too small."
+    description: "Understand your down payment, early buying picture, and every step from planning through closing day. No question is too small."
     link_text: "Start with confidence"
     link_url: "#"
   - number: "02"

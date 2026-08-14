@@ -2,15 +2,15 @@
 permalink: false
 items:
   - icon: "layers"
-    text: "100+ Lender Network"
+    text: "Broad Lender Network"
   - icon: "clock"
-    text: "48-Hour Pre-Approval"
+    text: "Responsive Review"
   - icon: "shield"
-    text: "No Hidden Fees"
+    text: "Clear Upfront Communication"
   - icon: "users"
     text: "All Clients Welcome"
   - icon: "monitor"
     text: "Digital-First Experience"
   - icon: "message-circle"
-    text: "Clear Communication"
+    text: "Clear Next Steps"
 ---
