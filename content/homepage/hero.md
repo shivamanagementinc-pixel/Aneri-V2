@@ -1,15 +1,15 @@
 ---
 permalink: false
-badge: "Trusted by 200+ families across Canada"
+badge: "Clear mortgage guidance for Canadian homebuyers"
 headline1: "Your home. Your future."
 headline2: "Made possible."
-description: "The Funders helps first-time buyers, newcomers, and all Canadians navigate mortgages without jargon, judgment, or pressure — backed by a free instant financing report no other broker offers."
+description: "The Funders helps first-time buyers, newcomers, and Canadians at different stages of homeownership explore mortgage options without jargon, judgment, or pressure — with clear property-specific education and a practical next step."
 primary_cta:
   text: "Book your free strategy call"
   url: "#contact"
 secondary_cta:
-  text: "Get the full report — free"
+  text: "Explore a property report"
   url: "/report-builder/"
-trust_text: "reports generated every day"
-trust_number: "200+"
+trust_text: "property conversations made clearer"
+trust_number: "Buyer-first"
 ---

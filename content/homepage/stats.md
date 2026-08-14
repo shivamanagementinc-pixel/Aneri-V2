@@ -1,12 +1,12 @@
 ---
 permalink: false
 items:
-  - number: "100+"
-    label: "Lender network"
-  - number: "48hr"
-    label: "Pre-approval"
-  - number: "200+"
-    label: "Reports generated every day"
+  - number: "Broad"
+    label: "lender options to explore"
+  - number: "Clear"
+    label: "next-step guidance"
+  - number: "Property"
+    label: "specific financing education"
   - number: "$0"
-    label: "Cost to you"
+    label: "cost for many standard files"
 ---

@@ -15,6 +15,21 @@
   to = "/.netlify/functions/view-report?id=:splat"
   status = 200
 
+# Funders Network application entry points. The app itself remains on a
+# separate Netlify site/subdomain so it does not conflict with this site's
+# Decap CMS route at /admin/.
+[[redirects]]
+  from = "/partner-login"
+  to = "https://app.thefunders.ca/login.html?portal=realtor"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/funders-network"
+  to = "/for-realtors/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
 

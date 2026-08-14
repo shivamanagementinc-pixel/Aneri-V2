@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% if title %}{{ title }} | thefunders.ca{% else %}thefunders.ca | Canadian Mortgage Broker | Free Financing Reports{% endif %}</title>
-<meta name="description" content="{% if description %}{{ description }}{% else %}thefunders.ca helps Canadians navigate mortgages with clarity — first-time buyers, newcomers, refinancers, and investors. Get a free, instant financing report for any property, no signup required.{% endif %}">
+<meta name="description" content="{% if description %}{{ description }}{% else %}thefunders.ca helps Canadians explore mortgage options with clear, property-specific education and a practical next step for formal review.{% endif %}">
 <link rel="canonical" href="https://thefunders.ca{{ page.url }}">
 <meta property="og:title" content="{% if title %}{{ title }} | thefunders.ca{% else %}thefunders.ca | Canadian Mortgage Broker{% endif %}">
-<meta property="og:description" content="{% if description %}{{ description }}{% else %}Free instant financing reports, 100+ lenders, 48-hour pre-approval. A clearer path to homeownership for all Canadians.{% endif %}">
+<meta property="og:description" content="{% if description %}{{ description }}{% else %}Property-specific financing education, practical mortgage guidance, and clear next steps for Canadian homebuyers.{% endif %}">
 <meta property="og:url" content="https://thefunders.ca{{ page.url }}">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -28,9 +28,11 @@ a{color:inherit;}
 .logo .the{color:#9aa39a;font-weight:400;}
 .logo .funders{color:var(--forest);font-weight:800;}
 .logo .dot{width:7px;height:7px;background:var(--sage);border-radius:50%;margin-left:3px;align-self:flex-start;margin-top:6px;}
-.nav-links{display:flex;gap:38px;align-items:center;}
-.nav-links a{color:#4b5563;text-decoration:none;font-size:15px;font-weight:500;}
-.nav-cta{background:var(--forest);color:#fff;padding:12px 26px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;}
+.nav-links{display:flex;gap:30px;align-items:center;}
+.nav-links a{color:#4b5563;text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap;}
+.nav-actions{display:flex;align-items:center;gap:12px;}
+.nav-login{color:var(--forest);padding:10px 13px;border:1px solid var(--border);border-radius:100px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;}
+.nav-cta{background:var(--forest);color:#fff;padding:12px 20px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;}
 
 /* SHARED BUTTONS */
 .btn{padding:15px 30px;border-radius:100px;font-family:var(--font-sans);font-size:14.5px;font-weight:700;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform 0.2s ease;}
@@ -57,6 +59,7 @@ a{color:inherit;}
 
 @media(max-width:900px){
   .nav-links{display:none;}
+  .nav-login{display:none;}
   .footer-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
@@ -69,12 +72,15 @@ a{color:inherit;}
     <div class="nav-links">
       <a href="/#who-we-help">Who We Help</a>
       <a href="/#report-tool">Financing Report</a>
+      <a href="/for-realtors/">For Realtors</a>
       <a href="/#how-it-works">How It Works</a>
-      <a href="/#stories">Stories</a>
       <a href="/blog/">Blog</a>
       <a href="/#faq">FAQ</a>
     </div>
-    <a href="/#contact" class="nav-cta">Book a Call</a>
+    <div class="nav-actions">
+      <a href="/partner-login" class="nav-login">Partner Login</a>
+      <a href="/#contact" class="nav-cta">Book a Call</a>
+    </div>
   </nav>
 </div>
 
