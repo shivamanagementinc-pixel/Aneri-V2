@@ -1,6 +1,8 @@
 # The Funders - Blog Setup Guide
 
 > **Funders Network integration:** See `FUNDERS_NETWORK_INTEGRATION_PLAN.md` for the separate-app subdomain architecture, public-site edits, report-builder transition plan, and launch checklist.
+>
+> **P0 report wording patch:** See `REPORT_BUILDER_SAFETY_PATCH.md` for the current public report wording boundaries and the remaining rate-source/privacy work.
 
 ## What This Does
 Converts your plain HTML site to use **Eleventy (11ty)** — a static site generator. This lets your CMS blog posts (Markdown files) automatically appear on your site.

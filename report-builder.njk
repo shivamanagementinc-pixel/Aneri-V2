@@ -75,9 +75,9 @@ permalink: /report-builder/index.html
 
   <div class="quick-box">
     <h3>Quick Generate</h3>
-    <p>Enter the buyer, the realtor, and an MLS number &mdash; the report opens automatically. This uses AI + web search to pull listing details.</p>
+    <p>Enter a buyer label, realtor details, and an MLS number to create an educational property scenario. Use only information you are authorized to use; do not enter credit, banking, tax, or document details.</p>
     <div class="quick-row" style="grid-template-columns:1fr 1fr;">
-      <div class="quick-field"><label>Prepared For (Buyer)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
+      <div class="quick-field"><label>Prepared For (use a first name or household label)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
       <div class="quick-field"><label>Prepared By (Realtor)</label><input type="text" id="q_agent" placeholder="e.g. Sarah Chen"></div>
     </div>
     <div class="quick-row" style="margin-top:12px;">
@@ -122,7 +122,7 @@ List Price ($)&#9;$599,888
   </div>
 
   <div class="form-grid">
-    <div class="form-group full"><label>Prepared For</label><input type="text" id="f_buyer" value="The Johnson Family"></div>
+    <div class="form-group full"><label>Prepared For (use a first name or household label)</label><input type="text" id="f_buyer" value="The Johnson Family"></div>
     <div class="form-group full"><label>Property Address</label><input type="text" id="f_address" value="42 Willow Creek Drive, Toronto, ON M4E 2X9"></div>
     <div class="form-group"><label>MLS#</label><input type="text" id="f_mls" value="W12345678"></div>
     <div class="form-group"><label>List Price ($)</label><input type="number" id="f_price" value="1250000"></div>
@@ -843,7 +843,7 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       </div>
       <div class="header-right">
         <div class="badge">__DATE__</div>
-        <div class="presented-by"><strong>Presented by:</strong> __AGENT_NAME__, Realtor<br><strong>Report Prepared by TheFunders.ca</strong><br>FSRA Lic. M23001234</div>
+        <div class="presented-by"><strong>Presented by:</strong> __AGENT_NAME__, Realtor<br><strong>Report Prepared by The Funders Team</strong><br>thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</div>
       </div>
     </div>
   </div>
@@ -858,17 +858,17 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
     <div class="section-header"><div class="section-number">1</div><h2>Your Financing Roadmap</h2></div>
     <div class="metrics-grid">
       <div class="metric-card"><div class="label">List Price</div><div class="value">__PRICE_FMT__</div><div class="sub">Listed today</div></div>
-      <div class="metric-card"><div class="label">Income Required</div><div class="value sage">__INCOME__<span style="font-size:14px;font-weight:500">/yr</span></div><div class="sub">Based on __DP__% down, __GDS__% GDS</div></div>
+      <div class="metric-card"><div class="label">Illustrative income context</div><div class="value sage">__INCOME__<span style="font-size:14px;font-weight:500">/yr</span></div><div class="sub">Scenario using __DP__% down and __GDS__% GDS</div></div>
       <div class="metric-card"><div class="label">Est. Monthly Payment</div><div class="value">__MONTHLY_TOTAL__<span style="font-size:14px;font-weight:500">/mo</span></div><div class="sub">Incl. tax, heat & condo fees</div></div>
     </div>
     <div class="rate-panel">
-      <div class="preferred-ribbon">Preferred</div>
-      <div class="rate-panel-header">Current Mortgage Rates &mdash; Updated Weekly<span style="margin-left:auto;font-size:11px;font-weight:500;color:var(--forest-muted);">Best rates highlighted</span></div>
+      <div class="preferred-ribbon">Illustrative</div>
+      <div class="rate-panel-header">Illustrative rate scenarios<span style="margin-left:auto;font-size:11px;font-weight:500;color:var(--forest-muted);">Pricing and eligibility require review</span></div>
       <table class="rate-table"><thead><tr><th>Term</th><th>Rate</th><th>Lender</th><th>Monthly</th><th>5-Yr Interest</th></tr></thead>
       <tbody><tr class="rows-placeholder"><td colspan="5">__RATES_ROWS__</td></tr></tbody></table>
     </div>
     <div class="rec-panel">
-      <div class="rec-panel-header"><span class="rec-star">&#9733;</span> Our Recommendation</div>
+      <div class="rec-panel-header"><span class="rec-star">&#9733;</span> Points to review</div>
       <div class="rec-body">__RECOMMENDATION_TEXT__</div>
     </div>
     <div class="dp-panel">
@@ -885,16 +885,16 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       </div>
     </div>
     <div class="qual-panel">
-      <div class="qual-panel-header">Quick Qualification Snapshot</div>
+      <div class="qual-panel-header">Illustrative affordability context</div>
       <div class="qual-grid">
-        <div class="qual-row"><span>Minimum Gross Income</span><span>__INCOME__/year</span></div>
+        <div class="qual-row"><span>Illustrative income context</span><span>__INCOME__/year</span></div>
         <div class="qual-row"><span>Minimum Down Payment</span><span>__DP_FMT__ (__DP__%)</span></div>
         <div class="qual-row"><span>Gross Debt Service (GDS)</span><span style="color:var(--sage);">__GDS__%</span></div>
         <div class="qual-row"><span>Total Debt Service (TDS)</span><span style="color:var(--sage);">__TDS__%</span></div>
         <div class="qual-row"><span>Stress Test Rate</span><span>__STRESS_RATE__ (contract + 2%)</span></div>
         <div class="qual-row"><span>Amortization</span><span>__AMORT__ years</span></div>
       </div>
-      <div class="qual-note"><strong>Stress Test:</strong> Lenders qualify you at __STRESS_RATE__ even though your actual rate is __BEST_RATE__%. This ensures you can afford payments if rates rise. Your payment at the stress-test rate would be __STRESS_PAYMENT__/month.</div>
+      <div class="qual-note"><strong>Stress-test context:</strong> Lenders may assess affordability using a higher qualifying rate. This scenario uses __STRESS_RATE__ and produces an illustrative payment of __STRESS_PAYMENT__/month. It does not determine qualification or a lender decision.</div>
     </div>
   </div>
   <div class="page-divider"></div>
@@ -947,19 +947,19 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       <div class="cc-note"><strong>First-Time Buyer Rebates:</strong> You may qualify for up to <strong>$8,475</strong> Ontario rebate. Toronto buyers pay an additional municipal LTT (also rebate-eligible up to $8,475). Net closing costs after rebates vary by municipality.</div>
     </div>
     <div class="cta-section">
-      <div class="cta-title">Ready to Make This Home Yours?</div>
-      <div class="cta-sub">Get a personalized pre-approval in 48 hours. No impact on your credit score. No obligation.</div>
+      <div class="cta-title">Ready to discuss this home?</div>
+      <div class="cta-sub">Request a financing review with The Funders Team. Timing, documentation needs, and lender decisions vary by buyer and property.</div>
       <div class="cta-buttons interactive-only">
-        <button class="btn btn-primary" onclick="openModal('preapproval')">Get Pre-Approved Now</button>
+        <button class="btn btn-primary" onclick="openModal('preapproval')">Request a financing review</button>
         <button class="btn btn-secondary" onclick="openModal('print')">Print / Save as PDF</button>
         <button class="btn btn-secondary" onclick="openModal('email')">Email Me This Report</button>
       </div>
       <div class="print-only print-cta-box">
         <h4>This report is prepared by TheFunders.ca</h4>
-        <p>Rates are subject to change. Contact us to secure the best and most transparent rates for your situation.</p>
+        <p>Rates, eligibility, and lender decisions vary by buyer and property. Contact The Funders Team for a personalized licensed review.</p>
         <div class="cta-strong">Call 437-605-9024 or email info@thefunders.ca</div>
       </div>
-      <div class="agent-footer">The Funders Mortgage Team | info@thefunders.ca | 437-605-9024<br>FSRA Lic. M23001234</div>
+      <div class="agent-footer">The Funders Team | info@thefunders.ca | 437-605-9024<br>thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</div>
     </div>
   </div>
   <div class="disclaimer"><strong>Disclaimer:</strong> This report is for informational purposes only and does not constitute a mortgage commitment or pre-approval. Interest rates are subject to change without notice. Income requirements, monthly payments, and closing costs are estimates based on standard lender guidelines (GDS &le; 32%, TDS &le; 40%, stress test at contract rate + 2% or 5.25%, whichever is higher). Actual qualification depends on credit score, employment history, debt obligations, and other underwriting factors. Rental income estimates are based on comparable area listings and are not guaranteed. Property appreciation assumptions (__APPREC__% annually) are for illustrative purposes only. Please consult a licensed mortgage professional for personalized advice.</div>
@@ -968,8 +968,8 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 <div class="modal-overlay" id="emailModal">
   <div class="modal">
     <div id="modalForm">
-      <h3 id="modalTitle">Get Pre-Approved</h3>
-      <p id="modalSubtitle">Tell us a bit about you and a mortgage specialist will follow up within 2 hours.</p>
+      <h3 id="modalTitle">Request a Financing Review</h3>
+      <p id="modalSubtitle">Tell us a bit about you and The Funders Team will follow up to discuss the next step.</p>
       <div class="form-group"><label>Your Name</label><input type="text" id="senderName" placeholder="e.g. Michael Johnson"></div>
       <div class="form-group"><label>Email Address</label><input type="email" id="senderEmail" placeholder="you@email.com"></div>
       <div class="form-group"><label>Also send to (optional)</label><input type="email" id="ccEmail" placeholder="partner@email.com"></div>
@@ -983,13 +983,13 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       </div>
       <div class="modal-actions">
         <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-primary" id="modalSubmitBtn" onclick="submitEmail()">Request Pre-Approval</button>
+        <button class="btn btn-primary" id="modalSubmitBtn" onclick="submitEmail()">Request Review</button>
       </div>
     </div>
     <div class="success-msg" id="successMsg">
       <div class="success-icon">&#10003;</div>
       <h3 style="color:var(--forest);margin-bottom:6px;font-family:var(--font-serif);font-size:20px;" id="successTitle">Request Sent!</h3>
-      <p style="color:var(--forest-muted);font-size:13px;" id="successBody">Check your inbox. A mortgage specialist will follow up within 2 hours.</p>
+      <p style="color:var(--forest-muted);font-size:13px;" id="successBody">The Funders Team will follow up to discuss the next step and the information required for review.</p>
       <button class="btn btn-primary" style="margin-top:16px;border-radius:10px;" onclick="closeModal()">Close</button>
     </div>
   </div>
@@ -1044,11 +1044,11 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 
   const MODAL_COPY={
     preapproval:{
-      title:'Get Pre-Approved',
-      subtitle:"Tell us a bit about you and a mortgage specialist will follow up within 2 hours.",
-      button:'Request Pre-Approval',
-      successTitle:'Request Sent!',
-      successBody:'Check your inbox. A mortgage specialist will follow up within 2 hours.'
+      title:'Request a Financing Review',
+      subtitle:"Tell us a bit about you and The Funders Team will follow up to discuss the next step. Review timing depends on the information required.",
+      button:'Request Review',
+      successTitle:'Request Received',
+      successBody:'The Funders Team will follow up to discuss the next step and the information required for review.'
     },
     print:{
       title:'Just One Quick Thing',
@@ -1112,9 +1112,9 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       'QUICK SNAPSHOT\n'+
       '--------------------------------\n'+
       'List Price             __PRICE_FMT__\n'+
-      'Recommended Rate       __BEST_RATE__% (__BEST_RATE_TERM__)\n'+
+      'Illustrative Scenario Rate __BEST_RATE__% (__BEST_RATE_TERM__)\n'+
       'Est. Monthly Payment   __MONTHLY_TOTAL__ (incl. tax, condo fees & insurance)\n'+
-      'Income Required        __INCOME__/year\n'+
+      'Illustrative Income Context __INCOME__/year\n'+
       '5-Year Wealth Gain     ~__NET_WEALTH__ (buying vs. renting)\n'+
       '--------------------------------\n\n'+
       "The full report covers your financing roadmap, a buy-vs-rent breakdown, rental income potential, and a closing cost estimate.\n\n"+
@@ -1125,7 +1125,7 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       '--\n'+
       'The Funders Mortgage Team\n'+
       'info@thefunders.ca | 437-605-9024\n'+
-      'FSRA Lic. M23001234'
+      'thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.'
     );
     window.location.href='mailto:?subject='+subject+'&body='+body;
   }
@@ -1149,7 +1149,7 @@ function fiveYearInterest(loanAmount,rate,amortYears){
   return totalPaid-principalPaid;
 }
 function isBestRate(r){return !!(r.best||r.isBest);}
-function generateRatesRows(rates,loanAmount,amortYears){return rates.map(r=>{const monthly=calculateMortgage(loanAmount,r.rate/100,amortYears);const rowIsBest=isBestRate(r);const isBest=rowIsBest?' class="best-rate"':'';const bestClass=rowIsBest?' best':'';const badge=rowIsBest?'<span class="preferred-badge">thefunders.ca preferred</span>':'';const interest5=(typeof r.interest5yr==='number'&&!isNaN(r.interest5yr))?r.interest5yr:fiveYearInterest(loanAmount,r.rate/100,amortYears);const logoContent=r.logoUrl?`<img src="${r.logoUrl}" alt="${r.lender}" onerror="this.parentElement.textContent='${r.lender}';this.parentElement.style.background=this.parentElement.style.background||'#475569';">`:r.lender;return`<tr${isBest}><td>${r.term}${badge}</td><td class="rate-value${bestClass}">${r.rate.toFixed(2)}%</td><td><span class="bank-logo ${r.logo}">${logoContent}</span></td><td class="monthly-cell${bestClass}">${fmt(monthly)}</td><td>${fmt(interest5)}</td></tr>`;}).join('');}
+function generateRatesRows(rates,loanAmount,amortYears){return rates.map(r=>{const monthly=calculateMortgage(loanAmount,r.rate/100,amortYears);const rowIsBest=isBestRate(r);const isBest=rowIsBest?' class="best-rate"':'';const bestClass=rowIsBest?' best':'';const badge=rowIsBest?'<span class="preferred-badge">scenario shown</span>':'';const interest5=(typeof r.interest5yr==='number'&&!isNaN(r.interest5yr))?r.interest5yr:fiveYearInterest(loanAmount,r.rate/100,amortYears);const logoContent=r.logoUrl?`<img src="${r.logoUrl}" alt="${r.lender}" onerror="this.parentElement.textContent='${r.lender}';this.parentElement.style.background=this.parentElement.style.background||'#475569';">`:r.lender;return`<tr${isBest}><td>${r.term}${badge}</td><td class="rate-value${bestClass}">${r.rate.toFixed(2)}%</td><td><span class="bank-logo ${r.logo}">${logoContent}</span></td><td class="monthly-cell${bestClass}">${fmt(monthly)}</td><td>${fmt(interest5)}</td></tr>`;}).join('');}
 
 function toggleManual(){
   const section=document.getElementById('manualSection');
@@ -1442,29 +1442,22 @@ function parsePastedData(){
 function generateRecommendation(buyer,bestRate,rates,loanAmount,amortYears,dpPercent,cmhcAmount,monthlyMortgage,price){
   const parts=[];
   const variableRate=rates.find(r=>/variable/i.test(r.term));
-  const fixedIsBest=/fixed/i.test(bestRate.term);
 
-  parts.push(`Based on today's rates and a ${dpPercent}% down payment, the <span class="rec-highlight">${bestRate.term} at ${bestRate.rate.toFixed(2)}%</span> is the strongest option available right now.`);
+  parts.push(`This educational scenario uses <span class="rec-highlight">${bestRate.term} at ${bestRate.rate.toFixed(2)}%</span> with a ${dpPercent}% down payment. Pricing, product availability, and eligibility can change and require a personalized review.`);
 
   if(variableRate && variableRate.term!==bestRate.term){
     const variableMonthly=calculateMortgage(loanAmount,variableRate.rate/100,amortYears);
-    const diff=Math.round(variableMonthly-monthlyMortgage);
-    if(fixedIsBest && diff>0){
-      parts.push(`It's ${fmt(diff)}/month cheaper than the current ${variableRate.term}, with a locked-in payment for the full term.`);
-    }else if(fixedIsBest){
-      parts.push(`The ${variableRate.term} is priced close to this right now \u2014 worth discussing if some payment fluctuation is comfortable in exchange for potential savings.`);
-    }else{
-      parts.push(`This variable option is currently pricing lower than the leading fixed rates \u2014 worth considering for those comfortable with some payment movement.`);
-    }
+    const diff=Math.round(Math.abs(variableMonthly-monthlyMortgage));
+    parts.push(`The scenario table also shows a ${variableRate.term} option. Its estimated payment differs by about ${fmt(diff)}/month in this illustration, while rate movement and product terms should be reviewed with a licensed professional.`);
   }
 
   if(dpPercent<20 && cmhcAmount>0){
-    parts.push(`At this down payment level, CMHC insurance of ${fmt(cmhcAmount)} is added to the mortgage \u2014 reaching 20% down would remove that cost entirely.`);
+    parts.push(`At this down payment level, mortgage default insurance is estimated at ${fmt(cmhcAmount)} and added to the mortgage in this scenario.`);
   }else if(dpPercent>=20){
-    parts.push(`At ${dpPercent}% down, CMHC insurance is avoided altogether, keeping the loan amount \u2014 and monthly payment \u2014 as low as possible.`);
+    parts.push(`At ${dpPercent}% down, this scenario does not include mortgage default insurance.`);
   }
 
-  parts.push(`This is a starting point based on the numbers available; the right fit still depends on your plans and comfort with risk, which we're happy to walk through together.`);
+  parts.push(`This is a starting point based on the information available. It is not a mortgage approval, qualification, or lender commitment.`);
 
   return parts.join(' ');
 }
