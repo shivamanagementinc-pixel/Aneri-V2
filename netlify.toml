@@ -10,9 +10,11 @@
   to = "/admin/index.html"
   status = 200
 
+# Keep the report ID in the rewritten path. Netlify does not reliably pass a
+# :splat value into a function query string during an internal (200) rewrite.
 [[redirects]]
   from = "/r/*"
-  to = "/.netlify/functions/view-report?id=:splat"
+  to = "/.netlify/functions/view-report/:splat"
   status = 200
 
 # Funders Network application entry points. The app itself remains on a
