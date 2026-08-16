@@ -76,8 +76,9 @@ permalink: /report-builder/index.html
   <div class="quick-box">
     <h3>Quick Generate</h3>
     <p>Enter a buyer label, realtor details, and an MLS number to create an educational property scenario. Use only information you are authorized to use; do not enter credit, banking, tax, or document details.</p>
-    <div class="quick-row" style="grid-template-columns:1fr 1fr;">
+    <div class="quick-row" style="grid-template-columns:1fr 1fr 1fr;">
       <div class="quick-field"><label>Prepared For (use a first name or household label)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
+      <div class="quick-field"><label>Buyer Email (optional)</label><input type="email" id="q_buyer_email" placeholder="buyer@email.com"></div>
       <div class="quick-field"><label>Prepared By (Realtor)</label><input type="text" id="q_agent" placeholder="e.g. Sarah Chen"></div>
     </div>
     <div class="quick-row" style="margin-top:12px;">
@@ -88,7 +89,15 @@ permalink: /report-builder/index.html
     </div>
     <div class="agree-row">
       <input type="checkbox" id="q_agree">
-      <label for="q_agree">I have read and agree to the <a href="/terms" target="_blank">Terms</a> and <a href="/privacy" target="_blank">Privacy Policy</a>. I confirm I have permission to use the property and contact details entered, and understand this report is an educational scenario based on available information — not a mortgage approval, pre-approval, qualification, or lender commitment.</label>
+      <label for="q_agree">I have read and agree to the <a href="/terms" target="_blank">Terms</a> and <a href="/privacy" target="_blank">Privacy Notice</a>. I confirm I have permission to use the property and contact details entered, and understand this report is an educational scenario based on available information — not a mortgage approval, pre-approval, qualification, or lender commitment.</label>
+    </div>
+    <div class="agree-row">
+      <input type="checkbox" id="q_report_consent">
+      <label for="q_report_consent">If I enter a buyer email, I confirm that the buyer requested or consented to receive this property financing report. Without this consent, no buyer Contact will be created in the Funders Network or HubSpot.</label>
+    </div>
+    <div class="agree-row">
+      <input type="checkbox" id="q_marketing_consent">
+      <label for="q_marketing_consent">The buyer has also agreed to receive future marketing or follow-up communications from The Funders Team. (Optional)</label>
     </div>
     <div class="quick-status" id="quickStatus"></div>
   </div>
@@ -122,7 +131,8 @@ List Price ($)&#9;$599,888
   </div>
 
   <div class="form-grid">
-    <div class="form-group full"><label>Prepared For (use a first name or household label)</label><input type="text" id="f_buyer" value="The Johnson Family"></div>
+    <div class="form-group"><label>Prepared For (use a first name or household label)</label><input type="text" id="f_buyer" value="The Johnson Family"></div>
+    <div class="form-group"><label>Buyer Email (optional)</label><input type="email" id="f_buyer_email" value=""></div>
     <div class="form-group full"><label>Property Address</label><input type="text" id="f_address" value="42 Willow Creek Drive, Toronto, ON M4E 2X9"></div>
     <div class="form-group"><label>MLS#</label><input type="text" id="f_mls" value="W12345678"></div>
     <div class="form-group"><label>List Price ($)</label><input type="number" id="f_price" value="1250000"></div>
@@ -136,13 +146,23 @@ List Price ($)&#9;$599,888
     <div class="form-group"><label>Est. Monthly Rent ($)</label><input type="number" id="f_rent" value="3800"></div>
     <div class="form-group"><label>Basement Rent ($)</label><input type="number" id="f_basement" value="1650"></div>
     <div class="form-group"><label>Down Payment %</label><select id="f_dp"><option value="5">5%</option><option value="10">10%</option><option value="15">15%</option><option value="20" selected>20%</option><option value="25">25%</option><option value="30">30%</option></select></div>
-    <div class="form-group full"><label>Realtor Name</label><input type="text" id="f_agent" value="Sarah Chen"></div>
-    <div class="form-group full"><label>Realtor Photo URL (optional)</label><input type="url" id="f_agentPhoto" value=""></div>
+    <div class="form-group"><label>Realtor Name</label><input type="text" id="f_agent" value="Sarah Chen"></div>
+    <div class="form-group"><label>Realtor Email (optional)</label><input type="email" id="f_agent_email" value=""></div>
+    <div class="form-group"><label>Realtor Phone (optional)</label><input type="tel" id="f_agent_phone" value=""></div>
+    <div class="form-group"><label>Realtor Photo URL (optional)</label><input type="url" id="f_agentPhoto" value=""></div>
+  </div>
+  <div class="agree-row">
+    <input type="checkbox" id="f_report_consent">
+    <label for="f_report_consent">If a buyer email is entered, I confirm the buyer requested or consented to receive this property financing report.</label>
+  </div>
+  <div class="agree-row">
+    <input type="checkbox" id="f_marketing_consent">
+    <label for="f_marketing_consent">The buyer agreed to future marketing or follow-up communications from The Funders Team. (Optional)</label>
   </div>
 
   <div class="builder-actions">
     <button class="btn-gen" onclick="makeReport()">Generate Report</button>
-    <button class="btn-sec" onclick="document.querySelectorAll('input').forEach(i=>i.value='');document.getElementById('f_dp').value='20';">Clear</button>
+    <button class="btn-sec" onclick="document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value='';});window.__buyerEmail='';window.__buyerReportConsent=false;window.__buyerMarketingConsent=false;window.__agentEmail='';window.__agentPhone='';document.getElementById('f_dp').value='20';">Clear</button>
   </div>
   <div class="status" id="status"></div>
   </div>
@@ -1163,6 +1183,9 @@ function toggleManual(){
 async function quickGenerate(){
   const buyer=document.getElementById('q_buyer').value.trim();
   const agent=document.getElementById('q_agent').value.trim();
+  const buyerEmail=document.getElementById('q_buyer_email').value.trim();
+  const buyerReportConsent=document.getElementById('q_report_consent').checked;
+  const buyerMarketingConsent=document.getElementById('q_marketing_consent').checked;
   const agentEmail=document.getElementById('q_agent_email').value.trim();
   const agentPhone=document.getElementById('q_agent_phone').value.trim();
   const mlsId=document.getElementById('q_mls').value.trim();
@@ -1179,6 +1202,10 @@ async function quickGenerate(){
   }
   if(!document.getElementById('q_agree').checked){
     statusEl.innerHTML='<span class="missed">Please check the agreement box above before generating a report.</span>';
+    return;
+  }
+  if(buyerEmail && !buyerReportConsent){
+    statusEl.innerHTML='<span class="missed">Please confirm buyer report consent before submitting a buyer email.</span>';
     return;
   }
 
@@ -1207,7 +1234,12 @@ async function quickGenerate(){
     }
 
     document.getElementById('f_buyer').value=buyer;
+    document.getElementById('f_buyer_email').value=buyerEmail;
+    document.getElementById('f_report_consent').checked=buyerReportConsent;
+    document.getElementById('f_marketing_consent').checked=buyerMarketingConsent;
     document.getElementById('f_agent').value=agent;
+    document.getElementById('f_agent_email').value=agentEmail;
+    document.getElementById('f_agent_phone').value=agentPhone;
     document.getElementById('f_address').value=data.address||'';
     document.getElementById('f_mls').value=data.mlsNumber||mlsId;
     document.getElementById('f_price').value=data.listPrice||'';
@@ -1234,6 +1266,9 @@ async function quickGenerate(){
     window.__reportSource='quick-generate';
     window.__agentEmail=agentEmail;
     window.__agentPhone=agentPhone;
+    window.__buyerEmail=buyerEmail;
+    window.__buyerReportConsent=buyerReportConsent;
+    window.__buyerMarketingConsent=buyerMarketingConsent;
     await makeReport(reportWindow);
 
   }catch(err){
@@ -1474,6 +1509,11 @@ async function makeReport(existingWindow){
   const isToronto=address.toLowerCase().includes('toronto');
   const buyer=document.getElementById('f_buyer').value||'The Buyer';
   const agent=document.getElementById('f_agent').value||'Your Realtor';
+  const buyerEmail=(window.__buyerEmail||document.getElementById('f_buyer_email').value||'').trim();
+  const buyerReportConsent=Boolean(window.__buyerReportConsent||document.getElementById('f_report_consent').checked);
+  const buyerMarketingConsent=Boolean(window.__buyerMarketingConsent||document.getElementById('f_marketing_consent').checked);
+  const agentEmail=(window.__agentEmail||document.getElementById('f_agent_email').value||'').trim();
+  const agentPhone=(window.__agentPhone||document.getElementById('f_agent_phone').value||'').trim();
   const mls=document.getElementById('f_mls').value||'';
   const photo=document.getElementById('f_photo').value||'';
   const beds=document.getElementById('f_beds').value||'3';
@@ -1605,7 +1645,7 @@ async function makeReport(existingWindow){
       body:JSON.stringify({
         id:reportId, reportHtml:html, buyer, agent, mlsId:mls,
         address, price, source:(window.__reportSource||'manual'),
-        agentEmail:(window.__agentEmail||''), agentPhone:(window.__agentPhone||'')
+        agentEmail, agentPhone, buyerEmail, buyerReportConsent, buyerMarketingConsent
       })
     });
   }catch(e){

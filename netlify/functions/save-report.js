@@ -10,6 +10,35 @@
 const { getConfiguredStore } = require("./_blobs-config");
 const crypto = require("crypto");
 
+function publicOrigin(event) {
+  const host = event.headers?.host || event.headers?.Host || 'thefunders.ca';
+  return `https://${host}`;
+}
+
+async function forwardToFundersNetwork(payload) {
+  const endpoint = String(process.env.FUNDERS_NETWORK_INGEST_URL || '').trim();
+  const secret = String(process.env.FUNDERS_NETWORK_INGEST_SECRET || '').trim();
+  // The current public report must continue opening even before the bridge is
+  // configured. A missing bridge is intentionally non-blocking during rollout.
+  if (!endpoint || !secret) return { status: 'skipped', reason: 'bridge_not_configured' };
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-funders-intake-secret': secret,
+      },
+      body: JSON.stringify(payload),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) return { status: 'failed', error: data.error || `HTTP ${response.status}` };
+    return { status: 'accepted', intakeId: data.intakeId || null, intakeStatus: data.status || null };
+  } catch (error) {
+    // Never fail report delivery because the CRM bridge is temporarily unavailable.
+    return { status: 'failed', error: String(error.message || error).slice(0, 300) };
+  }
+}
+
 exports.handler = async (event) => {
   const headers = { "Content-Type": "application/json" };
 
@@ -24,7 +53,21 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "Invalid request body" }) };
   }
 
-  const { reportHtml, buyer, agent, mlsId, address, price, source, id: clientId } = body;
+  const {
+    reportHtml,
+    buyer,
+    agent,
+    mlsId,
+    address,
+    price,
+    source,
+    id: clientId,
+    agentEmail,
+    agentPhone,
+    buyerEmail,
+    buyerReportConsent,
+    buyerMarketingConsent,
+  } = body;
 
   if (!reportHtml || !buyer || !agent) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: "reportHtml, buyer, and agent are required" }) };
@@ -46,14 +89,38 @@ exports.handler = async (event) => {
     await reportsStore.set(id, reportHtml, { metadata: { contentType: "text/html" } });
 
     const leadsStore = getConfiguredStore("leads");
+    const reportUrl = `${publicOrigin(event)}/r/${id}`;
+    const intake = await forwardToFundersNetwork({
+      externalReportId: id,
+      source: 'website_report_builder',
+      reportUrl,
+      reportCreatedAt: now,
+      buyerLabel: buyer,
+      buyerEmail: String(buyerEmail || '').trim(),
+      buyerReportConsent: Boolean(buyerReportConsent),
+      buyerMarketingConsent: Boolean(buyerMarketingConsent),
+      realtorName: agent,
+      realtorEmail: String(agentEmail || '').trim(),
+      realtorPhone: String(agentPhone || '').trim(),
+      propertyAddress: address || null,
+      mlsNumber: mlsId || null,
+      listPrice: price || null,
+    });
     const leadRecord = {
       id,
       buyer,
+      buyerEmail: String(buyerEmail || '').trim() || null,
+      buyerReportConsent: Boolean(buyerReportConsent),
+      buyerMarketingConsent: Boolean(buyerMarketingConsent),
       agent,
+      agentEmail: String(agentEmail || '').trim() || null,
+      agentPhone: String(agentPhone || '').trim() || null,
       mlsId: mlsId || null,
       address: address || null,
       price: price || null,
       source: source || "quick-generate", // 'quick-generate' | 'manual'
+      reportUrl,
+      fundersNetworkIntake: intake,
       createdAt: now
     };
     await leadsStore.setJSON(id, leadRecord);
@@ -61,7 +128,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ id, viewUrl: `/r/${id}` })
+      body: JSON.stringify({ id, viewUrl: `/r/${id}`, intake })
     };
   } catch (err) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: "Failed to save report", detail: String(err).slice(0, 500) }) };

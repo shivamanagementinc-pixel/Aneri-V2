@@ -5,6 +5,8 @@
 > **P0 report wording patch:** See `REPORT_BUILDER_SAFETY_PATCH.md` for the current public report wording boundaries and the remaining rate-source/privacy work.
 >
 > **Draft legal pages:** See `LEGAL_PAGES_REVIEW_CHECKLIST.md` before treating the new `/terms/` and `/privacy/` pages as final legal documents.
+>
+> **Website report intake bridge:** See `FUNDERS_NETWORK_REPORT_INTAKE_BRIDGE.md` for the secure public report-builder → Funders Network rollout.
 
 ## What This Does
 Converts your plain HTML site to use **Eleventy (11ty)** — a static site generator. This lets your CMS blog posts (Markdown files) automatically appear on your site.
