@@ -2,18 +2,30 @@
 permalink: false
 ---
 
-# Public Report-Builder → Funders Network Intake Bridge
+# Public Report-Builder → Funders Network Intake & Phone Follow-up Bridge
 
 ## Purpose
 
-The public report-builder continues to store its generated report in the existing public-site report storage. After saving, it can now send normalized metadata to the Funders Network app.
+The public report-builder stores each generated report in the existing public-site report storage, then sends only normalized report metadata to the Funders Network app.
 
 ```text
 thefunders.ca report-builder
 → save-report Netlify Function
 → secure app.thefunders.ca intake endpoint
 → Supabase website_report_intakes
-→ HubSpot Contact only when buyer email + report consent exist
+→ canonical Funders lead (when email + report consent exist)
+→ HubSpot Contact (when configured)
+```
+
+When the buyer later requests a financing review from the saved report, the report CTA securely captures a required phone number:
+
+```text
+saved report CTA
+→ capture-report-phone public Netlify Function
+→ existing private app intake endpoint (server-to-server secret)
+→ website_report_intakes.buyer_phone
+→ linked canonical leads.phone
+→ optional HubSpot standard phone update
 ```
 
 ## Required public-site Netlify environment variables
@@ -23,25 +35,37 @@ FUNDERS_NETWORK_INGEST_URL=https://app.thefunders.ca/api/public-report-intake
 FUNDERS_NETWORK_INGEST_SECRET=<same private shared value configured on the MVP app>
 ```
 
-These are server-only Netlify Function variables. Never put the secret in browser JavaScript, CMS content, GitHub, or an HTML form.
+These are server-only Netlify Function variables. Never put the secret in browser JavaScript, CMS content, GitHub, a report URL, or an HTML form.
 
-## Non-blocking behaviour
+No additional public-site secret is required for phone capture. The browser provides a per-report capability token to the public function; only the public function holds the shared app secret.
 
-Report generation remains available if the bridge is not configured or is temporarily unavailable. The function records a local status but never blocks the requested report from opening.
+## Consent and privacy behaviour
 
-## Consent behaviour
+- The primary public flow asks for name/household label, buyer email, MLS number, Terms/Privacy agreement, report consent, and optional marketing consent.
+- Buyer-only public reports are presented by The Funders Team and do not create or link a Realtor record.
+- Report consent is required before a canonical Funders lead or HubSpot Contact is created.
+- The report CTA asks only for a mandatory phone number because name and email were captured before the report was generated.
+- The phone CTA expressly requests follow-up about the report. It does **not** create marketing consent, approval, pre-approval, qualification, or lender commitment.
+- Phone numbers are sent to the secured Funders Network lead/intake record. They are not placed in URLs, report links, lead-event metadata, or Realtor-visible views.
+- Legacy/incomplete events without buyer email or report consent remain intake-only records. Phone capture does not create a lead from an unconsented intake.
+- Funders Team members can use the linked canonical lead for calls, activity logging, next actions, and high-level Realtor updates. Realtor privacy boundaries remain unchanged.
 
-- Buyer email is optional.
-- If a buyer email is supplied, report consent is required before the email is forwarded to the Funders Network and HubSpot.
-- Marketing consent is optional and is forwarded as intake metadata only.
-- If buyer email or report consent is missing, an Admin intake record is still created when the bridge is configured, but no HubSpot Contact is created.
+## Reliability behaviour
 
-## Rollout order
+- A generated report opens from its saved permanent `/r/<report-id>` URL only after public report storage confirms success.
+- The original intake bridge remains non-blocking for report delivery during a temporary app/HubSpot outage.
+- The phone CTA never displays a local success message until the secure server-to-server update succeeds.
+- If the secure update cannot be confirmed, the buyer sees a neutral retry/direct-contact message instead.
 
-1. Deploy the MVP app patch and run migration 015.
-2. Configure the shared secret on the MVP app Netlify site.
-3. Confirm `Admin Portal → Website Reports` works.
-4. Configure the two public-site environment variables.
-5. Deploy this public-site patch.
-6. Generate one fictional report with an email you control.
-7. Confirm the intake and HubSpot status in the Admin Portal.
+## Required rollout order
+
+1. Run Supabase migration `017_website_report_phone_capture.sql` after confirming migrations 015 and 016 have completed. This additive schema change is safe before code deployment.
+2. Deploy the MVP app phone-capture patch.
+3. Confirm the MVP app health version and `Admin Portal → Website Reports` load.
+4. Deploy the public P2 + phone-capture patch.
+5. In its Netlify Deploy Preview, generate one fictional report using an internal test email and report consent.
+6. Open the saved report, click **Request a financing review**, enter a fictional test phone number, and confirm the success message appears only after submission.
+7. In the Admin Portal, confirm the Website Reports row says phone captured and its canonical Funders lead shows the phone internally.
+8. Assign the test lead to a Funders Team member and confirm the Team Workspace can see the phone and original report.
+
+Do not test with a real buyer until legal/compliance review and launch safeguards are complete.
