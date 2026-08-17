@@ -67,6 +67,7 @@ exports.handler = async (event) => {
     buyerEmail,
     buyerReportConsent,
     buyerMarketingConsent,
+    contactUpdateToken,
   } = body;
 
   if (!reportHtml || !buyer || !agent) {
@@ -80,6 +81,14 @@ exports.handler = async (event) => {
   // the report's own permanent URL into the HTML before saving), use it as-is
   // only if it looks like a real UUID — otherwise generate a fresh one.
   const isValidUuid = typeof clientId === "string" && /^[0-9a-f-]{36}$/i.test(clientId);
+  // The report CTA sends this separate, unguessable capability token back to
+  // the public server before a phone number may be forwarded to the app.
+  const safeContactUpdateToken = typeof contactUpdateToken === "string" && /^[0-9a-f-]{36}$/i.test(contactUpdateToken)
+    ? contactUpdateToken
+    : null;
+  if (buyerEmail && buyerReportConsent && !safeContactUpdateToken) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: "Secure report follow-up could not be initialized. Please refresh and try again." }) };
+  }
 
   try {
     const id = isValidUuid ? clientId : crypto.randomUUID();
@@ -99,9 +108,11 @@ exports.handler = async (event) => {
       buyerEmail: String(buyerEmail || '').trim(),
       buyerReportConsent: Boolean(buyerReportConsent),
       buyerMarketingConsent: Boolean(buyerMarketingConsent),
-      realtorName: agent,
-      realtorEmail: String(agentEmail || '').trim(),
-      realtorPhone: String(agentPhone || '').trim(),
+      // Buyer-only public reports are not Realtor-attributed. The Funders Team
+      // remains the report presenter, but no Realtor record is created/linked.
+      realtorName: '',
+      realtorEmail: '',
+      realtorPhone: '',
       propertyAddress: address || null,
       mlsNumber: mlsId || null,
       listPrice: price || null,
@@ -120,6 +131,9 @@ exports.handler = async (event) => {
       price: price || null,
       source: source || "quick-generate", // 'quick-generate' | 'manual'
       reportUrl,
+      // Deliberately keep the capability token out of the app intake and out
+      // of browser URLs. It is used only by capture-report-phone.js.
+      contactUpdateToken: safeContactUpdateToken,
       fundersNetworkIntake: intake,
       createdAt: now
     };

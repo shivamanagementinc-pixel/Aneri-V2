@@ -75,17 +75,14 @@ permalink: /report-builder/index.html
 
   <div class="quick-box">
     <h3>Quick Generate</h3>
-    <p>Enter a buyer label, realtor details, and an MLS number to create an educational property scenario. Use only information you are authorized to use; do not enter credit, banking, tax, or document details.</p>
-    <div class="quick-row" style="grid-template-columns:1fr 1fr 1fr;">
-      <div class="quick-field"><label>Prepared For (use a first name or household label)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
-      <div class="quick-field"><label>Buyer Email (optional)</label><input type="email" id="q_buyer_email" placeholder="buyer@email.com"></div>
-      <div class="quick-field"><label>Prepared By (Realtor)</label><input type="text" id="q_agent" placeholder="e.g. Sarah Chen"></div>
+    <p>Enter your name, email, and an MLS number to create an educational property scenario. Use only information you are authorized to use; do not enter credit, banking, tax, or document details.</p>
+    <div class="quick-row" style="grid-template-columns:1fr 1fr;">
+      <div class="quick-field"><label>Your Name (or household label)</label><input type="text" id="q_buyer" placeholder="e.g. The Johnson Family"></div>
+      <div class="quick-field"><label>Your Email</label><input type="email" id="q_buyer_email" placeholder="you@email.com"></div>
     </div>
-    <div class="quick-row" style="margin-top:12px;">
-      <div class="quick-field"><label>Realtor Email</label><input type="email" id="q_agent_email" placeholder="sarah@realty.com"></div>
-      <div class="quick-field"><label>Realtor Phone (optional)</label><input type="tel" id="q_agent_phone" placeholder="(437) 555-0123"></div>
+    <div class="quick-row" style="grid-template-columns:1fr auto;margin-top:12px;">
       <div class="quick-field"><label>MLS Number</label><input type="text" id="q_mls" placeholder="e.g. X13227018"></div>
-      <button class="btn-quick-gen" id="quickGenBtn" onclick="quickGenerate()">Generate Report</button>
+      <button class="btn-quick-gen" id="quickGenBtn" onclick="quickGenerate()">Generate My Report</button>
     </div>
     <div class="agree-row">
       <input type="checkbox" id="q_agree">
@@ -93,11 +90,11 @@ permalink: /report-builder/index.html
     </div>
     <div class="agree-row">
       <input type="checkbox" id="q_report_consent">
-      <label for="q_report_consent">If I enter a buyer email, I confirm that the buyer requested or consented to receive this property financing report. Without this consent, no buyer Contact will be created in the Funders Network or HubSpot.</label>
+      <label for="q_report_consent">I request this property financing report and consent to The Funders Team using my name and email to provide it. Without this consent, no Funders Network lead or HubSpot Contact is created.</label>
     </div>
     <div class="agree-row">
       <input type="checkbox" id="q_marketing_consent">
-      <label for="q_marketing_consent">The buyer has also agreed to receive future marketing or follow-up communications from The Funders Team. (Optional)</label>
+      <label for="q_marketing_consent">I agree to receive future marketing or follow-up communications from The Funders Team. (Optional)</label>
     </div>
     <div class="quick-status" id="quickStatus"></div>
   </div>
@@ -132,7 +129,7 @@ List Price ($)&#9;$599,888
 
   <div class="form-grid">
     <div class="form-group"><label>Prepared For (use a first name or household label)</label><input type="text" id="f_buyer" value="The Johnson Family"></div>
-    <div class="form-group"><label>Buyer Email (optional)</label><input type="email" id="f_buyer_email" value=""></div>
+    <div class="form-group"><label>Your Email</label><input type="email" id="f_buyer_email" value=""></div>
     <div class="form-group full"><label>Property Address</label><input type="text" id="f_address" value="42 Willow Creek Drive, Toronto, ON M4E 2X9"></div>
     <div class="form-group"><label>MLS#</label><input type="text" id="f_mls" value="W12345678"></div>
     <div class="form-group"><label>List Price ($)</label><input type="number" id="f_price" value="1250000"></div>
@@ -146,23 +143,23 @@ List Price ($)&#9;$599,888
     <div class="form-group"><label>Est. Monthly Rent ($)</label><input type="number" id="f_rent" value="3800"></div>
     <div class="form-group"><label>Basement Rent ($)</label><input type="number" id="f_basement" value="1650"></div>
     <div class="form-group"><label>Down Payment %</label><select id="f_dp"><option value="5">5%</option><option value="10">10%</option><option value="15">15%</option><option value="20" selected>20%</option><option value="25">25%</option><option value="30">30%</option></select></div>
-    <div class="form-group"><label>Realtor Name</label><input type="text" id="f_agent" value="Sarah Chen"></div>
-    <div class="form-group"><label>Realtor Email (optional)</label><input type="email" id="f_agent_email" value=""></div>
-    <div class="form-group"><label>Realtor Phone (optional)</label><input type="tel" id="f_agent_phone" value=""></div>
-    <div class="form-group"><label>Realtor Photo URL (optional)</label><input type="url" id="f_agentPhoto" value=""></div>
+  </div>
+  <div class="agree-row">
+    <input type="checkbox" id="f_agree">
+    <label for="f_agree">I have read and agree to the <a href="/terms" target="_blank">Terms</a> and <a href="/privacy" target="_blank">Privacy Notice</a>. I understand this is an educational scenario — not a mortgage approval, pre-approval, qualification, or lender commitment.</label>
   </div>
   <div class="agree-row">
     <input type="checkbox" id="f_report_consent">
-    <label for="f_report_consent">If a buyer email is entered, I confirm the buyer requested or consented to receive this property financing report.</label>
+    <label for="f_report_consent">I request this property financing report and consent to The Funders Team using my name and email to provide it.</label>
   </div>
   <div class="agree-row">
     <input type="checkbox" id="f_marketing_consent">
-    <label for="f_marketing_consent">The buyer agreed to future marketing or follow-up communications from The Funders Team. (Optional)</label>
+    <label for="f_marketing_consent">I agree to receive future marketing or follow-up communications from The Funders Team. (Optional)</label>
   </div>
 
   <div class="builder-actions">
     <button class="btn-gen" onclick="makeReport()">Generate Report</button>
-    <button class="btn-sec" onclick="document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value='';});window.__buyerEmail='';window.__buyerReportConsent=false;window.__buyerMarketingConsent=false;window.__agentEmail='';window.__agentPhone='';document.getElementById('f_dp').value='20';">Clear</button>
+    <button class="btn-sec" onclick="document.querySelectorAll('input').forEach(i=>{if(i.type==='checkbox')i.checked=false;else i.value='';});window.__buyerEmail='';window.__buyerReportConsent=false;window.__buyerMarketingConsent=false;document.getElementById('f_dp').value='20';">Clear</button>
   </div>
   <div class="status" id="status"></div>
   </div>
@@ -332,6 +329,9 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
 .modal .form-group input:focus,.modal .form-group select:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 4px rgba(127,176,105,0.12);}
 .modal-actions{display:flex;gap:10px;margin-top:8px;}
 .modal-actions .btn{flex:1;justify-content:center;border-radius:10px;}
+.modal-help{font-family:var(--font-sans);font-size:12px;line-height:1.6;color:var(--forest-muted);margin:-4px 0 14px;}
+.modal-error{display:none;margin:-2px 0 14px;padding:10px 12px;border-radius:8px;background:#fff1f1;color:#8b1e1e;font-family:var(--font-sans);font-size:12px;line-height:1.5;}
+.modal-error.active{display:block;}
 .btn-cancel{background:var(--slate-light);color:var(--forest);border:1.5px solid var(--border);}
 .success-msg{display:none;text-align:center;padding:10px;}
 .success-msg.active{display:block;}
@@ -863,7 +863,7 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       </div>
       <div class="header-right">
         <div class="badge">__DATE__</div>
-        <div class="presented-by"><strong>Presented by:</strong> __AGENT_NAME__, Realtor<br><strong>Report Prepared by The Funders Team</strong><br>thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</div>
+        <div class="presented-by"><strong>Report Prepared by The Funders Team</strong><br>thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</div>
       </div>
     </div>
   </div>
@@ -970,9 +970,9 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
       <div class="cta-title">Ready to discuss this home?</div>
       <div class="cta-sub">Request a financing review with The Funders Team. Timing, documentation needs, and lender decisions vary by buyer and property.</div>
       <div class="cta-buttons interactive-only">
-        <button class="btn btn-primary" onclick="openModal('preapproval')">Request a financing review</button>
-        <button class="btn btn-secondary" onclick="openModal('print')">Print / Save as PDF</button>
-        <button class="btn btn-secondary" onclick="openModal('email')">Email Me This Report</button>
+        <button class="btn btn-primary" onclick="openPhoneModal()">Request a financing review</button>
+        <button class="btn btn-secondary" onclick="window.print()">Print / Save as PDF</button>
+        <button class="btn btn-secondary" onclick="emailReport()">Email Me This Report</button>
       </div>
       <div class="print-only print-cta-box">
         <h4>This report is prepared by TheFunders.ca</h4>
@@ -985,31 +985,23 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
   <div class="disclaimer"><strong>Disclaimer:</strong> This report is for informational purposes only and does not constitute a mortgage commitment or pre-approval. Interest rates are subject to change without notice. Income requirements, monthly payments, and closing costs are estimates based on standard lender guidelines (GDS &le; 32%, TDS &le; 40%, stress test at contract rate + 2% or 5.25%, whichever is higher). Actual qualification depends on credit score, employment history, debt obligations, and other underwriting factors. Rental income estimates are based on comparable area listings and are not guaranteed. Property appreciation assumptions (__APPREC__% annually) are for illustrative purposes only. Please consult a licensed mortgage professional for personalized advice.</div>
 </div>
 
-<div class="modal-overlay" id="emailModal">
+<div class="modal-overlay" id="phoneModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div id="modalForm">
       <h3 id="modalTitle">Request a Financing Review</h3>
-      <p id="modalSubtitle">Tell us a bit about you and The Funders Team will follow up to discuss the next step.</p>
-      <div class="form-group"><label>Your Name</label><input type="text" id="senderName" placeholder="e.g. Michael Johnson"></div>
-      <div class="form-group"><label>Email Address</label><input type="email" id="senderEmail" placeholder="you@email.com"></div>
-      <div class="form-group"><label>Also send to (optional)</label><input type="email" id="ccEmail" placeholder="partner@email.com"></div>
-      <div class="form-group">
-        <label>I am a&hellip; (optional)</label>
-        <select id="userRole"><option value="">Prefer not to say</option><option>Realtor</option><option>Homebuyer</option><option>Seller</option><option>Other</option></select>
-      </div>
-      <div class="form-group">
-        <label>Best time to reach you?</label>
-        <select id="bestTime"><option>Morning (9am-12pm)</option><option>Afternoon (12pm-5pm)</option><option>Evening (5pm-8pm)</option><option>Anytime</option><option>I'm not ready yet, just looking</option></select>
-      </div>
+      <p id="modalSubtitle">We already have your report details. Please add the best phone number for The Funders Team to contact you about this property.</p>
+      <div class="form-group"><label for="contactPhone">Best phone number <span aria-hidden="true">(required)</span></label><input type="tel" id="contactPhone" inputmode="tel" autocomplete="tel" placeholder="e.g. (416) 555-0123" required></div>
+      <p class="modal-help">By submitting, you request follow-up about this report. This does not mean you are approved, pre-approved, qualified, or guaranteed financing. Marketing communications are only sent if you separately opted in.</p>
+      <p class="modal-error" id="modalError" role="alert" aria-live="polite"></p>
       <div class="modal-actions">
         <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-primary" id="modalSubmitBtn" onclick="submitEmail()">Request Review</button>
+        <button class="btn btn-primary" id="modalSubmitBtn" onclick="submitPhoneCapture()">Request a call</button>
       </div>
     </div>
     <div class="success-msg" id="successMsg">
       <div class="success-icon">&#10003;</div>
-      <h3 style="color:var(--forest);margin-bottom:6px;font-family:var(--font-serif);font-size:20px;" id="successTitle">Request Sent!</h3>
-      <p style="color:var(--forest-muted);font-size:13px;" id="successBody">The Funders Team will follow up to discuss the next step and the information required for review.</p>
+      <h3 style="color:var(--forest);margin-bottom:6px;font-family:var(--font-serif);font-size:20px;" id="successTitle">Phone Number Saved</h3>
+      <p style="color:var(--forest-muted);font-size:13px;" id="successBody">The Funders Team can now follow up about this report and the next steps for a licensed review.</p>
       <button class="btn btn-primary" style="margin-top:16px;border-radius:10px;" onclick="closeModal()">Close</button>
     </div>
   </div>
@@ -1052,77 +1044,72 @@ body{font-family:var(--font-sans);background:#f5f0e8;color:var(--text);line-heig
   }
   if(slider){slider.addEventListener('input',updateDP);}
 
-  const modal=document.getElementById('emailModal');
+  const modal=document.getElementById('phoneModal');
   const modalForm=document.getElementById('modalForm');
   const successMsg=document.getElementById('successMsg');
-  const modalTitle=document.getElementById('modalTitle');
-  const modalSubtitle=document.getElementById('modalSubtitle');
   const modalSubmitBtn=document.getElementById('modalSubmitBtn');
-  const successTitle=document.getElementById('successTitle');
-  const successBody=document.getElementById('successBody');
-  let pendingAction='preapproval';
+  const modalError=document.getElementById('modalError');
+  const contactPhone=document.getElementById('contactPhone');
+  const REPORT_ID='__REPORT_ID__';
+  const REPORT_CONTACT_TOKEN='__REPORT_CONTACT_TOKEN__';
+  const PHONE_CAPTURE_ENDPOINT='__PHONE_CAPTURE_ENDPOINT__';
 
-  const MODAL_COPY={
-    preapproval:{
-      title:'Request a Financing Review',
-      subtitle:"Tell us a bit about you and The Funders Team will follow up to discuss the next step. Review timing depends on the information required.",
-      button:'Request Review',
-      successTitle:'Request Received',
-      successBody:'The Funders Team will follow up to discuss the next step and the information required for review.'
-    },
-    print:{
-      title:'Just One Quick Thing',
-      subtitle:"Tell us a bit about you, then we'll open the print dialog so you can save this report as a PDF.",
-      button:'Continue to Print',
-      successTitle:null, // no success screen \u2014 goes straight to print
-      successBody:null
-    },
-    email:{
-      title:'Just One Quick Thing',
-      subtitle:"Tell us a bit about you, then we'll open your email app with this report ready to send.",
-      button:'Continue to Email',
-      successTitle:null, // no success screen \u2014 goes straight to email
-      successBody:null
-    }
-  };
-
-  function openModal(action){
-    pendingAction=action||'preapproval';
-    const copy=MODAL_COPY[pendingAction];
-    modalTitle.textContent=copy.title;
-    modalSubtitle.textContent=copy.subtitle;
-    modalSubmitBtn.textContent=copy.button;
+  function showModalError(message){
+    modalError.textContent=message;
+    modalError.classList.add('active');
+  }
+  function clearModalError(){
+    modalError.textContent='';
+    modalError.classList.remove('active');
+  }
+  function validPhone(value){
+    const raw=String(value||'').trim();
+    const digits=raw.replace(/\D/g,'');
+    return /^[0-9+().\-\s]+$/.test(raw)&&digits.length>=10&&digits.length<=15;
+  }
+  function openPhoneModal(){
+    clearModalError();
     modal.classList.add('active');
     modalForm.style.display='block';
     successMsg.classList.remove('active');
     document.body.style.overflow='hidden';
+    window.setTimeout(()=>contactPhone.focus(),0);
   }
-  function closeModal(){modal.classList.remove('active');document.body.style.overflow='';}
-  function submitEmail(){
-    const name=document.getElementById('senderName').value.trim();
-    const email=document.getElementById('senderEmail').value.trim();
-    if(!name||!email){alert('Please fill in your name and email.');return;}
-
-    if(pendingAction==='print'){
-      closeModal();
-      window.print();
+  function closeModal(){
+    modal.classList.remove('active');
+    document.body.style.overflow='';
+    modalSubmitBtn.disabled=false;
+    modalSubmitBtn.textContent='Request a call';
+  }
+  async function submitPhoneCapture(){
+    const phone=contactPhone.value.trim();
+    if(!validPhone(phone)){
+      showModalError('Please enter a valid phone number with at least 10 digits.');
+      contactPhone.focus();
       return;
     }
-    if(pendingAction==='email'){
-      closeModal();
-      emailReport();
-      return;
+    clearModalError();
+    modalSubmitBtn.disabled=true;
+    modalSubmitBtn.textContent='Saving…';
+    try{
+      const response=await fetch(PHONE_CAPTURE_ENDPOINT,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({reportId:REPORT_ID,contactToken:REPORT_CONTACT_TOKEN,buyerPhone:phone}),
+        credentials:'omit'
+      });
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||!result.accepted) throw new Error(result.error||'We could not save your phone number.');
+      modalForm.style.display='none';
+      successMsg.classList.add('active');
+    }catch(error){
+      showModalError(error.message||'Phone follow-up is temporarily unavailable. Please contact The Funders Team directly.');
+      modalSubmitBtn.disabled=false;
+      modalSubmitBtn.textContent='Request a call';
     }
-
-    // preapproval: show the success screen in-place
-    const copy=MODAL_COPY.preapproval;
-    successTitle.textContent=copy.successTitle;
-    successBody.textContent=copy.successBody;
-    modalForm.style.display='none';
-    successMsg.classList.add('active');
   }
   modal.addEventListener('click',(e)=>{if(e.target===modal)closeModal();});
-  document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeModal();});
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&modal.classList.contains('active'))closeModal();});
 
   function emailReport(){
     const subject=encodeURIComponent('Your Personalized Financing Report \u2014 __ADDRESS__');
@@ -1182,22 +1169,22 @@ function toggleManual(){
 
 async function quickGenerate(){
   const buyer=document.getElementById('q_buyer').value.trim();
-  const agent=document.getElementById('q_agent').value.trim();
+  const agent='The Funders Team';
   const buyerEmail=document.getElementById('q_buyer_email').value.trim();
   const buyerReportConsent=document.getElementById('q_report_consent').checked;
   const buyerMarketingConsent=document.getElementById('q_marketing_consent').checked;
-  const agentEmail=document.getElementById('q_agent_email').value.trim();
-  const agentPhone=document.getElementById('q_agent_phone').value.trim();
+  const agentEmail='';
+  const agentPhone='';
   const mlsId=document.getElementById('q_mls').value.trim();
   const statusEl=document.getElementById('quickStatus');
   const btn=document.getElementById('quickGenBtn');
 
-  if(!buyer||!agent||!mlsId){
-    statusEl.innerHTML='<span class="missed">Please fill in buyer name, realtor name, and MLS number.</span>';
+  if(!buyer||!buyerEmail||!mlsId){
+    statusEl.innerHTML='<span class="missed">Please fill in your name, email, and MLS number.</span>';
     return;
   }
-  if(!agentEmail||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(agentEmail)){
-    statusEl.innerHTML='<span class="missed">Please enter a valid realtor email so we can follow up.</span>';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(buyerEmail)){
+    statusEl.innerHTML='<span class="missed">Please enter a valid email address.</span>';
     return;
   }
   if(!document.getElementById('q_agree').checked){
@@ -1235,11 +1222,9 @@ async function quickGenerate(){
 
     document.getElementById('f_buyer').value=buyer;
     document.getElementById('f_buyer_email').value=buyerEmail;
+    document.getElementById('f_agree').checked=document.getElementById('q_agree').checked;
     document.getElementById('f_report_consent').checked=buyerReportConsent;
     document.getElementById('f_marketing_consent').checked=buyerMarketingConsent;
-    document.getElementById('f_agent').value=agent;
-    document.getElementById('f_agent_email').value=agentEmail;
-    document.getElementById('f_agent_phone').value=agentPhone;
     document.getElementById('f_address').value=data.address||'';
     document.getElementById('f_mls').value=data.mlsNumber||mlsId;
     document.getElementById('f_price').value=data.listPrice||'';
@@ -1264,8 +1249,6 @@ async function quickGenerate(){
     statusEl.innerHTML=html;
 
     window.__reportSource='quick-generate';
-    window.__agentEmail=agentEmail;
-    window.__agentPhone=agentPhone;
     window.__buyerEmail=buyerEmail;
     window.__buyerReportConsent=buyerReportConsent;
     window.__buyerMarketingConsent=buyerMarketingConsent;
@@ -1497,23 +1480,55 @@ function generateRecommendation(buyer,bestRate,rates,loanAmount,amortYears,dpPer
   return parts.join(' ');
 }
 
+function createSecureUuid(){
+  if(window.crypto&&typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
+  if(!window.crypto||typeof window.crypto.getRandomValues!=='function') return null;
+  const bytes=new Uint8Array(16);
+  window.crypto.getRandomValues(bytes);
+  bytes[6]=(bytes[6]&0x0f)|0x40;
+  bytes[8]=(bytes[8]&0x3f)|0x80;
+  const hex=[...bytes].map((byte)=>byte.toString(16).padStart(2,'0')).join('');
+  return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+}
+
 async function makeReport(existingWindow){
   const status=document.getElementById('status');
-  const reportWindow=existingWindow||window.open('','_blank');
-  if(reportWindow) reportWindow.document.write('<p style="font-family:sans-serif;padding:60px;text-align:center;color:#5a6b60;">Generating your report&hellip;</p>');
-  const reportId=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(36).slice(2)));
-  const reportUrl=window.location.origin+'/.netlify/functions/view-report?id='+reportId;
   const price=Number(document.getElementById('f_price').value)||1250000;
   const dpPercent=Number(document.getElementById('f_dp').value)||20;
   const address=document.getElementById('f_address').value||'42 Willow Creek Drive, Toronto, ON';
   const isToronto=address.toLowerCase().includes('toronto');
   const buyer=document.getElementById('f_buyer').value||'The Buyer';
-  const agent=document.getElementById('f_agent').value||'Your Realtor';
+  const agent='The Funders Team';
   const buyerEmail=(window.__buyerEmail||document.getElementById('f_buyer_email').value||'').trim();
   const buyerReportConsent=Boolean(window.__buyerReportConsent||document.getElementById('f_report_consent').checked);
   const buyerMarketingConsent=Boolean(window.__buyerMarketingConsent||document.getElementById('f_marketing_consent').checked);
-  const agentEmail=(window.__agentEmail||document.getElementById('f_agent_email').value||'').trim();
-  const agentPhone=(window.__agentPhone||document.getElementById('f_agent_phone').value||'').trim();
+  const termsAccepted=Boolean(document.getElementById('f_agree').checked);
+  const agentEmail='';
+  const agentPhone='';
+  if(!buyer.trim() || !buyerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(buyerEmail)){
+    status.textContent='Please enter a name or household label and a valid email address before generating the report.';
+    return;
+  }
+  if(!termsAccepted){
+    status.textContent='Please confirm that you have read the Terms and Privacy Notice before generating the report.';
+    return;
+  }
+  if(!buyerReportConsent){
+    status.textContent='Please confirm report consent before generating the report.';
+    return;
+  }
+  const reportWindow=existingWindow||window.open('','_blank');
+  if(reportWindow) reportWindow.document.write('<p style="font-family:sans-serif;padding:60px;text-align:center;color:#5a6b60;">Generating your report&hellip;</p>');
+  const reportId=createSecureUuid();
+  const reportContactToken=createSecureUuid();
+  if(!reportId||!reportContactToken){
+    const message='Your browser could not securely initialize this report. Please update your browser and try again.';
+    status.textContent=message;
+    if(reportWindow&&!reportWindow.closed) reportWindow.document.body.innerHTML='<p style="font-family:sans-serif;padding:60px;text-align:center;color:#7f1d1d;">'+message+'</p>';
+    return;
+  }
+  const reportUrl=window.location.origin+'/r/'+reportId;
+  const phoneCaptureEndpoint=window.location.origin+'/.netlify/functions/capture-report-phone';
   const mls=document.getElementById('f_mls').value||'';
   const photo=document.getElementById('f_photo').value||'';
   const beds=document.getElementById('f_beds').value||'3';
@@ -1633,32 +1648,40 @@ async function makeReport(existingWindow){
   .replace(/__NET_CARRY__/g,fmt(netCarryingCost))
   .replace(/__RENT_DIFF__/g,fmt(rentDiff))
   .replace(/__TENANT_PRINCIPAL__/g,fmt(tenantPrincipal5yr))
-  .replace(/__REPORT_URL__/g,reportUrl);
+  .replace(/__REPORT_URL__/g,reportUrl)
+  .replace(/__REPORT_ID__/g,reportId)
+  .replace(/__REPORT_CONTACT_TOKEN__/g,reportContactToken)
+  .replace(/__PHONE_CAPTURE_ENDPOINT__/g,phoneCaptureEndpoint);
 
-  // Save the report so it has a permanent, shareable link and shows up in
-  // the leads dashboard. This shouldn't block opening the report even if
-  // saving fails for some reason (e.g. a transient network blip).
+  // Save first, then open the permanent report URL. This ensures the report
+  // CTA has a verified server-side record before it can collect a phone number.
   try{
-    await fetch('/.netlify/functions/save-report',{
+    const saveResponse=await fetch('/.netlify/functions/save-report',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         id:reportId, reportHtml:html, buyer, agent, mlsId:mls,
         address, price, source:(window.__reportSource||'manual'),
-        agentEmail, agentPhone, buyerEmail, buyerReportConsent, buyerMarketingConsent
+        agentEmail, agentPhone, buyerEmail, buyerReportConsent, buyerMarketingConsent,
+        contactUpdateToken:reportContactToken
       })
     });
-  }catch(e){
-    console.warn('Could not save report for tracking/link purposes:',e);
+    const saved=await saveResponse.json().catch(()=>({}));
+    if(!saveResponse.ok||!saved.id) throw new Error(saved.error||'The report could not be saved.');
+    const permanentReportUrl=new URL(saved.viewUrl||('/r/'+reportId),window.location.origin).toString();
+    if(reportWindow&&!reportWindow.closed){
+      reportWindow.location.replace(permanentReportUrl);
+    }else{
+      window.location.assign(permanentReportUrl);
+    }
+    status.textContent='Your saved report is open in a new tab. Print or save from there.';
+  }catch(error){
+    console.warn('Could not save report for secure follow-up:',error);
+    const message='We could not securely save this report. Please return to the builder and try again.';
+    status.textContent=message;
+    if(reportWindow&&!reportWindow.closed){
+      reportWindow.document.body.innerHTML='<p style="font-family:sans-serif;padding:60px;text-align:center;color:#7f1d1d;">'+message+'</p>';
+    }
   }
-
-  const blob=new Blob([html],{type:'text/html'});
-  const url=URL.createObjectURL(blob);
-  if(reportWindow && !reportWindow.closed){
-    reportWindow.location.href=url;
-  }else{
-    window.open(url,'_blank');
-  }
-  status.textContent='Report opened in a new tab. Print or save from there.';
 }
 </script>
