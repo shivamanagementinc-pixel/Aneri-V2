@@ -24,7 +24,8 @@ a{color:inherit;}
 
 /* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;}
-.logo{font-family:var(--font-sans);font-size:22px;display:flex;align-items:baseline;gap:2px;}
+.logo{font-family:var(--font-sans);font-size:22px;display:flex;align-items:baseline;gap:2px;text-decoration:none;color:inherit;width:max-content;}
+.logo:focus-visible{outline:3px solid var(--sage);outline-offset:5px;border-radius:4px;}
 .logo .the{color:#9aa39a;font-weight:400;}
 .logo .funders{color:var(--forest);font-weight:800;}
 .logo .dot{width:7px;height:7px;background:var(--sage);border-radius:50%;margin-left:3px;align-self:flex-start;margin-top:6px;}
@@ -68,7 +69,7 @@ a{color:inherit;}
 
 <div class="wrap">
   <nav class="nav">
-    <div class="logo"><span class="the">the</span><span class="funders">funders</span><span class="dot"></span></div>
+    <a href="/" class="logo" aria-label="The Funders home"><span class="the">the</span><span class="funders">funders</span><span class="dot"></span></a>
     <div class="nav-links">
       <a href="/#who-we-help">Who We Help</a>
       <a href="/#report-tool">Financing Report</a>
@@ -90,7 +91,7 @@ a{color:inherit;}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="logo"><span class="the">the</span><span class="funders">funders</span><span class="dot"></span></div>
+        <a href="/" class="logo" aria-label="The Funders home"><span class="the">the</span><span class="funders">funders</span><span class="dot"></span></a>
         <p>{{ homepage.footer.description }}</p>
       </div>
       <div class="footer-col">
