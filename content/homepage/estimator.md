@@ -1,6 +1,6 @@
 ---
 eyebrow: Illustrative estimate
-headline1: Curious what a monthly payment
+headline1: Curious what your monthly payment
 headline2: could support?
 description: Use this educational estimate to start a conversation. A lender and
   licensed review are required to assess an actual mortgage application.
