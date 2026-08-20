@@ -7,7 +7,7 @@ description: Use this educational estimate to start a conversation. A lender and
 slider_min: 1500
 slider_max: 8000
 slider_default: 3200
-assumed_rate: 5
+assumed_rate: 5.25
 assumed_amortization: 25
 permalink: false
 assumed_down_percent: 20
