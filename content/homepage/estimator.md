@@ -2,8 +2,8 @@
 eyebrow: Illustrative estimate
 headline1: Curious what a monthly payment
 headline2: could support?
-description: Use this education-only estimate to start a conversation. A lender
-  and licensed review are required to assess an actual mortgage application.
+description: Use this educational estimate to start a conversation. A lender and
+  licensed review are required to assess an actual mortgage application.
 slider_min: 1500
 slider_max: 8000
 slider_default: 3200
