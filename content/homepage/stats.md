@@ -1,12 +1,12 @@
 ---
 permalink: false
 items:
-  - number: "Broad"
-    label: "lender options to explore"
-  - number: "Clear"
-    label: "next-step guidance"
-  - number: "Property"
-    label: "specific financing education"
-  - number: "$0"
-    label: "cost for many standard files"
+  - number: Multiple Lender
+    label: options to explore
+  - number: Clear Guidance
+    label: on next steps
+  - number: Financing Education
+    label: on specific property
+  - number: $0 Cost
+    label: for many standard files
 ---
