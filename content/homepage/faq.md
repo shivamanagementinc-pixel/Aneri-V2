@@ -1,7 +1,7 @@
 ---
 permalink: false
 label: FAQ
-title: Questions? We have answers.
+title: Financing Questions? We have answers.
 description: Everything you need to know before starting your homeownership journey.
 items:
   - question: What is the minimum down payment in Canada?
@@ -18,9 +18,9 @@ items:
       review and keep you informed as the file progresses. A property scenario
       or report is not a pre-approval or lender decision.
   - question: Do you charge fees for your services?
-    answer: For most standard mortgages, our services are free to you — we are
-      compensated by the lender. In some complex situations, a fee may apply,
-      which we will always disclose upfront.
+    answer: For most standard residential mortgages, our services are free to you —
+      we are compensated by the lender. In some complex situations, a fee may
+      apply, which we will always disclose upfront.
   - question: What is the difference between fixed and variable rates?
     answer: A fixed rate stays the same for your entire term, giving you predictable
       payments. A variable rate fluctuates with the prime rate, which can mean
