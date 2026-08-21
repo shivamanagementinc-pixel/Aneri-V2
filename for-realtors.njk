@@ -14,69 +14,67 @@ permalink: /for-realtors/index.html
 <section class="network-hero">
   <div class="wrap network-hero-grid">
     <div>
-      <span class="network-eyebrow">The Funders Network · For Realtors</span>
-      <h1>Give every property conversation a <em>better next step.</em></h1>
-      <p>The Funders Network is a no-cost, property-first engagement workspace for approved Realtor partners. Create reports and campaigns from an MLS number, connect existing buyers or leads, share through approved workflows, follow useful engagement signals, access branded marketing support, and use Open House QR tools when they fit.</p>
+      <span class="network-eyebrow">{{ realtorPage.hero.eyebrow }}</span>
+      <h1>{{ realtorPage.hero.headline }} <em>{{ realtorPage.hero.headline_accent }}</em></h1>
+      <p>{{ realtorPage.hero.description }}</p>
       <div class="network-actions">
-        <a class="btn btn-primary" href="{{ fundersNetwork.appUrl }}/login.html?portal=realtor">Partner login &rarr;</a>
-        <a class="btn btn-secondary" href="#network-how-it-works">See how it works</a>
+        <a class="btn btn-primary" href="{{ realtorPage.hero.primary_cta_url }}">{{ realtorPage.hero.primary_cta_text }} &rarr;</a>
+        <a class="btn btn-secondary" href="{{ realtorPage.hero.secondary_cta_url }}">{{ realtorPage.hero.secondary_cta_text }}</a>
       </div>
-      <p class="network-note">Programme access, rewards, and fulfilment are subject to approval, availability, and applicable brokerage/compliance requirements.</p>
+      <p class="network-note">{{ realtorPage.hero.note }}</p>
     </div>
     <aside class="network-preview" aria-label="Property-first Funders Network workspace example">
-      <div class="preview-top"><div><b>My Property Campaign</b><span>Buyer engagement workspace</span></div><span class="preview-chip">Active property</span></div>
-      <div class="preview-property"><span>Featured property</span><b>123 Maple Grove Avenue</b></div>
-      <div class="preview-kpis"><div><b>12</b><span>Reports shared</span></div><div><b>6</b><span>Reports opened</span></div><div><b>3</b><span>Buyer milestones</span></div></div>
-      <div class="preview-update"><span>Latest Funders update</span><b>Financing review started</b><small>High-level file updates keep the Realtor aligned while buyer financial detail stays private.</small></div>
+      <div class="preview-top"><div><b>{{ realtorPage.preview.title }}</b><span>{{ realtorPage.preview.subtitle }}</span></div><span class="preview-chip">{{ realtorPage.preview.chip }}</span></div>
+      <div class="preview-property"><span>{{ realtorPage.preview.property_label }}</span><b>{{ realtorPage.preview.property_name }}</b></div>
+      <div class="preview-kpis">
+        {% for metric in realtorPage.preview.metrics %}<div><b>{{ metric.number }}</b><span>{{ metric.label }}</span></div>{% endfor %}
+      </div>
+      <div class="preview-update"><span>{{ realtorPage.preview.update_label }}</span><b>{{ realtorPage.preview.update_title }}</b><small>{{ realtorPage.preview.update_detail }}</small></div>
     </aside>
   </div>
 </section>
 
 <section class="network-section">
   <div class="wrap">
-    <div class="network-header"><span class="label">One property-first system</span><h2>Useful for the buyer. <em>Practical for the Realtor.</em></h2><p>Turn a property into an educational report, a permissioned buyer signal, reusable marketing support, and a more organized path for follow-up.</p></div>
+    <div class="network-header"><span class="label">{{ realtorPage.overview.label }}</span><h2>{{ realtorPage.overview.headline }} <em>{{ realtorPage.overview.headline_accent }}</em></h2><p>{{ realtorPage.overview.description }}</p></div>
     <div class="network-grid">
-      <article class="network-card"><div class="icon">▣</div><h3>Property report delivery</h3><p>Create an educational property-financing report from an MLS number and share a clearer next step with a buyer.</p></article>
-      <article class="network-card"><div class="icon">↗</div><h3>Direct buyer and lead follow-up</h3><p>Add the appropriate buyer, open a prepared email, or reuse a generic report link through your approved email or CRM workflow.</p></article>
-      <article class="network-card"><div class="icon">♙</div><h3>Buyer engagement workspace</h3><p>Track property campaigns, report activity, buyer milestones, and high-level Funders updates from one workspace.</p></article>
-      <article class="network-card"><div class="icon">✦</div><h3>Branded marketing support</h3><p>Use your saved profile to support social graphics, a property brochure, and editable follow-up messages.</p></article>
-      <article class="network-card"><div class="icon">⇄</div><h3>Compare homes</h3><p>Use the same illustrative financing assumptions to compare homes with a buyer who is narrowing a shortlist.</p></article>
-      <article class="network-card"><div class="icon">⌁</div><h3>Optional Open House QR campaigns</h3><p>Add QR registration, campaign timing, and live engagement tracking when an Open House is part of the plan.</p></article>
+      {% for feature in realtorPage.overview.features %}
+      <article class="network-card"><div class="icon">{{ feature.icon }}</div><h3>{{ feature.title }}</h3><p>{{ feature.description }}</p></article>
+      {% endfor %}
     </div>
   </div>
 </section>
 
 <section class="network-section soft" id="network-how-it-works">
   <div class="wrap">
-    <div class="network-header"><span class="label">The shared workflow</span><h2>From a property to a <em>clearer next step.</em></h2><p>The Realtor stays central to the property conversation. The Funders Team handles the confidential financing workflow when the buyer is ready.</p></div>
+    <div class="network-header"><span class="label">{{ realtorPage.workflow.label }}</span><h2>{{ realtorPage.workflow.headline }} <em>{{ realtorPage.workflow.headline_accent }}</em></h2><p>{{ realtorPage.workflow.description }}</p></div>
     <div class="workflow">
-      <article class="workflow-step"><b>1</b><h3>Create from the property</h3><p>Enter the MLS number, review the property details, and create the report or campaign.</p></article>
-      <article class="workflow-step"><b>2</b><h3>Connect the buyer</h3><p>Add an existing buyer or lead, or use an optional QR campaign to capture permissioned interest.</p></article>
-      <article class="workflow-step"><b>3</b><h3>Share and follow</h3><p>Send the report through your approved workflow and act on useful engagement milestones.</p></article>
-      <article class="workflow-step"><b>4</b><h3>Keep moving</h3><p>Continue the property relationship while The Funders Team supports private financing next steps.</p></article>
+      {% for step in realtorPage.workflow.steps %}
+      <article class="workflow-step"><b>{{ step.number }}</b><h3>{{ step.title }}</h3><p>{{ step.description }}</p></article>
+      {% endfor %}
     </div>
   </div>
 </section>
 
 <section class="network-section">
   <div class="wrap privacy-wrap">
-    <article class="privacy-panel"><h3>What Realtors can see</h3><p>Useful engagement and high-level file progress that helps the Realtor serve the buyer better.</p><div class="privacy-list"><div><b>✓</b><span>Property-report activity and permissioned campaign engagement</span></div><div><b>✓</b><span>Buyer milestones and high-level Funders updates</span></div><div><b>✓</b><span>Campaign performance and report status</span></div><div><b>✓</b><span>Approved rewards and redemption status</span></div></div></article>
-    <article class="privacy-panel dark"><h3>What stays private</h3><p>The Funders Network is designed so Realtors can stay helpful without receiving confidential mortgage-file information.</p><div class="privacy-list"><div><b>×</b><span>Buyer phone, income, debt, credit, bank statements, and tax documents</span></div><div><b>×</b><span>Down-payment evidence, documents, and lender or underwriting notes</span></div><div><b>×</b><span>Actual funded amount or internal reward value</span></div><div><b>×</b><span>Unsupported approval, pre-approval, qualification, or lender-commitment claims</span></div></div></article>
+    <article class="privacy-panel"><h3>{{ realtorPage.privacy.visible_title }}</h3><p>{{ realtorPage.privacy.visible_description }}</p><div class="privacy-list">{% for item in realtorPage.privacy.visible_items %}<div><b>✓</b><span>{{ item }}</span></div>{% endfor %}</div></article>
+    <article class="privacy-panel dark"><h3>{{ realtorPage.privacy.private_title }}</h3><p>{{ realtorPage.privacy.private_description }}</p><div class="privacy-list">{% for item in realtorPage.privacy.private_items %}<div><b>×</b><span>{{ item }}</span></div>{% endfor %}</div></article>
   </div>
 </section>
 
 <section class="network-section soft">
   <div class="wrap reward-panel">
-    <div><span class="network-eyebrow">Realtor rewards programme</span><h2>Build more buyer value. <em>Unlock your next milestone.</em></h2><p>Eligible property campaigns can show estimated potential points. After verified funding, points are submitted for Administrator review and become visible only after approval.</p><p class="network-note">Points are not cash. Rewards, travel, tickets, availability, eligibility, and fulfilment remain subject to programme terms and Administrator approval.</p></div>
-    <div class="reward-tiers"><div class="reward-tier"><b>200 points</b><span>Welcome-home package or select experience</span></div><div class="reward-tier"><b>400 points</b><span>Premium home & lifestyle bundle</span></div><div class="reward-tier"><b>800+ points</b><span>Signature premium selections</span></div><div class="reward-tier"><b>1,200+ points</b><span>Travel and milestone packages, subject to terms</span></div></div>
+    <div><span class="network-eyebrow">{{ realtorPage.rewards.eyebrow }}</span><h2>{{ realtorPage.rewards.headline }} <em>{{ realtorPage.rewards.headline_accent }}</em></h2><p>{{ realtorPage.rewards.description }}</p><p class="network-note">{{ realtorPage.rewards.note }}</p></div>
+    <div class="reward-tiers">{% for tier in realtorPage.rewards.tiers %}<div class="reward-tier"><b>{{ tier.points }}</b><span>{{ tier.description }}</span></div>{% endfor %}</div>
   </div>
 </section>
 
 <section class="network-cta">
   <div class="wrap">
-    <h2>Ready to make your next property conversation <em>more useful?</em></h2>
-    <p>Approved Realtor partners can use The Funders Network for property reports, direct buyer follow-up, engagement signals, branded marketing support, optional Open House QR campaigns, high-level Funders updates, and rewards visibility.</p>
-    <a class="btn-light" href="{{ fundersNetwork.appUrl }}/login.html?portal=realtor">Open Partner Login &rarr;</a>
-    <small>thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</small>
+    <h2>{{ realtorPage.cta.headline }} <em>{{ realtorPage.cta.headline_accent }}</em></h2>
+    <p>{{ realtorPage.cta.description }}</p>
+    <a class="btn-light" href="{{ realtorPage.cta.button_url }}">{{ realtorPage.cta.button_text }} &rarr;</a>
+    <small>{{ realtorPage.cta.legal }}</small>
   </div>
 </section>

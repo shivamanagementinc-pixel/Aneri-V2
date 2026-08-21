@@ -1,5 +1,6 @@
 ---
 permalink: false
+visible: false
 label: "Client Stories"
 title: "Real people. Real front doors."
 description: "Thoughtful advice changes the experience — and sometimes what buyers believe is possible."

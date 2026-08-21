@@ -1,0 +1,93 @@
+{
+  "hero": {
+    "eyebrow": "The Funders Network · For Realtors",
+    "headline": "Give every property conversation a",
+    "headline_accent": "better next step.",
+    "description": "The Funders Network is a no-cost, property-first engagement workspace for approved Realtor partners. Create reports and campaigns from an MLS number, connect existing buyers or leads, share through approved workflows, follow useful engagement signals, access branded marketing support, and use Open House QR tools when they fit.",
+    "primary_cta_text": "Partner login",
+    "primary_cta_url": "/partner-login",
+    "secondary_cta_text": "See how it works",
+    "secondary_cta_url": "#network-how-it-works",
+    "note": "Programme access, rewards, and fulfilment are subject to approval, availability, and applicable brokerage/compliance requirements."
+  },
+  "preview": {
+    "title": "My Property Campaign",
+    "subtitle": "Buyer engagement workspace",
+    "chip": "Active property",
+    "property_label": "Featured property",
+    "property_name": "123 Maple Grove Avenue",
+    "metrics": [
+      { "number": "12", "label": "Reports shared" },
+      { "number": "6", "label": "Reports opened" },
+      { "number": "3", "label": "Buyer milestones" }
+    ],
+    "update_label": "Latest Funders update",
+    "update_title": "Financing review started",
+    "update_detail": "High-level file updates keep the Realtor aligned while buyer financial detail stays private."
+  },
+  "overview": {
+    "label": "One property-first system",
+    "headline": "Useful for the buyer.",
+    "headline_accent": "Practical for the Realtor.",
+    "description": "Turn a property into an educational report, a permissioned buyer signal, reusable marketing support, and a more organized path for follow-up.",
+    "features": [
+      { "icon": "▣", "title": "Property report delivery", "description": "Create an educational property-financing report from an MLS number and share a clearer next step with a buyer." },
+      { "icon": "↗", "title": "Direct buyer and lead follow-up", "description": "Add the appropriate buyer, open a prepared email, or reuse a generic report link through your approved email or CRM workflow." },
+      { "icon": "♙", "title": "Buyer engagement workspace", "description": "Track property campaigns, report activity, buyer milestones, and high-level Funders updates from one workspace." },
+      { "icon": "✦", "title": "Branded marketing support", "description": "Use your saved profile to support social graphics, a property brochure, and editable follow-up messages." },
+      { "icon": "⇄", "title": "Compare homes", "description": "Use the same illustrative financing assumptions to compare homes with a buyer who is narrowing a shortlist." },
+      { "icon": "⌁", "title": "Optional Open House QR campaigns", "description": "Add QR registration, campaign timing, and live engagement tracking when an Open House is part of the plan." }
+    ]
+  },
+  "workflow": {
+    "label": "The shared workflow",
+    "headline": "From a property to a",
+    "headline_accent": "clearer next step.",
+    "description": "The Realtor stays central to the property conversation. The Funders Team handles the confidential financing workflow when the buyer is ready.",
+    "steps": [
+      { "number": "1", "title": "Create from the property", "description": "Enter the MLS number, review the property details, and create the report or campaign." },
+      { "number": "2", "title": "Connect the buyer", "description": "Add an existing buyer or lead, or use an optional QR campaign to capture permissioned interest." },
+      { "number": "3", "title": "Share and follow", "description": "Send the report through your approved workflow and act on useful engagement milestones." },
+      { "number": "4", "title": "Keep moving", "description": "Continue the property relationship while The Funders Team supports private financing next steps." }
+    ]
+  },
+  "privacy": {
+    "visible_title": "What Realtors can see",
+    "visible_description": "Useful engagement and high-level file progress that helps the Realtor serve the buyer better.",
+    "visible_items": [
+      "Property-report activity and permissioned campaign engagement",
+      "Buyer milestones and high-level Funders updates",
+      "Campaign performance and report status",
+      "Approved rewards and redemption status"
+    ],
+    "private_title": "What stays private",
+    "private_description": "The Funders Network is designed so Realtors can stay helpful without receiving confidential mortgage-file information.",
+    "private_items": [
+      "Buyer phone, income, debt, credit, bank statements, and tax documents",
+      "Down-payment evidence, documents, and lender or underwriting notes",
+      "Actual funded amount or internal reward value",
+      "Unsupported approval, pre-approval, qualification, or lender-commitment claims"
+    ]
+  },
+  "rewards": {
+    "eyebrow": "Realtor rewards programme",
+    "headline": "Build more buyer value.",
+    "headline_accent": "Unlock your next milestone.",
+    "description": "Eligible property campaigns can show estimated potential points. After verified funding, points are submitted for Administrator review and become visible only after approval.",
+    "note": "Points are not cash. Rewards, travel, tickets, availability, eligibility, and fulfilment remain subject to programme terms and Administrator approval.",
+    "tiers": [
+      { "points": "200 points", "description": "Welcome-home package or select experience" },
+      { "points": "400 points", "description": "Premium home & lifestyle bundle" },
+      { "points": "800+ points", "description": "Signature premium selections" },
+      { "points": "1,200+ points", "description": "Travel and milestone packages, subject to terms" }
+    ]
+  },
+  "cta": {
+    "headline": "Ready to make your next property conversation",
+    "headline_accent": "more useful?",
+    "description": "Approved Realtor partners can use The Funders Network for property reports, direct buyer follow-up, engagement signals, branded marketing support, optional Open House QR campaigns, high-level Funders updates, and rewards visibility.",
+    "button_text": "Open Partner Login",
+    "button_url": "/partner-login",
+    "legal": "thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463."
+  }
+}
