@@ -61,7 +61,7 @@ module.exports = function (eleventyConfig) {
     // loaded — makes future issues immediately visible instead of silent.
     console.log(`[homepage data] Loaded ${mdFiles.length} files: ${Object.keys(data).join(", ")}`);
 
-    const expectedKeys = ["hero","marquee","all_clients","who_we_help","report_tool","stats","estimator","process","testimonials","faq","cta","footer"];
+    const expectedKeys = ["hero","marquee","all_clients","who_we_help","report_tool","realtor_network","stats","estimator","process","testimonials","faq","cta","footer"];
     const missingKeys = expectedKeys.filter((k) => !data[k]);
     if (missingKeys.length > 0) {
       throw new Error(

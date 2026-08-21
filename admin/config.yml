@@ -10,8 +10,7 @@ media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
 # Authentication for Netlify Identity
-site_url: https://thefounders.ca
-logo_url: https://thefounders.ca/logo.png
+site_url: https://thefunders.ca
 
 # Collections define the content types you can edit
 collections:
@@ -34,7 +33,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Button Text", name: "text", widget: "string", default: "Book your free strategy call" }
-              - { label: "Button URL", name: "url", widget: "string", default: "#contact" }
+              - { label: "Button URL", name: "url", widget: "string", default: "https://calendar.app.google/2utLDi3bVnhkNaCj8" }
           - label: "Secondary CTA"
             name: "secondary_cta"
             widget: "object"
@@ -118,6 +117,34 @@ collections:
           - { label: "CTA Button Text", name: "cta_text", widget: "string", default: "Build a property scenario" }
           - { label: "CTA Button URL", name: "cta_url", widget: "string", default: "/report-builder/" }
 
+      - file: "content/homepage/realtor-network.md"
+        label: "Realtor Section"
+        name: "realtor_network"
+        fields:
+          - { label: "Section Label", name: "label", widget: "string" }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Headline Accent", name: "headline_accent", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - label: "Primary CTA"
+            name: "primary_cta"
+            widget: "object"
+            fields:
+              - { label: "Button Text", name: "text", widget: "string" }
+              - { label: "Button URL", name: "url", widget: "string" }
+          - label: "Secondary CTA"
+            name: "secondary_cta"
+            widget: "object"
+            fields:
+              - { label: "Button Text", name: "text", widget: "string" }
+              - { label: "Button URL", name: "url", widget: "string" }
+          - { label: "Privacy Note", name: "privacy_note", widget: "text" }
+          - label: "Feature Cards"
+            name: "cards"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
       - file: "content/homepage/stats.md"
         label: "Stat Strip"
         name: "stats"
@@ -145,7 +172,7 @@ collections:
           - { label: "Slider Min ($/month)", name: "slider_min", widget: "number", default: 1500 }
           - { label: "Slider Max ($/month)", name: "slider_max", widget: "number", default: 8000 }
           - { label: "Slider Default ($/month)", name: "slider_default", widget: "number", default: 3200 }
-          - { label: "Assumed Rate (%)", name: "assumed_rate", widget: "number", default: 5.0, value_type: "float" }
+          - { label: "Assumed Rate (%)", name: "assumed_rate", widget: "number", default: 5.25, value_type: "float" }
           - { label: "Assumed Amortization (years)", name: "assumed_amortization", widget: "number", default: 25 }
           - { label: "Assumed Down Payment (%)", name: "assumed_down_percent", widget: "number", default: 20 }
           - { label: "Result Note", name: "result_note", widget: "string", default: "illustrative estimate using {rate}% and a {years}-year amortization — not a lending decision" }
@@ -174,6 +201,7 @@ collections:
         label: "Testimonials Section"
         name: "testimonials"
         fields:
+          - { label: "Show Testimonials", name: "visible", widget: "boolean", default: false, hint: "Keep off until testimonials are verified and approved for public use." }
           - { label: "Section Label", name: "label", widget: "string", default: "Client Stories" }
           - { label: "Section Title", name: "title", widget: "string", default: "Real people. Real front doors." }
           - { label: "Section Description", name: "description", widget: "text", default: "Thoughtful advice changes the experience — and sometimes what buyers believe is possible." }
@@ -223,7 +251,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Button Text", name: "text", widget: "string", default: "Book your free strategy call" }
-              - { label: "Button URL", name: "url", widget: "string", default: "#" }
+              - { label: "Button URL", name: "url", widget: "string", default: "https://calendar.app.google/2utLDi3bVnhkNaCj8" }
           - { label: "Subtext", name: "subtext", widget: "string", default: "No obligation. No pressure. 100% confidential." }
 
       - file: "content/homepage/footer.md"
@@ -251,6 +279,113 @@ collections:
               - { label: "URL", name: "url", widget: "string" }
           - { label: "Licensing Disclosure", name: "licensing", widget: "string", default: "thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463." }
           - { label: "Copyright Text", name: "copyright", widget: "string", default: "© 2026 thefunders.ca. All rights reserved." }
+
+  # ============================================
+  # REALTOR PAGE - Editable public Realtor page
+  # ============================================
+  - name: "realtor_page"
+    label: "Realtor Page"
+    files:
+      - file: "_data/realtorPage.json"
+        label: "Realtor Page Content"
+        name: "realtor_page_content"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Headline Accent", name: "headline_accent", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Primary CTA Text", name: "primary_cta_text", widget: "string" }
+              - { label: "Primary CTA URL", name: "primary_cta_url", widget: "string" }
+              - { label: "Secondary CTA Text", name: "secondary_cta_text", widget: "string" }
+              - { label: "Secondary CTA URL", name: "secondary_cta_url", widget: "string" }
+              - { label: "Programme Note", name: "note", widget: "text" }
+          - label: "Workspace Preview"
+            name: "preview"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string" }
+              - { label: "Status Chip", name: "chip", widget: "string" }
+              - { label: "Property Label", name: "property_label", widget: "string" }
+              - { label: "Property Name", name: "property_name", widget: "string" }
+              - label: "Metrics"
+                name: "metrics"
+                widget: "list"
+                fields:
+                  - { label: "Number", name: "number", widget: "string" }
+                  - { label: "Label", name: "label", widget: "string" }
+              - { label: "Update Label", name: "update_label", widget: "string" }
+              - { label: "Update Title", name: "update_title", widget: "string" }
+              - { label: "Update Detail", name: "update_detail", widget: "text" }
+          - label: "Feature Overview"
+            name: "overview"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Headline Accent", name: "headline_accent", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Features"
+                name: "features"
+                widget: "list"
+                fields:
+                  - { label: "Icon", name: "icon", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - label: "Workflow"
+            name: "workflow"
+            widget: "object"
+            fields:
+              - { label: "Section Label", name: "label", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Headline Accent", name: "headline_accent", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Steps"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Number", name: "number", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - label: "Privacy Boundaries"
+            name: "privacy"
+            widget: "object"
+            fields:
+              - { label: "Visible Panel Title", name: "visible_title", widget: "string" }
+              - { label: "Visible Panel Description", name: "visible_description", widget: "text" }
+              - { label: "Visible Items", name: "visible_items", widget: "list" }
+              - { label: "Private Panel Title", name: "private_title", widget: "string" }
+              - { label: "Private Panel Description", name: "private_description", widget: "text" }
+              - { label: "Private Items", name: "private_items", widget: "list" }
+          - label: "Rewards"
+            name: "rewards"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Headline Accent", name: "headline_accent", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Programme Note", name: "note", widget: "text" }
+              - label: "Reward Tiers"
+                name: "tiers"
+                widget: "list"
+                fields:
+                  - { label: "Points", name: "points", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+          - label: "Final CTA"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Headline Accent", name: "headline_accent", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Button Text", name: "button_text", widget: "string" }
+              - { label: "Button URL", name: "button_url", widget: "string" }
+              - { label: "Legal Disclosure", name: "legal", widget: "text" }
 
   # ============================================
   # BLOG POSTS

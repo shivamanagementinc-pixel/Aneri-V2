@@ -264,19 +264,19 @@ description: "thefunders.ca helps Canadians explore mortgage options with clear,
 <section class="funders-network-bridge" id="for-realtors">
   <div class="wrap network-bridge-grid">
     <div class="network-bridge-copy">
-      <span class="network-bridge-label">For Realtors · The Funders Network</span>
-      <h2>Give every property conversation a <em>better next step.</em></h2>
-      <p>The Funders Network gives approved Realtor partners a property-first workspace for buyer reports, direct follow-up, engagement signals, marketing support, property comparisons, optional Open House QR campaigns, high-level Funders updates, and rewards visibility.</p>
+      <span class="network-bridge-label">{{ homepage.realtor_network.label }}</span>
+      <h2>{{ homepage.realtor_network.headline }} <em>{{ homepage.realtor_network.headline_accent }}</em></h2>
+      <p>{{ homepage.realtor_network.description }}</p>
       <div class="network-bridge-actions">
-        <a class="btn btn-primary" href="/for-realtors/">Explore the Funders Network &rarr;</a>
-        <a class="btn btn-secondary" href="/partner-login">Partner login</a>
+        <a class="btn btn-primary" href="{{ homepage.realtor_network.primary_cta.url }}">{{ homepage.realtor_network.primary_cta.text }} &rarr;</a>
+        <a class="btn btn-secondary" href="{{ homepage.realtor_network.secondary_cta.url }}">{{ homepage.realtor_network.secondary_cta.text }}</a>
       </div>
-      <p class="network-bridge-note">Realtors see useful buyer engagement and high-level file updates. Buyer phone, income, debt, credit, documents, lender notes, underwriting notes, funded amount, and internal reward value remain private.</p>
+      <p class="network-bridge-note">{{ homepage.realtor_network.privacy_note }}</p>
     </div>
     <div class="network-bridge-cards">
-      <article class="network-bridge-card"><b>Property report delivery</b><span>Create a report from an MLS number and share it after a showing, during follow-up, or with an existing buyer.</span></article>
-      <article class="network-bridge-card"><b>Buyer engagement and follow-up</b><span>See high-level activity and timely follow-up cues without receiving confidential mortgage-file data.</span></article>
-      <article class="network-bridge-card"><b>Marketing and campaign support</b><span>Use branded content, brochures, message drafts, comparison tools, and optional Open House QR campaigns.</span></article>
+      {% for card in homepage.realtor_network.cards %}
+      <article class="network-bridge-card"><b>{{ card.title }}</b><span>{{ card.description }}</span></article>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -338,6 +338,7 @@ description: "thefunders.ca helps Canadians explore mortgage options with clear,
   </div>
 </section>
 
+{% if homepage.testimonials.visible %}
 <section class="section" id="stories" style="background:#fff;">
   <div class="wrap">
     <div class="section-header">
@@ -358,6 +359,7 @@ description: "thefunders.ca helps Canadians explore mortgage options with clear,
     </div>
   </div>
 </section>
+{% endif %}
 
 <section class="section" id="faq">
   <div class="wrap">
