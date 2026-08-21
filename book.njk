@@ -1,0 +1,68 @@
+---
+layout: base.njk
+title: "Book a Strategy Call"
+description: "Choose an available time for a free strategy call with The Funders Team."
+permalink: /book/index.html
+---
+
+<style>
+.booking-hero{padding:64px 0 34px;background:radial-gradient(circle at 84% 8%,rgba(127,176,105,.18),transparent 25rem),linear-gradient(145deg,#fefaf3,#f4f8f1)}
+.booking-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:42px;align-items:start}
+.booking-copy{position:sticky;top:28px;padding-top:18px}
+.booking-eyebrow{display:inline-flex;padding:7px 13px;border:1px solid #b9d4b2;border-radius:100px;background:#edf6e9;color:#3c7137;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.booking-copy h1{margin:20px 0 16px;font-family:var(--font-serif);font-size:clamp(40px,5vw,62px);font-weight:600;line-height:1.05;color:var(--forest)}
+.booking-copy h1 em{display:block;color:var(--sage);font-style:italic}
+.booking-copy>p{color:var(--ink-muted);font-size:16px;line-height:1.7}
+.booking-points{display:grid;gap:11px;margin:26px 0 0;list-style:none}
+.booking-points li{display:flex;gap:10px;align-items:flex-start;color:var(--forest);font-size:13px;line-height:1.5}
+.booking-points li::before{content:'✓';display:grid;place-items:center;flex:0 0 21px;height:21px;border-radius:50%;background:var(--sage);color:#fff;font-size:11px;font-weight:900;margin-top:1px}
+.booking-card{overflow:hidden;border:1px solid #d9e4d5;border-radius:22px;background:#fff;box-shadow:0 24px 64px rgba(25,35,29,.12)}
+.booking-card-header{padding:20px 24px;border-bottom:1px solid #edf0eb;background:#fbfdf9}
+.booking-card-header b{display:block;color:var(--forest);font-size:16px}
+.booking-card-header span{display:block;margin-top:4px;color:var(--ink-muted);font-size:12px}
+.booking-frame{display:block;width:100%;height:720px;border:0;background:#fff}
+.booking-fallback{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 22px;border-top:1px solid #edf0eb;background:#fbfdf9}
+.booking-fallback p{color:var(--ink-muted);font-size:12px;line-height:1.45}
+.booking-fallback a{flex-shrink:0;padding:11px 17px;border-radius:100px;background:var(--forest);color:#fff;text-decoration:none;font-size:12px;font-weight:800}
+.booking-notice{padding:25px 0 70px}
+.booking-notice p{max-width:780px;margin:0 auto;color:#6f796f;font-size:11.5px;line-height:1.6;text-align:center}
+.booking-notice a{color:var(--forest);font-weight:700}
+@media(max-width:900px){.booking-hero{padding-top:40px}.booking-grid{grid-template-columns:1fr}.booking-copy{position:static;padding-top:0}.booking-frame{height:680px}}
+@media(max-width:560px){.booking-hero{padding:32px 0 22px}.booking-frame{height:640px}.booking-fallback{align-items:flex-start;flex-direction:column}.booking-fallback a{width:100%;text-align:center}.booking-copy h1{font-size:42px}}
+</style>
+
+<section class="booking-hero">
+  <div class="wrap booking-grid">
+    <div class="booking-copy">
+      <span class="booking-eyebrow">Free strategy call</span>
+      <h1>Choose a time that <em>works for you.</em></h1>
+      <p>Book a conversation with The Funders Team to discuss your goals, questions, and a practical next step. The call is educational and does not represent a mortgage approval, pre-approval, qualification, or lender commitment.</p>
+      <ul class="booking-points">
+        <li>Choose from the currently available appointment times.</li>
+        <li>Receive clear next-step guidance without pressure or obligation.</li>
+        <li>Any financing decision still requires verified information, document review, lender eligibility, and professional assessment.</li>
+      </ul>
+    </div>
+
+    <div class="booking-card">
+      <div class="booking-card-header"><b>Select an available appointment</b><span>The scheduler below is provided securely by Google Calendar.</span></div>
+      <iframe
+        class="booking-frame"
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3ZLZkEfDARnTqJNi9gpcKi5lxFRluwynGKne4z_XdYrwCBLcWJCu5TxRL3JLdTnJKqMoGi5FKl?gv=true"
+        title="Book an appointment with The Funders Team"
+        loading="eager"
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
+      <div class="booking-fallback">
+        <p>If the scheduler does not appear, open the secure Google booking page directly.</p>
+        <a href="https://calendar.app.google/2utLDi3bVnhkNaCj8">Open booking page</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="booking-notice">
+  <div class="wrap">
+    <p>Appointment scheduling is provided by Google Calendar. Using the embedded scheduler may send information to Google under its <a href="https://policies.google.com/privacy">Privacy Policy</a>. thefunders.ca operates under BRX Mortgage Inc., FSRA Licence #13463.</p>
+  </div>
+</div>
