@@ -47,12 +47,14 @@ description: "thefunders.ca helps Canadians explore mortgage options with clear,
 .rm-row.best{background:#e8f5e9;}
 .rm-badge{background:var(--sage);color:var(--forest);font-size:7px;font-weight:800;text-transform:uppercase;padding:2px 7px;border-radius:100px;letter-spacing:0.3px;margin-right:4px;}
 
-.stat-strip{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0;margin-top:70px;position:relative;overflow:hidden;}
-.stat-strip::before{content:'';position:absolute;top:-40%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(127,176,105,0.12) 0%,transparent 70%);pointer-events:none;}
-.stat-strip .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
-.stat{text-align:center;flex:1;min-width:140px;}
-.stat .num{font-family:var(--font-sans);font-size:34px;font-weight:900;color:var(--sage-glow);letter-spacing:-1px;position:relative;z-index:1;}
-.stat .lbl{font-size:11.5px;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-top:2px;position:relative;z-index:1;}
+.stat-strip{background:linear-gradient(155deg,var(--forest) 0%,var(--forest-light) 100%);border-top:1px solid rgba(255,255,255,0.08);padding:34px 0;margin-top:70px;position:relative;overflow:hidden;}
+.stat-strip::before{content:'';position:absolute;top:-55%;left:-8%;width:520px;height:520px;background:radial-gradient(circle,rgba(127,176,105,0.16) 0%,transparent 70%);pointer-events:none;}
+.stat-strip::after{content:'';position:absolute;right:-8%;bottom:-90%;width:480px;height:480px;background:radial-gradient(circle,rgba(155,201,138,0.1) 0%,transparent 70%);pointer-events:none;}
+.stat-strip .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;position:relative;z-index:1;}
+.stat{display:flex;min-width:0;min-height:154px;padding:24px 20px;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+.stat::before{content:'';width:28px;height:3px;margin-bottom:17px;border-radius:99px;background:var(--sage);opacity:.9;}
+.stat .num{font-family:var(--font-sans);font-size:clamp(25px,2.3vw,34px);font-weight:900;color:var(--sage-glow);letter-spacing:-.8px;line-height:1.08;text-wrap:balance;}
+.stat .lbl{max-width:220px;font-size:10.5px;color:rgba(255,255,255,0.67);text-transform:uppercase;letter-spacing:1px;font-weight:700;line-height:1.45;margin-top:11px;text-wrap:balance;}
 
 .marquee-strip{background:var(--cream);border-bottom:1px solid var(--border);padding:16px 0;overflow:hidden;white-space:nowrap;}
 .marquee-track{display:inline-flex;gap:40px;animation:marquee 28s linear infinite;}
@@ -155,10 +157,18 @@ description: "thefunders.ca helps Canadians explore mortgage options with clear,
   .hero-grid{grid-template-columns:1fr;text-align:center;}
   .report-mock{transform:none;max-width:360px;margin:40px auto 0;}
   .rm-ribbon{right:-30px;}
+  .stat-strip .wrap{grid-template-columns:repeat(2,minmax(0,1fr));}
   .tool-section{padding:68px 0;}
   .tool-grid,.network-bridge-grid{grid-template-columns:1fr;}
   .afford-widget{padding:28px 24px;margin:0 16px;}
   .help-grid,.steps-grid,.testimonial-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .stat-strip{padding:24px 0;margin-top:48px;}
+  .stat-strip .wrap{gap:10px;padding:0 18px;}
+  .stat{min-height:138px;padding:20px 12px;border-radius:15px;}
+  .stat .num{font-size:clamp(22px,7vw,28px);}
+  .stat .lbl{font-size:9px;letter-spacing:.75px;}
 }
 </style>
 

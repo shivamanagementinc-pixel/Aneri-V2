@@ -33,7 +33,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Button Text", name: "text", widget: "string", default: "Book your free strategy call" }
-              - { label: "Button URL", name: "url", widget: "string", default: "https://calendar.app.google/2utLDi3bVnhkNaCj8" }
+              - { label: "Button URL", name: "url", widget: "string", default: "/book/" }
           - label: "Secondary CTA"
             name: "secondary_cta"
             widget: "object"
@@ -251,7 +251,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Button Text", name: "text", widget: "string", default: "Book your free strategy call" }
-              - { label: "Button URL", name: "url", widget: "string", default: "https://calendar.app.google/2utLDi3bVnhkNaCj8" }
+              - { label: "Button URL", name: "url", widget: "string", default: "/book/" }
           - { label: "Subtext", name: "subtext", widget: "string", default: "No obligation. No pressure. 100% confidential." }
 
       - file: "content/homepage/footer.md"

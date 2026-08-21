@@ -12,7 +12,7 @@ headline1: Your home. Your future.
 headline2: Made possible.
 primary_cta:
   text: Book your free strategy call
-  url: https://calendar.app.google/2utLDi3bVnhkNaCj8
+  url: /book/
 trust_text: financing conversations made clearer
 trust_number: Buyer-first
 ---
